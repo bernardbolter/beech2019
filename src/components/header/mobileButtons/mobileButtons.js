@@ -1,18 +1,40 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { showSearch, showNavigation } from "../headerStore/headerActions";
+import { toggleSearch, toggleNavigation } from "../headerStore/headerActions";
 
 import "./mobileButtons.sass";
 
 class MobileButtons extends Component {
   render() {
+    console.log(this.props);
+    const { toggleNavigation, toggleSearch } = this.props;
+    const { showNavigation, showSearch } = this.props.header;
     return (
       <div className="mobile_buttons">
-        <a onClick={this.props.showNavigation} className="search-menu">
-          menu
+        <a
+          onClick={toggleNavigation}
+          className={showNavigation ? "nav-button nav-button-on" : "nav-button"}
+        >
+          <svg
+            className="nav-svg nav-svg-on"
+            id="nav-svg"
+            height="30px"
+            weight="30px"
+            viewBox="0 0 30 30"
+            xmlns="https://www.w3.org/2000/svg"
+          >
+            <line id="nav-svg-line-top" x1={4} y1={8} x2={26} y2={8} />
+            <line id="nav-svg-line-mid" x1={4} y1={15} x2={26} y2={15} />
+            <line id="nav-svg-line-bot" x1={4} y1={22} x2={26} y2={22} />
+          </svg>
         </a>
-        <a onClick={this.props.showSearch} className="">
+        <a
+          onClick={toggleSearch}
+          className={
+            showSearch ? "search-button search-button-on" : "search-button"
+          }
+        >
           <svg
             className="search-svg search-svg-on"
             id="search-svg"
@@ -43,5 +65,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { showSearch, showNavigation }
+  { toggleSearch, toggleNavigation }
 )(MobileButtons);

@@ -1,4 +1,8 @@
-import { SHOW_NEWSLETTER, SHOW_SEARCH, SHOW_NAVIGATION } from "./headerTypes";
+import {
+  TOGGLE_NEWSLETTER,
+  TOGGLE_SEARCH,
+  TOGGLE_NAVIGATION
+} from "./headerTypes";
 
 const initialState = {
   showNewsletter: false,
@@ -8,17 +12,17 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SHOW_NEWSLETTER:
+    case TOGGLE_NEWSLETTER:
       return {
         ...state,
         showNewsletter: !state.showNewsletter
       };
-    case SHOW_SEARCH:
+    case TOGGLE_SEARCH:
       return {
         ...state,
         showSearch: !state.showSearch
       };
-    case SHOW_NAVIGATION:
+    case TOGGLE_NAVIGATION:
       return {
         ...state,
         showNavigation: !state.showNavigation

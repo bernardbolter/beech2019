@@ -1,19 +1,23 @@
-import { SHOW_NEWSLETTER, SHOW_NAVIGATION, SHOW_SEARCH } from "./headerTypes";
+import {
+  TOGGLE_NEWSLETTER,
+  TOGGLE_NAVIGATION,
+  TOGGLE_SEARCH
+} from "./headerTypes";
 
-export const showNewsletter = () => {
+export const toggleNewsletter = () => {
   return {
-    type: SHOW_NEWSLETTER
+    type: TOGGLE_NEWSLETTER
   };
 };
 
-export const showSearch = () => {
+export const toggleSearch = () => {
   return {
-    type: SHOW_SEARCH
+    type: TOGGLE_SEARCH
   };
 };
 
-export const showNavigation = () => {
+export const toggleNavigation = () => {
   return {
-    type: SHOW_NAVIGATION
+    type: TOGGLE_NAVIGATION
   };
 };

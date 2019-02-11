@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { showNewsletter } from "../headerStore/headerActions";
+import { toggleNewsletter } from "../headerStore/headerActions";
 
 import Newsletter from "../newsletter/newsletter";
 import "./nav.sass";
 
 class Nav extends Component {
   render() {
+    const { toggleNewsletter } = this.props;
+    const { showNewsletter } = this.props.header;
     return (
       <div className="nav">
         <a className="nav_close_menu">x</a>
@@ -15,8 +17,8 @@ class Nav extends Component {
         <Link to="/airplanes">airplanes</Link>
         <Link to="/incidents">incidents</Link>
         <Link to="/facts">facts</Link>
-        <a onClick={this.props.showNewsletter}>newsletter</a>
-        {this.props.header.showNewsletter ? <Newsletter /> : null}
+        <a onClick={toggleNewsletter}>newsletter</a>
+        {showNewsletter ? <Newsletter /> : null}
       </div>
     );
   }
@@ -28,5 +30,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { showNewsletter }
+  { toggleNewsletter }
 )(Nav);

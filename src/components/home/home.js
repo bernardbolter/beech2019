@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { firebaseConnect } from "react-redux-firebase";
+import { firestoreConnect } from "react-redux-firebase";
 
 import Header from "../header/header";
 
@@ -47,9 +47,9 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-  firebaseConnect(["airplanes", "incidents", "facts"]),
+  firestoreConnect([{ collection: "base" }]),
   connect((state, props) => ({
-    data: state.firebase.data,
+    base: state.firestore.ordered.base,
     mapStateToProps
   }))
 )(Home);

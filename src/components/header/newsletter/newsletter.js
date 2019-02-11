@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { showNewsletter } from "../headerStore/headerActions";
+import { toggleNewsletter } from "../headerStore/headerActions";
 
 import "./newsletter.sass";
 
 class Newsletter extends React.Component {
   render() {
+    const { showNewsletter } = this.props;
     return (
       <div className="newsletter">
         <a onClick={this.props.showNewsletter}>
@@ -23,5 +24,5 @@ class Newsletter extends React.Component {
 
 export default connect(
   null,
-  { showNewsletter }
+  { toggleNewsletter }
 )(Newsletter);

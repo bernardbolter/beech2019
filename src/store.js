@@ -1,7 +1,8 @@
 import { createStore, combineReducers, compose } from "redux";
 import firebase from "firebase/app";
-import "firebase/database";
+import "firebase/firestore";
 import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
+import { reduxFirestore, firestoreReducer } from "redux-firestore";
 
 import headerReducer from "./components/header/headerStore/headerReducer";
 
@@ -15,17 +16,24 @@ const firebaseConfig = {
 };
 
 const rrfConfig = {
-  userProfile: "users"
+  userProfile: "users",
+  useFirestoreForProfile: true
 };
 
 firebase.initializeApp(firebaseConfig);
 
+const firestore = firebase.firestore();
+const settings = {};
+firestore.settings(settings);
+
 const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebase, rrfConfig)
+  reactReduxFirebase(firebase, rrfConfig),
+  reduxFirestore(firebase)
 )(createStore);
 
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
+  firestore: firestoreReducer,
   header: headerReducer
 });
 
