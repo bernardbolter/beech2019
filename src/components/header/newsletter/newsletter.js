@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { toggleNewsletter } from "../../../store/actions/newsletterActions";
+import { showNewsletter } from "../headerStore/headerActions";
 
 import "./newsletter.sass";
 
@@ -8,7 +8,7 @@ class Newsletter extends React.Component {
   render() {
     return (
       <div className="newsletter">
-        <a>
+        <a onClick={this.props.showNewsletter}>
           close <span className="news_x">x</span>
         </a>
         <p>Sign up for our Newsletter</p>
@@ -21,11 +21,7 @@ class Newsletter extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  newsletter: state.store.newsletter
-});
-
 export default connect(
-  mapStateToProps,
-  { toggleNewsletter }
+  null,
+  { showNewsletter }
 )(Newsletter);

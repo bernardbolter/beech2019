@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { Router, Route } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 
-import store from "./store/store";
+import store from "./store";
 
 import Home from "./components/home/home";
 import Airplanes from "./components/airplanes/airplanes";

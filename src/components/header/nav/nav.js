@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { toggleNewsletter } from "../../../store/actions/newsletterActions";
+import { showNewsletter } from "../headerStore/headerActions";
 
 import Newsletter from "../newsletter/newsletter";
 import "./nav.sass";
@@ -15,22 +15,18 @@ class Nav extends Component {
         <Link to="/airplanes">airplanes</Link>
         <Link to="/incidents">incidents</Link>
         <Link to="/facts">facts</Link>
-        <a onClick={this._newsletterClick}>newsletter</a>
-        {this.props.newsletter.openNewsletter ? <Newsletter /> : null}
+        <a onClick={this.props.showNewsletter}>newsletter</a>
+        {this.props.header.showNewsletter ? <Newsletter /> : null}
       </div>
     );
   }
-
-  _newsletterClick = () => {
-    this.props.toggleNewsletter();
-  };
 }
 
 const mapStateToProps = state => ({
-  newsletter: state.store.newsletter
+  header: state.header
 });
 
 export default connect(
   mapStateToProps,
-  { toggleNewsletter }
+  { showNewsletter }
 )(Nav);

@@ -1,0 +1,3 @@
+export const SHOW_NEWSLETTER = "SHOW_NEWSLETTER";
+export const SHOW_NAVIGATION = "SHOW_NAVIGATION";
+export const SHOW_SEARCH = "SHOW_SEARCH";
