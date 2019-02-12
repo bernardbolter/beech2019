@@ -42,7 +42,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  nav: state.store.nav
+  base: state.base
 });
 
 export default compose(

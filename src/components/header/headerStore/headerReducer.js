@@ -7,7 +7,13 @@ import {
 const initialState = {
   showNewsletter: false,
   showSearch: false,
-  showNavigation: false
+  showNavigation: false,
+  // Incident Variables
+  incidentsFilter: "",
+  incidentsOlderChecked: false,
+  incidentsNewerChecked: false,
+  incidentsFatalitiesChecked: false,
+  incidenstType: ""
 };
 
 export default function(state = initialState, action) {

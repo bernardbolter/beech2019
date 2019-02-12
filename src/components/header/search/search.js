@@ -5,8 +5,6 @@ import IncidentSearch from "./incidentSearch";
 
 class Search extends Component {
   render() {
-    console.log(this.props);
-
     return <React.Fragment>{this.decideSearch()}</React.Fragment>;
   }
   decideSearch = () => {
