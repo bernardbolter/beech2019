@@ -7,7 +7,6 @@ import "./mobileButtons.sass";
 
 class MobileButtons extends Component {
   render() {
-    console.log(this.props);
     const { toggleNavigation, toggleSearch } = this.props;
     const { showNavigation, showSearch } = this.props.header;
     return (

@@ -9,15 +9,14 @@ import "./nav.sass";
 class Nav extends Component {
   render() {
     const { toggleNewsletter } = this.props;
-    const { showNewsletter } = this.props.header;
+    const { showNewsletter, showNavigation } = this.props.header;
     return (
-      <div className="nav">
-        <a className="nav_close_menu">x</a>
+      <div className={showNavigation ? "nav nav-open" : "nav"}>
         <Link to="/">home</Link>
         <Link to="/airplanes">airplanes</Link>
         <Link to="/incidents">incidents</Link>
         <Link to="/facts">facts</Link>
-        <a onClick={toggleNewsletter}>newsletter</a>
+        <p onClick={toggleNewsletter}>newsletter</p>
         {showNewsletter ? <Newsletter /> : null}
       </div>
     );

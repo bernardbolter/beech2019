@@ -6,10 +6,10 @@ import "./newsletter.sass";
 
 class Newsletter extends React.Component {
   render() {
-    const { showNewsletter } = this.props;
+    const { toggleNewsletter } = this.props;
     return (
       <div className="newsletter">
-        <a onClick={this.props.showNewsletter}>
+        <a onClick={toggleNewsletter}>
           close <span className="news_x">x</span>
         </a>
         <p>Sign up for our Newsletter</p>

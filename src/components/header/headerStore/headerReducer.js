@@ -18,14 +18,28 @@ export default function(state = initialState, action) {
         showNewsletter: !state.showNewsletter
       };
     case TOGGLE_SEARCH:
+      let navState;
+      if (!state.showSearch && state.showNavigation) {
+        navState = false;
+      } else {
+        navState = state.showNavigation;
+      }
       return {
         ...state,
-        showSearch: !state.showSearch
+        showSearch: !state.showSearch,
+        showNavigation: navState
       };
     case TOGGLE_NAVIGATION:
+      let searchState;
+      if (!state.showNavigation && state.showSearch) {
+        searchState = false;
+      } else {
+        searchState = state.showSearch;
+      }
       return {
         ...state,
-        showNavigation: !state.showNavigation
+        showNavigation: !state.showNavigation,
+        showSearch: searchState
       };
     default:
       return state;

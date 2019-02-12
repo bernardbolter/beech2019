@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 
+import Header from "../header/header";
+
 class Incidents extends Component {
   render() {
+    const { match } = this.props;
     return (
-      <div>
+      <React.Fragment>
+        <Header match={match} />
         <h1>Incidents</h1>
-      </div>
+      </React.Fragment>
     );
   }
 }
