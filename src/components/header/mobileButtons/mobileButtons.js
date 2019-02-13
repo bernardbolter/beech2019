@@ -7,7 +7,7 @@ import "./mobileButtons.sass";
 
 class MobileButtons extends Component {
   render() {
-    const { toggleNavigation, toggleSearch } = this.props;
+    const { toggleNavigation, toggleSearch, match } = this.props;
     const { showNavigation, showSearch } = this.props.header;
     return (
       <div className="mobile_buttons">
@@ -31,7 +31,10 @@ class MobileButtons extends Component {
         <a
           onClick={toggleSearch}
           className={
-            showSearch ? "search-button search-button-on" : "search-button"
+            (match.path === "/" || match.path === "/facts"
+              ? "search-button-hide "
+              : "") +
+            (showSearch ? "search-button search-button-on" : "search-button")
           }
         >
           <svg

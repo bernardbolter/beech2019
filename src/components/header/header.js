@@ -15,7 +15,7 @@ class Header extends Component {
         <div className="nav-container">
           <Nav match={match} />
           <Logo match={match} />
-          <MobileButtons />
+          <MobileButtons match={match} />
           <Search match={match} />
         </div>
       </div>
