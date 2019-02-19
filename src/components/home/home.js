@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { firestoreConnect, isLoaded } from "react-redux-firebase";
 
 import Header from "../header/header";
+import HomeColumn from "./homeColumn";
 
 import { filterHomeData } from "./homeStore/homeActions";
 
@@ -44,13 +45,27 @@ class Home extends Component {
 
           {this.props.home.homeDataLoaded && isLoaded(this.props.base) ? (
             <div className="home-grid">
-              <h1>THE GRID</h1>
-              {/* {this._makeGridRow('currentStatus')}
-                {this._makeGridRow('airplaneProduction')}
-                {this._makeGridRow('latestOperator')}
-                {this._makeGridRow('latestCountry')}
-                {this._makeGridRow('serial')}
-                {this._makeGridRow('accidentType')} */}
+              <HomeColumn
+                columnName="currentStatus"
+                columnHeader="Current Status"
+              />
+              <HomeColumn
+                columnName="airplaneProduction"
+                columnHeader="Prod. Runs"
+              />
+              <HomeColumn
+                columnName="latestOperator"
+                columnHeader="Top Operators"
+              />
+              <HomeColumn
+                columnName="latestCountry"
+                columnHeader="Top Countries"
+              />
+              <HomeColumn columnName="serial" columnHeader="Serial Series" />
+              <HomeColumn
+                columnName="accidentType"
+                columnHeader="Top Incident Type"
+              />
             </div>
           ) : (
             <div>
