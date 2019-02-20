@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 const HomeColumn = props => {
-  const columnData = props.home.homeData[props.columnName];
-  console.log(columnData);
   return (
     <div className={"grid-" + props.columnName}>
       <div className={"grid-cell-header grid-cell-header-" + props.columnName}>

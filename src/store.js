@@ -6,6 +6,8 @@ import { reduxFirestore, firestoreReducer } from "redux-firestore";
 
 import headerReducer from "./components/header/headerStore/headerReducer";
 import homeReducer from "./components/home/homeStore/homeReducer";
+import airplanesReducer from "./components/airplanes/airplanesStore/airplanesReducer";
+import baseReducer from "./base/baseReducer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDbLt9jQRPWCxIop-TUaeJeDycBWcxV1NY",
@@ -35,8 +37,10 @@ const createStoreWithFirebase = compose(
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
+  baseData: baseReducer,
   header: headerReducer,
-  home: homeReducer
+  home: homeReducer,
+  airplanes: airplanesReducer
 });
 
 const initialState = {};

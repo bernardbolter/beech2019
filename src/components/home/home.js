@@ -7,17 +7,47 @@ import Header from "../header/header";
 import HomeColumn from "./homeColumn";
 
 import { filterHomeData } from "./homeStore/homeActions";
+import { getBaseAirplanes, getBaseIncidents } from "../../base/baseActions";
 
 import "./home.sass";
 
 class Home extends Component {
+  async componentDidMount() {
+    if (
+      Object.keys(this.props.home.homeData).length === 0 &&
+      isLoaded(this.props.base)
+    ) {
+      if (this.props.baseData.baseAirplanes.length === 0) {
+        await this.props.getBaseAirplanes(this.props.base[0]);
+      }
+      if (this.props.baseData.baseIncidents.length === 0) {
+        await this.props.getBaseIncidents(this.props.base[2]);
+      }
+      let homeObject = {};
+      homeObject.airplanes = this.props.baseData.baseAirplanes;
+      homeObject.incidents = this.props.baseData.baseIncidents;
+      this.props.filterHomeData(homeObject);
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.base !== prevProps.base) {
-      this.props.filterHomeData(this.props.base);
+      this.props.getBaseAirplanes(this.props.base[0]);
+      this.props.getBaseIncidents(this.props.base[2]);
+    }
+    if (
+      this.props.baseData.baseAirplanes !== prevProps.baseData.baseAirplanes ||
+      this.props.baseData.baseIncidents !== prevProps.baseData.baseIncidents
+    ) {
+      let homeObject = {};
+      homeObject.airplanes = this.props.baseData.baseAirplanes;
+      homeObject.incidents = this.props.baseData.baseIncidents;
+      this.props.filterHomeData(homeObject);
     }
   }
 
   render() {
+    console.log(this.props);
     return (
       <React.Fragment>
         <div>
@@ -70,9 +100,6 @@ class Home extends Component {
           ) : (
             <div>
               <h1>NO DATA</h1>
-              <button onClick={() => this.props.sendHomeData(this.props.base)}>
-                push it
-              </button>
             </div>
           )}
 
@@ -89,13 +116,14 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   base: state.firestore.ordered.base,
-  home: state.home
+  home: state.home,
+  baseData: state.baseData
 });
 
 export default compose(
   firestoreConnect([{ collection: "base" }]),
   connect(
     mapStateToProps,
-    { filterHomeData }
+    { filterHomeData, getBaseAirplanes, getBaseIncidents }
   )
 )(Home);

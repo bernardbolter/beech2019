@@ -1,3 +1,5 @@
+@import '../../vars.scss'
+    
 .airplanes
     width: 100%
     top: 0
@@ -7,3 +9,218 @@
 .airplanes-search-open
     top: 268px
     transition: top 300ms ease-in-out
+
+.airplane-data
+  width: 100%
+
+.airplane-top-info
+  width: 100%
+  height: 20px
+  border-top: 1px solid #999999
+  border-bottom: 1px solid #999999
+  @media screen and (min-width: 650px)
+    border-bottom: none
+
+  p
+    padding: 0
+    font-size: 12px
+    color: #666666
+    margin: 3px 0 0 3%
+
+.airplane-data-wrapper
+  position: relative
+  top: 0
+  transition: top 300ms ease-in-out
+
+.airplane-data-menu
+  top: 191px
+  transition: top 300ms ease-in-out
+  @media screen and (min-width: 650px)
+    top: 0
+
+.airplane-data-search
+  top: 267px
+  transition: top 300ms ease-in-out
+  @media screen and (min-width: 650px)
+    top: 0
+
+.airplane-data-headers
+  width: 100%
+  flex-direction: row
+  justify-content: center
+  display: none
+  @media screen and (min-width: 650px)
+    display: flex
+
+  p
+    font-size: 11px
+    color: $header-text
+    text-transform: uppercase
+    text-align: center
+    font-weight: bold
+    padding: 8px 0
+    margin: 0
+    @media screen and (min-width: 800px)
+      font-size: 13px
+
+.serial-header
+  background: $serial
+  width: 10%
+
+.airplane-serial
+  width: 100%
+  text-align: left
+  @media screen and (min-width: 650px)
+    width: 10%
+    text-align: center
+
+.current-status-header
+  background: $current
+  width: 20%
+  @media screen and (min-width: 650px)
+    font-size: 12px
+
+.airplane-current-status
+  background: $current
+  width: 50%
+  @media screen and (min-width: 650px)
+    width: 20%
+
+.date-made-header
+  background: $date
+  width: 25%
+  @media screen and (min-width: 650px)
+    width: 10%
+
+.airplane-date-made
+  background: $date
+  width: 25%
+  @media screen and (min-width: 650px)
+    width: 10%
+
+.registration-header
+  background: $reg
+  width: 15%
+
+.airplane-registration
+  background: $reg
+  width: 25%
+  @media screen and (min-width: 650px)
+    width: 15%
+
+.latest-operator-header
+  background: $ops
+  width: 25%
+
+.airplane-latest-operator
+  background: $ops
+  width: 50%
+  @media screen and (min-width: 650px)
+    width: 25%
+
+.country-header
+  background: $country
+  width: 20%
+
+.airplane-country
+  background: $country
+  width: 50%
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  align-items: center
+  @media screen and (min-width: 650px)
+    width: 20%
+
+  img
+    height: 15px
+    margin-left: 8px
+    align-self: flex-end
+    padding-bottom: 7px
+    @media screen and (min-width: 650px)
+      align-self: center
+      padding-bottom: 0
+
+.airplane-excerpt
+  width: 100%
+  border-bottom: 1px solid #ccc
+  font-size: 12px
+  @media screen and (min-width: 400px)
+    font-size: 13px
+  @media screen and (min-width: 450px)
+    font-size: 14px
+  @media screen and (min-width: 650px)
+    font-size: 12px
+  @media screen and (min-width: 700px)
+    font-size: 13px
+  @media screen and (min-width: 750px)
+    font-size: 14px
+  @media screen and (min-width: 850px)
+    font-size: 15px
+
+
+  a
+    width: 100%
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    flex-wrap: wrap
+    color: $dark-color
+    text-decoration: none
+    @media screen and (min-width: 650px)
+      &:hover
+        filter: contrast(2)
+        font-weight: bold
+
+  p
+    margin: 0
+    padding: 5px 0 5px 5px
+    @media screen and (min-width: 650px)
+      padding: 13px 0 13px 15px
+
+.mobile-excerpt
+  display: block
+  font-size: 10px
+  margin-bottom: 3px
+  color: #999
+  @media screen and (min-width: 650px)
+    display: none
+
+.excerpt-even
+  .airplane-serial
+    background: desaturate(lighten($serial, 40%), 10%)
+
+  .airplane-current-status
+    background: desaturate(lighten($current, 30%), 10%)
+
+  .airplane-date-made
+    background: desaturate(lighten($date, 55%), 10%)
+
+  .airplane-registration
+    background: desaturate(lighten($reg, 30%), 10%)
+
+  .airplane-latest-operator
+    background: desaturate(lighten($ops, 53%), 10%)
+
+  .airplane-country
+    background: desaturate(lighten($country, 20%), 10%)
+
+
+.excerpt-odd
+  .airplane-serial
+    background: lighten($serial, 45%)
+
+  .airplane-current-status
+    background: lighten($current, 35%)
+
+  .airplane-date-made
+    background: lighten($date, 45%)
+
+  .airplane-registration
+    background: lighten($reg, 35%)
+
+  .airplane-latest-operator
+    background: lighten($ops, 50%)
+
+  .airplane-country
+    background: lighten($country, 25%)

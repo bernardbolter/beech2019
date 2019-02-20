@@ -1,6 +1,6 @@
 import * as actionTypes from "./homeTypes";
 
-export const filterHomeData = data => {
+export const filterHomeData = homeData => {
   let sortedData = {
     accidentType: [],
     currentStatus: [],
@@ -10,14 +10,12 @@ export const filterHomeData = data => {
     serial: []
   };
 
-  // put the data into 6 individual objects
-  Object.values(data[2]).map(i => sortedData.accidentType.push(i.accidentType));
-  Object.values(data[0]).map(a => {
+  homeData.incidents.map(i => sortedData.accidentType.push(i.accidentType));
+  homeData.airplanes.map(a => {
     // status data
     if (a.currentStatus !== "?" && a.currentStatus !== undefined) {
       sortedData.currentStatus.push(a.currentStatus);
     }
-
     // production run data
     if (a.factoryDate !== "?" && a.factoryDate !== undefined) {
       var theYear = a.factoryDate.slice(-2);
@@ -28,24 +26,14 @@ export const filterHomeData = data => {
       }
       sortedData.airplaneProduction.push(theYear);
     }
-
     // country data
     if (a.latestCountry !== "?" && a.latestCountry !== undefined) {
-      if (a.latestCountry.charAt(0) === `(`) {
-        sortedData.latestCountry.push(a.latestCountry.slice(1, -1));
-      }
       sortedData.latestCountry.push(a.latestCountry);
     }
-
     // operator data
     if (a.latestOperator !== "?" && a.latestOperator !== undefined) {
-      if (a.latestOperator.charAt(0) === `(`) {
-        var noOp = a.latestOperator.slice(1, -1);
-        sortedData.latestOperator.push(noOp);
-      }
       sortedData.latestOperator.push(a.latestOperator);
     }
-
     // serial data
     if (a.serial !== "?" && a.serial !== undefined) {
       var shortSerial = a.serial.substring(0, 2);
