@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { firestoreConnect, isLoaded } from "react-redux-firebase";
+import { withFirestore, isLoaded } from "react-redux-firebase";
 
 import Header from "../header/header";
 import HomeColumn from "./homeColumn";
@@ -13,36 +13,45 @@ import "./home.sass";
 
 class Home extends Component {
   async componentDidMount() {
-    if (
-      Object.keys(this.props.home.homeData).length === 0 &&
-      isLoaded(this.props.base)
-    ) {
-      if (this.props.baseData.baseAirplanes.length === 0) {
-        await this.props.getBaseAirplanes(this.props.base[0]);
-      }
-      if (this.props.baseData.baseIncidents.length === 0) {
-        await this.props.getBaseIncidents(this.props.base[2]);
-      }
+    if (this.props.baseData.baseAirplanes.length === 0) {
+      let fireplanesRef = await this.props.firestore
+        .collection("base")
+        .doc("airplaneExcerpts");
+      await fireplanesRef
+        .get()
+        .then(doc => {
+          if (!doc.exists) {
+            console.log("No such document.");
+          } else {
+            this.props.getBaseAirplanes(doc.data());
+          }
+        })
+        .catch(err => {
+          console.log("Error getting document".err);
+        });
+    }
+    if (this.props.baseData.baseIncidents.length === 0) {
+      let incidentsRef = await this.props.firestore
+        .collection("base")
+        .doc("incidents");
+      await incidentsRef
+        .get()
+        .then(doc => {
+          if (!doc.exists) {
+            console.log("No such document.");
+          } else {
+            this.props.getBaseIncidents(doc.data());
+          }
+        })
+        .catch(err => {
+          console.log("Error getting document".err);
+        });
+    }
+    if (Object.keys(this.props.home.homeData).length === 0) {
       let homeObject = {};
       homeObject.airplanes = this.props.baseData.baseAirplanes;
       homeObject.incidents = this.props.baseData.baseIncidents;
-      this.props.filterHomeData(homeObject);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.base !== prevProps.base) {
-      this.props.getBaseAirplanes(this.props.base[0]);
-      this.props.getBaseIncidents(this.props.base[2]);
-    }
-    if (
-      this.props.baseData.baseAirplanes !== prevProps.baseData.baseAirplanes ||
-      this.props.baseData.baseIncidents !== prevProps.baseData.baseIncidents
-    ) {
-      let homeObject = {};
-      homeObject.airplanes = this.props.baseData.baseAirplanes;
-      homeObject.incidents = this.props.baseData.baseIncidents;
-      this.props.filterHomeData(homeObject);
+      await this.props.filterHomeData(homeObject);
     }
   }
 
@@ -73,7 +82,7 @@ class Home extends Component {
             <p>below are the top rankings of the stats</p>
           </div>
 
-          {this.props.home.homeDataLoaded && isLoaded(this.props.base) ? (
+          {this.props.home.homeDataLoaded ? (
             <div className="home-grid">
               <HomeColumn
                 columnName="currentStatus"
@@ -115,13 +124,13 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  base: state.firestore.ordered.base,
   home: state.home,
-  baseData: state.baseData
+  baseData: state.baseData,
+  base: state.firestore.ordered.base
 });
 
 export default compose(
-  firestoreConnect([{ collection: "base" }]),
+  withFirestore,
   connect(
     mapStateToProps,
     { filterHomeData, getBaseAirplanes, getBaseIncidents }

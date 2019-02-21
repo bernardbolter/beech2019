@@ -30,12 +30,39 @@ const Airplane = props => {
         <div className="airplane-registration">
           <p>
             <span className="mobile-excerpt">Registration</span>
-            {props.latestReg}
+            {props.factoryReg}
           </p>
+        </div>
+        <div className="airplane-latest-operator">
+          <p>
+            <span className="mobile-excerpt">Latest Operator</span>
+            {props.latestOperator}
+          </p>
+        </div>
+        <div className="airplane-country">
+          <p>
+            <span className="mobile-excerpt">Country</span>
+            {props.latestCountry}
+          </p>
+          <img
+            src={displayFlag(props.latestCountry)}
+            alt={props.latestCountry}
+          />
         </div>
       </Link>
     </div>
   );
+};
+
+const displayFlag = country => {
+  console.log(country);
+  const countryUnder = country.split(" ").join("_");
+  const countryAll = `${process.env.PUBLIC_URL}/flags/${countryUnder}.png`;
+  if (countryUnder === "?") {
+    return null;
+  } else {
+    return countryAll;
+  }
 };
 
 export default Airplane;

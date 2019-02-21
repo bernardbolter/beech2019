@@ -66,7 +66,6 @@ class Airplanes extends Component {
                     <p>Country</p>
                   </div>
                 </section>
-                <h1>The Planes</h1>
                 {this.renderAirplaneExcerpts()}
               </div>
             </div>
