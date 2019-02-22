@@ -6,8 +6,8 @@ const Airplane = props => {
     <div
       className={
         parseInt(props.id, 10) & 1
-          ? "airplane-excerpt excert-odd"
-          : "airplane-excerpt excert-even"
+          ? "airplane-excerpt excerpt-odd"
+          : "airplane-excerpt excerpt-even"
       }
     >
       <Link to={`/airplanes/${props.serial}`}>
@@ -30,7 +30,7 @@ const Airplane = props => {
         <div className="airplane-registration">
           <p>
             <span className="mobile-excerpt">Registration</span>
-            {props.factoryReg}
+            {props.latestReg}
           </p>
         </div>
         <div className="airplane-latest-operator">
@@ -45,24 +45,21 @@ const Airplane = props => {
             {props.latestCountry}
           </p>
           <img
-            src={displayFlag(props.latestCountry)}
-            alt={props.latestCountry}
+            src={
+              props.countryName === "?" || props.countryName === undefined
+                ? null
+                : [`${process.env.PUBLIC_URL}/flags/${props.countryName}.png`]
+            }
+            alt={
+              props.countryName === "?" || props.countryName === undefined
+                ? null
+                : [`${props.latestCountry} Flag`]
+            }
           />
         </div>
       </Link>
     </div>
   );
-};
-
-const displayFlag = country => {
-  console.log(country);
-  const countryUnder = country.split(" ").join("_");
-  const countryAll = `${process.env.PUBLIC_URL}/flags/${countryUnder}.png`;
-  if (countryUnder === "?") {
-    return null;
-  } else {
-    return countryAll;
-  }
 };
 
 export default Airplane;

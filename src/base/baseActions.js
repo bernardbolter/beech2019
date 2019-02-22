@@ -3,6 +3,7 @@ import * as actionTypes from "./baseTypes";
 export const getBaseAirplanes = airplanes => {
   let airplanesArrayRaw = Object.keys(airplanes).map(key => airplanes[key]);
   let airplanesArray = [];
+  console.log(airplanesArrayRaw);
   airplanesArrayRaw.map(plane => {
     if (plane.latestCountry !== "?" && plane.latestCountry !== undefined) {
       if (plane.latestCountry.charAt(0) === `(`) {

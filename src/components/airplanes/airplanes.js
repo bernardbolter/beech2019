@@ -1,29 +1,38 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { firestoreConnect, isLoaded } from "react-redux-firebase";
+import { withFirestore } from "react-redux-firebase";
 
 import Header from "../header/header";
 import Airplane from "./airplane";
 
-import { airplanesHaveBeenLoaded } from "./airplanesStore/airplanesActions";
+import { getFilteredAirplanes } from "./airplanesStore/airplanesActions";
 import { getBaseAirplanes } from "../../base/baseActions";
 
 import "./airplanes.sass";
 
 class Airplanes extends Component {
-  componentDidMount() {
-    if (this.props.baseData.baseAirplanes) {
-      console.log("hit base data");
-      this.props.airplanesHaveBeenLoaded(this.props.baseData.baseAirplanes);
+  async componentDidMount() {
+    if (this.props.baseData.baseAirplanes.length === 0) {
+      let fireplanesRef = await this.props.firestore
+        .collection("base")
+        .doc("airplaneExcerpts");
+      await fireplanesRef
+        .get()
+        .then(doc => {
+          if (!doc.exists) {
+            console.log("No such document.");
+          } else {
+            this.props.getBaseAirplanes(doc.data());
+          }
+        })
+        .catch(err => {
+          console.log("Error getting document".err);
+        });
+      this.props.getFilteredAirplanes(this.props.baseData.baseAirplanes);
     }
-  }
-
-  async componentDidUpdate(prevProps) {
-    if (this.props.base !== prevProps.base) {
-      console.log("hit firestore");
-      await this.props.getBaseAirplanes(this.props.base[0]);
-      this.props.airplanesHaveBeenLoaded(this.props.baseData.baseAirplanes);
+    if (this.props.airplanes.filteredAirplanes.length === 0) {
+      await this.props.getFilteredAirplanes(this.props.baseData.baseAirplanes);
     }
   }
 
@@ -40,10 +49,14 @@ class Airplanes extends Component {
             showSearch ? "airplanes airplanes-search-open" : "airplanes"
           }
         >
-          {this.props.airplanes.airplanesLoaded && isLoaded(this.props.base) ? (
+          {this.props.airplanes.airplanesLoaded ? (
             <div>
               <section className="airplane-top-info">
-                {this.renderAirplaneCount()}
+                {this.props.airplanes.airplaneCount !== 0 ? (
+                  <p>Viewing {this.props.airplanes.airplaneCount} Records</p>
+                ) : (
+                  <p>There are no aiplane results for your search.</p>
+                )}
               </section>
               <div className="airplane-data-wrapper">
                 <section className="airplane-data-headers">
@@ -66,7 +79,19 @@ class Airplanes extends Component {
                     <p>Country</p>
                   </div>
                 </section>
-                {this.renderAirplaneExcerpts()}
+                {!this.props.airplanes.filteredAirplanes.length ? (
+                  <div className="no-incident">
+                    <img
+                      src={`${process.env.PUBLIC_URL}/b1900-logo.png`}
+                      alt="BEECH 1900 Graphic"
+                    />
+                    <p>no airplanes were found in your search</p>
+                  </div>
+                ) : (
+                  this.props.airplanes.filteredAirplanes.map((plane, i) => (
+                    <Airplane key={i} {...plane} />
+                  ))
+                )}
               </div>
             </div>
           ) : (
@@ -112,9 +137,9 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-  firestoreConnect([{ collection: "base" }]),
+  withFirestore,
   connect(
     mapStateToProps,
-    { airplanesHaveBeenLoaded, getBaseAirplanes }
+    { getFilteredAirplanes, getBaseAirplanes }
   )
 )(Airplanes);
