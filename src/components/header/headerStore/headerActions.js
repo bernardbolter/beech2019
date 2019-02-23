@@ -1,23 +1,46 @@
-import {
-  TOGGLE_NEWSLETTER,
-  TOGGLE_NAVIGATION,
-  TOGGLE_SEARCH
-} from "./headerTypes";
+import * as actionTypes from "./headerTypes";
+
+export const getAirplaneSearchValues = () => {
+  return {
+    type: actionTypes.AIRPLANE_SEARCH_VALUES
+  };
+};
+
+export const changeAirplaneSearchText = value => {
+  return {
+    type: actionTypes.AIRPLANE_SEARCH_TEXT,
+    text: value
+  };
+};
+
+export const changeAirplaneSort = value => {
+  return {
+    type: actionTypes.AIRPLANE_SORT,
+    sortValue: value
+  };
+};
+
+export const changeAirplaneFilter = value => {
+  return {
+    type: actionTypes.AIRPLANE_FILTER,
+    filterValue: value
+  };
+};
 
 export const toggleNewsletter = () => {
   return {
-    type: TOGGLE_NEWSLETTER
+    type: actionTypes.TOGGLE_NEWSLETTER
   };
 };
 
 export const toggleSearch = () => {
   return {
-    type: TOGGLE_SEARCH
+    type: actionTypes.TOGGLE_SEARCH
   };
 };
 
 export const toggleNavigation = () => {
   return {
-    type: TOGGLE_NAVIGATION
+    type: actionTypes.TOGGLE_NAVIGATION
   };
 };

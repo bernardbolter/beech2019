@@ -1,16 +1,12 @@
-import {
-  TOGGLE_NEWSLETTER,
-  TOGGLE_SEARCH,
-  TOGGLE_NAVIGATION
-} from "./headerTypes";
+import * as actionTypes from "./headerTypes";
 
 const initialState = {
   showNewsletter: false,
   showSearch: false,
   showNavigation: false,
   // Airplane Values
-  airplanesFilter: "",
-  airplanesOlderChecked: false,
+  airplanesSearchText: "",
+  airplanesOlderChecked: true,
   airplanesNewerChecked: false,
   uaChecked: false,
   ubChecked: false,
@@ -35,13 +31,40 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
+  console.log("hit reducer");
   switch (action.type) {
-    case TOGGLE_NEWSLETTER:
+    case actionTypes.AIRPLANE_SEARCH_TEXT:
+      console.log(action.text);
+      return {
+        ...state,
+        airplanesSearchText: action.text
+      };
+    case actionTypes.AIRPLANE_FILTER:
+      let filterVariable = `${action.filterValue}Checked`;
+      return {
+        ...state,
+        [filterVariable]: !state[filterVariable]
+      };
+    case actionTypes.AIRPLANE_SORT:
+      if (action.sortValue === "newer") {
+        return {
+          ...state,
+          airplanesNewerChecked: true,
+          airplanesOlderChecked: false
+        };
+      } else {
+        return {
+          ...state,
+          airplanesNewerChecked: false,
+          airplanesOlderChecked: true
+        };
+      }
+    case actionTypes.TOGGLE_NEWSLETTER:
       return {
         ...state,
         showNewsletter: !state.showNewsletter
       };
-    case TOGGLE_SEARCH:
+    case actionTypes.TOGGLE_SEARCH:
       let navState;
       if (!state.showSearch && state.showNavigation) {
         navState = false;
@@ -53,7 +76,7 @@ export default function(state = initialState, action) {
         showSearch: !state.showSearch,
         showNavigation: navState
       };
-    case TOGGLE_NAVIGATION:
+    case actionTypes.TOGGLE_NAVIGATION:
       let searchState;
       if (!state.showNavigation && state.showSearch) {
         searchState = false;

@@ -1,13 +1,32 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import {
+  changeAirplaneSearchText,
+  changeAirplaneSort,
+  changeAirplaneFilter
+} from "../headerStore/headerActions";
+
 class AirplaneSearch extends Component {
+  handleTextChange = e => {
+    this.props.changeAirplaneSearchText(e.target.value);
+  };
+
+  handleSortChange = e => {
+    this.props.changeAirplaneSort(e.target.value);
+  };
+
+  handleFilterChnage = e => {
+    this.props.changeAirplaneFilter(e.target.value);
+  };
+
   render() {
+    console.log(this.props);
     const {
       showSearch,
       airplanesOlderChecked,
       airplanesNewerChecked,
-      airplanesFilter,
+      airplanesSearchText,
       uaChecked,
       ubChecked,
       ucChecked,
@@ -19,10 +38,10 @@ class AirplaneSearch extends Component {
       partedOutChecked,
       destroyedChecked,
       airplanesLatestOperatorValue,
-      airplanesLatestOperator,
-      airplanesCountryValue,
-      airplanesCountry
+      airplanesCountryValue
     } = this.props.header;
+    const { uniqueCountries, uniqueOperators } = this.props.baseData;
+
     return (
       <div className={showSearch ? "search search-open" : "search"}>
         <div className="search-column-one">
@@ -34,7 +53,7 @@ class AirplaneSearch extends Component {
               id="older"
               value="older"
               checked={airplanesOlderChecked}
-              // onChange={this.toggleSorting}
+              onChange={this.handleSortChange}
             />
           </label>
           <label htmlFor="newer" className="sort-label check-newer">
@@ -44,15 +63,15 @@ class AirplaneSearch extends Component {
               id="newer"
               value="newer"
               checked={airplanesNewerChecked}
-              // onChange={this.toggleSorting}
+              onChange={this.handleSortChange}
             />
           </label>
           <input
             className="search-input filter"
             placeholder="search serial and reg"
             type="text"
-            value={airplanesFilter}
-            // onChange={this.goFilter}
+            value={airplanesSearchText}
+            onChange={this.handleTextChange}
           />
         </div>
 
@@ -64,7 +83,7 @@ class AirplaneSearch extends Component {
               id="ua"
               value="ua"
               checked={uaChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> UA</span>
           </label>
@@ -74,7 +93,7 @@ class AirplaneSearch extends Component {
               id="ub"
               value="ub"
               checked={ubChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> UB</span>
           </label>
@@ -84,7 +103,7 @@ class AirplaneSearch extends Component {
               id="uc"
               value="uc"
               checked={ucChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> UC</span>
           </label>
@@ -94,7 +113,7 @@ class AirplaneSearch extends Component {
               id="ud"
               value="ud"
               checked={udChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> UD</span>
           </label>
@@ -104,7 +123,7 @@ class AirplaneSearch extends Component {
               id="ue"
               value="ue"
               checked={ueChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> UE</span>
           </label>
@@ -117,7 +136,7 @@ class AirplaneSearch extends Component {
               id="operating"
               value="operating"
               checked={operatingChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> Operating</span>
           </label>
@@ -130,7 +149,7 @@ class AirplaneSearch extends Component {
               id="operatingNonCurrent"
               value="operatingNonCurrent"
               checked={operatingNonCurrentChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> Operating (Non-Current)</span>
           </label>
@@ -140,7 +159,7 @@ class AirplaneSearch extends Component {
               id="nonFlying"
               value="nonFlying"
               checked={nonFlyingChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> Non-Flying</span>
           </label>
@@ -150,7 +169,7 @@ class AirplaneSearch extends Component {
               id="partedOut"
               value="partedOut"
               checked={partedOutChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> Parted-Out</span>
           </label>
@@ -160,7 +179,7 @@ class AirplaneSearch extends Component {
               id="destroyed"
               value="destroyed"
               checked={destroyedChecked}
-              // onChange={this.toggleFilters}
+              onChange={this.handleFilterChnage}
             />
             <span> Destroyed</span>
           </label>
@@ -186,9 +205,9 @@ class AirplaneSearch extends Component {
             // onChange={this.handleOperatorChange}
           >
             <option defaultValue="selected">Select Latest Operator</option>
-            {airplanesLatestOperator.map(oper => (
-              <option key={oper} value={oper}>
-                {oper}
+            {uniqueOperators.map((operator, i) => (
+              <option key={i} value={operator}>
+                {operator}
               </option>
             ))}
           </select>
@@ -197,8 +216,8 @@ class AirplaneSearch extends Component {
             // onChange={this.handleCountryChange}
           >
             <option>Select Country</option>
-            {airplanesCountry.map(country => (
-              <option key={country} value={country}>
+            {uniqueCountries.map((country, i) => (
+              <option key={i} value={country}>
                 {country}
               </option>
             ))}
@@ -210,7 +229,11 @@ class AirplaneSearch extends Component {
 }
 
 const mapStateToProps = state => ({
-  header: state.header
+  header: state.header,
+  baseData: state.baseData
 });
 
-export default connect(mapStateToProps)(AirplaneSearch);
+export default connect(
+  mapStateToProps,
+  { changeAirplaneSearchText, changeAirplaneSort, changeAirplaneFilter }
+)(AirplaneSearch);

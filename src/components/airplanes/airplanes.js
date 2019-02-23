@@ -39,7 +39,6 @@ class Airplanes extends Component {
   render() {
     const { match } = this.props;
     const { showSearch } = this.props.header;
-    console.log(this.props);
     return (
       <React.Fragment>
         <Header match={match} />
@@ -101,32 +100,6 @@ class Airplanes extends Component {
       </React.Fragment>
     );
   }
-
-  renderAirplaneExcerpts = () => {
-    if (!this.props.airplanes.filteredAirplanes.length) {
-      return (
-        <div className="no-incident">
-          <img
-            src={`${process.env.PUBLIC_URL}/b1900-logo.png`}
-            alt="BEECH 1900 Graphic"
-          />
-          <p>no airplanes were found in your search</p>
-        </div>
-      );
-    } else {
-      return this.props.airplanes.filteredAirplanes.map(plane => (
-        <Airplane key={plane.id} {...plane} />
-      ));
-    }
-  };
-
-  renderAirplaneCount = () => {
-    if (this.props.airplanes.airplaneCount) {
-      return <p>Viewing {this.props.airplanes.airplaneCount} Records</p>;
-    } else {
-      return <p>There are no aiplane results for your search.</p>;
-    }
-  };
 }
 
 const mapStateToProps = state => ({

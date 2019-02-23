@@ -3,7 +3,9 @@ import * as actionTypes from "./baseTypes";
 const initialState = {
   baseAirplanes: [],
   baseIncidents: [],
-  basefacts: []
+  basefacts: [],
+  uniqueCountries: [],
+  uniqueOperators: []
 };
 
 export default function(state = initialState, action) {
@@ -11,7 +13,9 @@ export default function(state = initialState, action) {
     case actionTypes.GET_BASE_AIRPLANES:
       return {
         ...state,
-        baseAirplanes: action.baseAirplanes
+        baseAirplanes: action.baseAirplanes,
+        uniqueCountries: action.countries,
+        uniqueOperators: action.operators
       };
     case actionTypes.GET_BASE_INCIDENTS:
       return {
