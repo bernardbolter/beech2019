@@ -6,7 +6,10 @@ import { withFirestore } from "react-redux-firebase";
 import Header from "../header/header";
 import Airplane from "./airplane";
 
-import { getFilteredAirplanes } from "./airplanesStore/airplanesActions";
+import {
+  getFilteredAirplanes,
+  getUpdatedFilteredAirplanes
+} from "./airplanesStore/airplanesActions";
 import { getBaseAirplanes } from "../../base/baseActions";
 
 import "./airplanes.sass";
@@ -36,7 +39,44 @@ class Airplanes extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.header !== prevProps.header) {
+      const {
+        uaChecked,
+        ubChecked,
+        ucChecked,
+        udChecked,
+        ueChecked
+      } = this.props.header;
+      const allPlanes = this.props.baseData.baseAirplanes;
+      const SerialArray = [];
+      if (uaChecked) {
+        SerialArray.push("A");
+      }
+      if (ubChecked) {
+        SerialArray.push("B");
+      }
+      if (ucChecked) {
+        SerialArray.push("C");
+      }
+      if (udChecked) {
+        SerialArray.push("D");
+      }
+      if (ueChecked) {
+        SerialArray.push("E");
+      }
+      let SerialString = SerialArray.join(", ");
+
+      if (!uaChecked && !ubChecked && !ucChecked && !udChecked && !ueChecked) {
+        SerialString = "A, B, C, D, E";
+      }
+
+      this.props.getUpdatedFilteredAirplanes(SerialString, allPlanes);
+    }
+  }
+
   render() {
+    console.log(this.props);
     const { match } = this.props;
     const { showSearch } = this.props.header;
     return (
@@ -113,6 +153,6 @@ export default compose(
   withFirestore,
   connect(
     mapStateToProps,
-    { getFilteredAirplanes, getBaseAirplanes }
+    { getFilteredAirplanes, getUpdatedFilteredAirplanes, getBaseAirplanes }
   )
 )(Airplanes);

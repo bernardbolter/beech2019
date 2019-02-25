@@ -15,6 +15,16 @@ export default function(state = initialState, action) {
         airplaneCount: action.totalAirplanes,
         airplanesLoaded: true
       };
+    case actionTypes.UPDATE_FILTERED_AIRPLANES:
+      const serialRegEx = new RegExp(`^U[${action.serials}]`);
+      const newFilteredAirplanes = action.allPlanes.filter(plane =>
+        serialRegEx.test(plane.serial)
+      );
+      return {
+        ...state,
+        filteredAirplanes: newFilteredAirplanes,
+        airplaneCount: newFilteredAirplanes.length
+      };
     default:
       return state;
   }
