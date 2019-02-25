@@ -59,6 +59,40 @@ export default function(state = initialState, action) {
           airplanesOlderChecked: true
         };
       }
+    case actionTypes.AIRPLANE_DROPDOWN:
+      let operator = "";
+      let country = "";
+      if (action.selector === "operator") {
+        operator = action.dropValue;
+        country = state.airplanesCountryValue;
+      } else {
+        operator = state.airplanesLatestOperatorValue;
+        country = action.dropValue;
+      }
+      return {
+        ...state,
+        airplanesLatestOperatorValue: operator,
+        airplanesCountryValue: country
+      };
+    case actionTypes.AIRPLANES_RESET:
+      return {
+        ...state,
+        airplanesSearchText: "",
+        airplanesOlderChecked: true,
+        airplanesNewerChecked: false,
+        uaChecked: false,
+        ubChecked: false,
+        ucChecked: false,
+        udChecked: false,
+        ueChecked: false,
+        operatingChecked: false,
+        operatingNonCurrentChecked: false,
+        nonFlyingChecked: false,
+        partedOutChecked: false,
+        destroyedChecked: false,
+        airplanesLatestOperatorValue: "",
+        airplanesCountryValue: ""
+      };
     case actionTypes.TOGGLE_NEWSLETTER:
       return {
         ...state,

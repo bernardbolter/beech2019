@@ -27,6 +27,20 @@ export const changeAirplaneFilter = value => {
   };
 };
 
+export const changeAirplaneDropdown = (value, selector) => {
+  return {
+    type: actionTypes.AIRPLANE_DROPDOWN,
+    dropValue: value,
+    selector: selector
+  };
+};
+
+export const handleAirplaneReset = () => {
+  return {
+    type: actionTypes.AIRPLANES_RESET
+  };
+};
+
 export const toggleNewsletter = () => {
   return {
     type: actionTypes.TOGGLE_NEWSLETTER

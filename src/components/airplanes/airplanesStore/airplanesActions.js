@@ -8,10 +8,23 @@ export const getFilteredAirplanes = airplanes => {
   };
 };
 
-export const getUpdatedFilteredAirplanes = (serials, allPlanes) => {
+export const getUpdatedFilteredAirplanes = (
+  serials,
+  status,
+  country,
+  operator,
+  sorting,
+  filterText,
+  allPlanes
+) => {
   return {
     type: actionTypes.UPDATE_FILTERED_AIRPLANES,
     serials: serials,
+    status: status,
+    sorting: sorting,
+    country: country,
+    operator: operator,
+    filterText: filterText,
     allPlanes: allPlanes
   };
 };

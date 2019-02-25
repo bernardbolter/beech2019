@@ -17,9 +17,35 @@ export default function(state = initialState, action) {
       };
     case actionTypes.UPDATE_FILTERED_AIRPLANES:
       const serialRegEx = new RegExp(`^U[${action.serials}]`);
-      const newFilteredAirplanes = action.allPlanes.filter(plane =>
-        serialRegEx.test(plane.serial)
+      const statusRegEx = new RegExp(`^[${action.status}]`);
+      let newFilteredAirplanes = action.allPlanes.filter(
+        plane =>
+          serialRegEx.test(plane.serial) &&
+          statusRegEx.test(plane.currentStatus)
       );
+      if (action.operator !== "") {
+        newFilteredAirplanes = newFilteredAirplanes.filter(plane => {
+          return plane.latestOperator === action.operator;
+        });
+      }
+      if (action.country !== "") {
+        newFilteredAirplanes = newFilteredAirplanes.filter(plane => {
+          return plane.latestCountry === action.country;
+        });
+      }
+      if (!action.sorting) {
+        newFilteredAirplanes = newFilteredAirplanes.reverse();
+      }
+
+      if (action.filterText !== "") {
+        const matchesFilter = new RegExp(action.filterText, "i");
+        newFilteredAirplanes = newFilteredAirplanes.filter(
+          plane =>
+            !action.filterText ||
+            matchesFilter.test(plane.serial) ||
+            matchesFilter.test(plane.latestReg)
+        );
+      }
       return {
         ...state,
         filteredAirplanes: newFilteredAirplanes,

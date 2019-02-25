@@ -46,32 +46,87 @@ class Airplanes extends Component {
         ubChecked,
         ucChecked,
         udChecked,
-        ueChecked
+        ueChecked,
+        airplanesOlderChecked,
+        operatingChecked,
+        operatingNonCurrentChecked,
+        nonFlyingChecked,
+        partedOutChecked,
+        destroyedChecked,
+        airplanesSearchText,
+        airplanesLatestOperatorValue,
+        airplanesCountryValue
       } = this.props.header;
-      const allPlanes = this.props.baseData.baseAirplanes;
-      const SerialArray = [];
+
+      let serialArray = [];
       if (uaChecked) {
-        SerialArray.push("A");
+        serialArray.push("A");
       }
       if (ubChecked) {
-        SerialArray.push("B");
+        serialArray.push("B");
       }
       if (ucChecked) {
-        SerialArray.push("C");
+        serialArray.push("C");
       }
       if (udChecked) {
-        SerialArray.push("D");
+        serialArray.push("D");
       }
       if (ueChecked) {
-        SerialArray.push("E");
+        serialArray.push("E");
       }
-      let SerialString = SerialArray.join(", ");
+      let serialString = serialArray.join(", ");
 
       if (!uaChecked && !ubChecked && !ucChecked && !udChecked && !ueChecked) {
-        SerialString = "A, B, C, D, E";
+        serialString = "A, B, C, D, E";
       }
 
-      this.props.getUpdatedFilteredAirplanes(SerialString, allPlanes);
+      let statusArray = [];
+
+      if (operatingChecked) {
+        statusArray.push("O");
+      }
+
+      if (operatingNonCurrentChecked) {
+        statusArray.push("O");
+      }
+
+      if (nonFlyingChecked) {
+        statusArray.push("N");
+      }
+
+      if (partedOutChecked) {
+        statusArray.push("P");
+      }
+
+      if (destroyedChecked) {
+        statusArray.push("D");
+      }
+
+      let statusString = statusArray.join(", ");
+
+      if (statusString === "") {
+        statusString = "O, N, P, D";
+      }
+
+      const country = airplanesCountryValue;
+
+      const operator = airplanesLatestOperatorValue;
+
+      const sorting = airplanesOlderChecked;
+
+      const filterText = airplanesSearchText;
+
+      const allPlanes = this.props.baseData.baseAirplanes;
+
+      this.props.getUpdatedFilteredAirplanes(
+        serialString,
+        statusString,
+        country,
+        operator,
+        sorting,
+        filterText,
+        allPlanes
+      );
     }
   }
 
