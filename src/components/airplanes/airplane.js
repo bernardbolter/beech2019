@@ -12,8 +12,10 @@ const Airplane = props => {
     >
       <Link to={`/airplanes/${props.serial}`}>
         <div className="airplane-serial">
-          <span className="mobile-excerpt">Serial</span>
-          {props.serial}
+          <p>
+            <span className="mobile-excerpt">Serial</span>
+            {props.serial}
+          </p>
         </div>
         <div className="airplane-current-status">
           <p>

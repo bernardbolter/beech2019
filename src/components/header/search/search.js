@@ -10,6 +10,8 @@ class Search extends Component {
   decideSearch = () => {
     if (this.props.match.path === "/airplanes") {
       return <AirplaneSearch />;
+    } else if (this.props.match.path === "/airplanes/:serial") {
+      return <AirplaneSearch />;
     } else if (this.props.match.path === "/incidents") {
       return <IncidentSearch />;
     } else {
