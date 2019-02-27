@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import Header from "../header/header";
 import Event from "./event";
 
+import { getBaseIncidents } from "../../base/baseActions";
+
 import "./airplane-single.sass";
 
 class AirplaneSingle extends Component {
@@ -39,9 +41,34 @@ class AirplaneSingle extends Component {
     await this.setState({ airplaneLoaded: true });
     await this.getEvents(this.state.airplaneData);
     await this.setState({ eventsLoaded: true });
+    if (this.state.airplaneData.incidentHistory) {
+      if (this.props.baseData.baseIncidents.length === 0) {
+        console.log("geting base incidents");
+        let incidentsRef = await this.props.firestore
+          .collection("base")
+          .doc("incidents");
+        await incidentsRef
+          .get()
+          .then(doc => {
+            if (!doc.exists) {
+              console.log("No such document.");
+            } else {
+              this.props.getBaseIncidents(doc.data());
+            }
+          })
+          .catch(err => {
+            console.log("Error getting document".err);
+          });
+      }
+      console.log(this.state.airplaneData.incidentHistory);
+    } else {
+      console.log("no incident history");
+    }
   }
 
   render() {
+    console.log(this.props);
+    console.log(this.state);
     const { match } = this.props;
     return (
       <React.Fragment>
@@ -207,10 +234,13 @@ class AirplaneSingle extends Component {
 }
 
 const mapStateToProps = state => ({
-  airplanes: state.firestore.ordered.airplanes
+  baseData: state.baseData
 });
 
 export default compose(
   withFirestore,
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    { getBaseIncidents }
+  )
 )(AirplaneSingle);

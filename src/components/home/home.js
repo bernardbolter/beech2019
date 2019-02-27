@@ -6,7 +6,12 @@ import { withFirestore } from "react-redux-firebase";
 import Header from "../header/header";
 import HomeColumn from "./homeColumn";
 
-import { filterHomeData } from "./homeStore/homeActions";
+import {
+  filterHomeData,
+  toggleLogin,
+  updateLoginText,
+  submitLogin
+} from "./homeStore/homeActions";
 import { getBaseAirplanes, getBaseIncidents } from "../../base/baseActions";
 
 import "./home.sass";
@@ -57,6 +62,7 @@ class Home extends Component {
 
   render() {
     console.log(this.props);
+    const { loginEmail, loginPassword, loginAnswer } = this.props.home;
     return (
       <React.Fragment>
         <div>
@@ -116,23 +122,89 @@ class Home extends Component {
             <p>
               Beech1900.com | all rights reserved - {new Date().getFullYear()}
             </p>
+            <p>
+              webdesign by{" "}
+              <a
+                className="bolter-link"
+                href="bernardbolter.com"
+                target="_blank"
+              >
+                Bernard Bolter
+              </a>{" "}
+              |{" "}
+              <span className="login-button" onClick={this.props.toggleLogin}>
+                get in
+              </span>
+            </p>
+            <div
+              className={
+                this.props.home.showLogin
+                  ? "login-modal login-modal-show"
+                  : "login-modal"
+              }
+            >
+              <h2>Login in here</h2>
+              <form
+                onSubmit={e =>
+                  this.props.submitLogin(e, loginEmail, loginPassword)
+                }
+              >
+                <label htmlFor="loginEmail">
+                  <p>email</p>
+                </label>
+                <input
+                  type="email"
+                  placeholder="enter email"
+                  value={loginEmail}
+                  onChange={e => this.props.updateLoginText(e)}
+                  name="loginEmail"
+                  required
+                />
+                <label htmlFor="loginPassword">
+                  <p>password</p>
+                </label>
+                <input
+                  type="password"
+                  value={loginPassword}
+                  onChange={e => this.props.updateLoginText(e)}
+                  name="loginPassword"
+                  required
+                />
+                <input type="submit" value="Submit" />
+              </form>
+              <p>{!loginAnswer ? null : loginAnswer}</p>
+            </div>
           </div>
         </section>
       </React.Fragment>
     );
   }
+
+  onChange = e => {
+    this.setState = {
+      [e.target.name]: e.target.value
+    };
+  };
 }
 
 const mapStateToProps = state => ({
   home: state.home,
   baseData: state.baseData,
-  base: state.firestore.ordered.base
+  base: state.firestore.ordered.base,
+  auth: state.firebase.auth
 });
 
 export default compose(
   withFirestore,
   connect(
     mapStateToProps,
-    { filterHomeData, getBaseAirplanes, getBaseIncidents }
+    {
+      filterHomeData,
+      getBaseAirplanes,
+      getBaseIncidents,
+      toggleLogin,
+      updateLoginText,
+      submitLogin
+    }
   )
 )(Home);

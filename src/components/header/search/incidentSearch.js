@@ -12,7 +12,7 @@ class IncidentSearch extends Component {
       incidentsFilter,
       incidentsFatalitiesChecked,
       incidentsType
-    } = this.props.header;
+    } = this.props.nav;
     return (
       <div
         className={
@@ -100,7 +100,7 @@ class IncidentSearch extends Component {
 }
 
 const mapStateToProps = state => ({
-  header: state.header
+  nav: state.nav
 });
 
 export default connect(mapStateToProps)(IncidentSearch);

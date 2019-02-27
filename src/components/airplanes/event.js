@@ -1,7 +1,6 @@
 import React from "react";
 
 const Event = props => {
-  console.log(props);
   return (
     <section className={props.class}>
       <p>Date</p>

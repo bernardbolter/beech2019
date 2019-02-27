@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { toggleSearch, toggleNavigation } from "../headerStore/headerActions";
+import { toggleSearch, toggleNavigation } from "../headerStore/navActions";
 
 import "./mobileButtons.sass";
 
 class MobileButtons extends Component {
   render() {
     const { toggleNavigation, toggleSearch, match } = this.props;
-    const { showNavigation, showSearch } = this.props.header;
+    const { showNavigation, showSearch } = this.props.nav;
     return (
       <div className="mobile_buttons">
         <a
@@ -62,7 +62,7 @@ class MobileButtons extends Component {
 }
 
 const mapStateToProps = state => ({
-  header: state.header
+  nav: state.nav
 });
 
 export default connect(

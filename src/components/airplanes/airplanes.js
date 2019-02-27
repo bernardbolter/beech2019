@@ -40,7 +40,7 @@ class Airplanes extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.header !== prevProps.header) {
+    if (this.props.searchAirplanes !== prevProps.searchAirplanes) {
       const {
         uaChecked,
         ubChecked,
@@ -56,7 +56,7 @@ class Airplanes extends Component {
         airplanesSearchText,
         airplanesLatestOperatorValue,
         airplanesCountryValue
-      } = this.props.header;
+      } = this.props.searchAirplanes;
 
       let serialArray = [];
       if (uaChecked) {
@@ -133,7 +133,7 @@ class Airplanes extends Component {
   render() {
     console.log(this.props);
     const { match } = this.props;
-    const { showSearch } = this.props.header;
+    const { showSearch } = this.props.nav;
     return (
       <React.Fragment>
         <Header match={match} />
@@ -198,7 +198,8 @@ class Airplanes extends Component {
 }
 
 const mapStateToProps = state => ({
-  header: state.header,
+  searchAirplanes: state.searchAirplanes,
+  nav: state.nav,
   airplanes: state.airplanes,
   base: state.firestore.ordered.base,
   baseData: state.baseData

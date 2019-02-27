@@ -1,1 +1,5 @@
 export const FILTER_HOME_DATA = "FILTER_HOME_DATA";
+export const TOGGLE_LOGIN = "TOGGLE_LOGIN";
+export const UPDATE_LOGIN_TEXT = "UPDATE_LOGIN_TEXT";
+export const SUBMIT_LOGIN = "SUBMIT_LOGIN";
+export const LOGIN_MESSAGE = "LOGIN_MESSAGE";

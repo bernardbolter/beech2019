@@ -1,14 +1,25 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import firebase from "firebase/app";
+import "firebase/auth";
 import "firebase/firestore";
-import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
-import { reduxFirestore, firestoreReducer } from "redux-firestore";
+import {
+  reactReduxFirebase,
+  firebaseReducer,
+  getFirebase
+} from "react-redux-firebase";
+import {
+  reduxFirestore,
+  firestoreReducer,
+  getFirestore
+} from "redux-firestore";
 
-import headerReducer from "./components/header/headerStore/headerReducer";
+import searchAirplanesReducer from "./components/header/headerStore/searchAirplanesReducer";
 import homeReducer from "./components/home/homeStore/homeReducer";
 import airplanesReducer from "./components/airplanes/airplanesStore/airplanesReducer";
 import baseReducer from "./base/baseReducer";
+import incidentsReducer from "./components/incidents/incidentsStore/incidentsReducer";
+import navReducer from "./components/header/headerStore/navReducer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDbLt9jQRPWCxIop-TUaeJeDycBWcxV1NY",
@@ -39,9 +50,11 @@ const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   baseData: baseReducer,
-  header: headerReducer,
+  searchAirplanes: searchAirplanesReducer,
+  nav: navReducer,
   home: homeReducer,
-  airplanes: airplanesReducer
+  airplanes: airplanesReducer,
+  incidents: incidentsReducer
 });
 
 const initialState = {};
@@ -49,8 +62,8 @@ const initialState = {};
 const store = createStoreWithFirebase(
   rootReducer,
   initialState,
-  applyMiddleware(thunk),
   compose(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reactReduxFirebase(firebase),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )

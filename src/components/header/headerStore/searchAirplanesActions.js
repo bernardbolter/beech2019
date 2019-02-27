@@ -40,21 +40,3 @@ export const handleAirplaneReset = () => {
     type: actionTypes.AIRPLANES_RESET
   };
 };
-
-export const toggleNewsletter = () => {
-  return {
-    type: actionTypes.TOGGLE_NEWSLETTER
-  };
-};
-
-export const toggleSearch = () => {
-  return {
-    type: actionTypes.TOGGLE_SEARCH
-  };
-};
-
-export const toggleNavigation = () => {
-  return {
-    type: actionTypes.TOGGLE_NAVIGATION
-  };
-};

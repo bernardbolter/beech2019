@@ -1,10 +1,6 @@
 import * as actionTypes from "./headerTypes";
 
 const initialState = {
-  showNewsletter: false,
-  showSearch: false,
-  showNavigation: false,
-  // Airplane Values
   airplanesSearchText: "",
   airplanesOlderChecked: true,
   airplanesNewerChecked: false,
@@ -31,7 +27,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  console.log("hit reducer");
   switch (action.type) {
     case actionTypes.AIRPLANE_SEARCH_TEXT:
       console.log(action.text);
@@ -92,35 +87,6 @@ export default function(state = initialState, action) {
         destroyedChecked: false,
         airplanesLatestOperatorValue: "",
         airplanesCountryValue: ""
-      };
-    case actionTypes.TOGGLE_NEWSLETTER:
-      return {
-        ...state,
-        showNewsletter: !state.showNewsletter
-      };
-    case actionTypes.TOGGLE_SEARCH:
-      let navState;
-      if (!state.showSearch && state.showNavigation) {
-        navState = false;
-      } else {
-        navState = state.showNavigation;
-      }
-      return {
-        ...state,
-        showSearch: !state.showSearch,
-        showNavigation: navState
-      };
-    case actionTypes.TOGGLE_NAVIGATION:
-      let searchState;
-      if (!state.showNavigation && state.showSearch) {
-        searchState = false;
-      } else {
-        searchState = state.showSearch;
-      }
-      return {
-        ...state,
-        showNavigation: !state.showNavigation,
-        showSearch: searchState
       };
     default:
       return state;

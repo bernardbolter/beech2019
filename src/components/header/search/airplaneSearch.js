@@ -7,7 +7,7 @@ import {
   changeAirplaneFilter,
   changeAirplaneDropdown,
   handleAirplaneReset
-} from "../headerStore/headerActions";
+} from "../headerStore/searchAirplanesActions";
 
 class AirplaneSearch extends Component {
   handleTextChange = e => {
@@ -44,7 +44,7 @@ class AirplaneSearch extends Component {
       destroyedChecked,
       airplanesLatestOperatorValue,
       airplanesCountryValue
-    } = this.props.header;
+    } = this.props.searchAirplanes;
     const { uniqueCountries, uniqueOperators } = this.props.baseData;
 
     return (
@@ -239,7 +239,7 @@ class AirplaneSearch extends Component {
 }
 
 const mapStateToProps = state => ({
-  header: state.header,
+  searchAirplanes: state.searchAirplanes,
   baseData: state.baseData
 });
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { toggleNewsletter } from "../headerStore/headerActions";
+import { toggleNewsletter } from "../headerStore/navActions";
 
 import Newsletter from "../newsletter/newsletter";
 import "./nav.sass";
@@ -9,7 +9,7 @@ import "./nav.sass";
 class Nav extends Component {
   render() {
     const { toggleNewsletter } = this.props;
-    const { showNewsletter, showNavigation } = this.props.header;
+    const { showNewsletter, showNavigation } = this.props.nav;
     return (
       <div className={showNavigation ? "nav nav-open" : "nav"}>
         <Link to="/">home</Link>
@@ -24,7 +24,7 @@ class Nav extends Component {
 }
 
 const mapStateToProps = state => ({
-  header: state.header
+  nav: state.nav
 });
 
 export default connect(

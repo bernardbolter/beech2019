@@ -76,3 +76,38 @@ const sortData = array => {
   finalList = finalList.slice(0, 10);
   return finalList;
 };
+
+export const toggleLogin = () => {
+  return {
+    type: actionTypes.TOGGLE_LOGIN
+  };
+};
+
+export const updateLoginText = event => {
+  return {
+    type: actionTypes.UPDATE_LOGIN_TEXT,
+    name: event.target.name,
+    value: event.target.value
+  };
+};
+
+export const sendLoginMessage = message => {
+  return {
+    type: actionTypes.LOGIN_MESSAGE,
+    message: message
+  };
+};
+
+export const submitLogin = (e, email, password) => {
+  e.preventDefault();
+  console.log("hit that form");
+  return async (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error.message);
+      dispatch(sendLoginMessage(error.message));
+    }
+  };
+};

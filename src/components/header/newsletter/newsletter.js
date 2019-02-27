@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { toggleNewsletter } from "../headerStore/headerActions";
+import { toggleNewsletter } from "../headerStore/navActions";
 
 import "./newsletter.sass";
 
