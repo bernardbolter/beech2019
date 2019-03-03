@@ -39,6 +39,8 @@ class Incidents extends Component {
     }
   }
   render() {
+    const { auth } = this.props;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     const { match } = this.props;
     const { showSearch } = this.props.nav;
     console.log(this.props);
@@ -59,7 +61,13 @@ class Incidents extends Component {
             </section>
             {this.props.incidents.incidentsLoaded ? (
               this.props.incidents.filteredIncidents.map(incident => {
-                return <Incident key={incident.id} {...incident} />;
+                return (
+                  <Incident
+                    key={incident.id}
+                    {...incident}
+                    loggedIn={authenticated}
+                  />
+                );
               })
             ) : (
               <h3>Incidents are Loading....</h3>
@@ -74,7 +82,8 @@ class Incidents extends Component {
 const mapStateToProps = state => ({
   nav: state.nav,
   baseData: state.baseData,
-  incidents: state.incidents
+  incidents: state.incidents,
+  auth: state.firebase.auth
 });
 
 export default compose(

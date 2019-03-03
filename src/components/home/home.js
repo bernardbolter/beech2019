@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withFirestore } from "react-redux-firebase";
+import { withFirestore, withFirebase } from "react-redux-firebase";
 
 import Header from "../header/header";
 import HomeColumn from "./homeColumn";
 
-import {
-  filterHomeData,
-  toggleLogin,
-  updateLoginText,
-  submitLogin
-} from "./homeStore/homeActions";
+import { filterHomeData } from "./homeStore/homeActions";
 import { getBaseAirplanes, getBaseIncidents } from "../../base/baseActions";
+import { openModal } from "../../features/modals/modalStore/modalActions";
 
 import "./home.sass";
 
@@ -61,16 +57,18 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props);
-    const { loginEmail, loginPassword, loginAnswer } = this.props.home;
+    const {
+      match,
+      openMobileNav,
+      openModal,
+      home: { homeDataLoaded }
+    } = this.props;
     return (
       <React.Fragment>
         <div>
-          <Header match={this.props.match} />
+          <Header match={match} />
         </div>
-        <section
-          className={this.props.openMobileNav ? "home home-open" : "home"}
-        >
+        <section className={openMobileNav ? "home home-open" : "home"}>
           <div className="home-text">
             <h1>
               Welcome to Beech1900.com! This website is an active database of
@@ -88,7 +86,7 @@ class Home extends Component {
             <p>below are the top rankings of the stats</p>
           </div>
 
-          {this.props.home.homeDataLoaded ? (
+          {homeDataLoaded ? (
             <div className="home-grid">
               <HomeColumn
                 columnName="currentStatus"
@@ -126,85 +124,46 @@ class Home extends Component {
               webdesign by{" "}
               <a
                 className="bolter-link"
-                href="bernardbolter.com"
+                href="https://bernardbolter.com"
                 target="_blank"
               >
                 Bernard Bolter
               </a>{" "}
               |{" "}
-              <span className="login-button" onClick={this.props.toggleLogin}>
+              <span
+                className="login-button"
+                onClick={() => openModal("LoginModal")}
+              >
                 get in
               </span>
             </p>
-            <div
-              className={
-                this.props.home.showLogin
-                  ? "login-modal login-modal-show"
-                  : "login-modal"
-              }
-            >
-              <h2>Login in here</h2>
-              <form
-                onSubmit={e =>
-                  this.props.submitLogin(e, loginEmail, loginPassword)
-                }
-              >
-                <label htmlFor="loginEmail">
-                  <p>email</p>
-                </label>
-                <input
-                  type="email"
-                  placeholder="enter email"
-                  value={loginEmail}
-                  onChange={e => this.props.updateLoginText(e)}
-                  name="loginEmail"
-                  required
-                />
-                <label htmlFor="loginPassword">
-                  <p>password</p>
-                </label>
-                <input
-                  type="password"
-                  value={loginPassword}
-                  onChange={e => this.props.updateLoginText(e)}
-                  name="loginPassword"
-                  required
-                />
-                <input type="submit" value="Submit" />
-              </form>
-              <p>{!loginAnswer ? null : loginAnswer}</p>
-            </div>
           </div>
         </section>
       </React.Fragment>
     );
   }
-
-  onChange = e => {
-    this.setState = {
-      [e.target.name]: e.target.value
-    };
-  };
 }
 
 const mapStateToProps = state => ({
   home: state.home,
   baseData: state.baseData,
   base: state.firestore.ordered.base,
-  auth: state.firebase.auth
+  auth: state.firebase.auth,
+  form: state.form
 });
+
+const actions = {
+  filterHomeData,
+  getBaseAirplanes,
+  getBaseIncidents,
+  openModal
+};
 
 export default compose(
   withFirestore,
+  withFirebase,
   connect(
     mapStateToProps,
-    {
-      filterHomeData,
-      getBaseAirplanes,
-      getBaseIncidents,
-      toggleLogin,
-      updateLoginText,
-      submitLogin
-    }
+    actions
   )
 )(Home);

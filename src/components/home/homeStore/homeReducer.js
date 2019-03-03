@@ -4,8 +4,6 @@ const initialState = {
   homeDataLoaded: false,
   homeData: {},
   showLogin: false,
-  loginEmail: "",
-  loginPassword: "",
   loginMessage: ""
 };
 
@@ -22,18 +20,8 @@ export default function(state = initialState, action) {
         ...state,
         showLogin: !state.showLogin
       };
-    case actionTypes.UPDATE_LOGIN_TEXT:
-      return {
-        ...state,
-        [action.name]: action.value
-      };
-    case actionTypes.SUBMIT_LOGIN:
-      return {
-        ...state,
-        loginAnswer: "login submitted"
-      };
     case actionTypes.LOGIN_MESSAGE:
-      console.log(action.message);
+      console.log(action);
       return {
         ...state,
         loginAnswer: action.message

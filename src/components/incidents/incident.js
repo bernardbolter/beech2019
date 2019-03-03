@@ -20,16 +20,20 @@ const Incident = props => {
           </p>
           {props.serial === "" || props.serial === "?" ? (
             <p className="incident-serial">
-            <span className="incident-span">Serial Number</span>
-            {props.serial}
-          </p> ) : (
-            <Link to={`/airplanes/${props.serial}`} className="incidents-link">
-            <p className="incident-serial">
-              <img src={`${process.env.PUBLIC_URL}/link.png`} alt="Link Graphic" />
               <span className="incident-span">Serial Number</span>
               {props.serial}
             </p>
-          </Link>
+          ) : (
+            <Link to={`/airplanes/${props.serial}`} className="incidents-link">
+              <p className="incident-serial">
+                <img
+                  src={`${process.env.PUBLIC_URL}/link.png`}
+                  alt="Link Graphic"
+                />
+                <span className="incident-span">Serial Number</span>
+                {props.serial}
+              </p>
+            </Link>
           )}
 
           <p className="incident-registration">
@@ -54,6 +58,16 @@ const Incident = props => {
             <span className="incident-span">Fatalities</span>
             {props.fatalities}
           </p>
+          {props.loggedIn ? (
+            <p>
+              <Link to="/">
+                <img
+                  src={`${process.env.PUBLIC_URL}/edit.png`}
+                  alt="Edit Graphic"
+                />
+              </Link>
+            </p>
+          ) : null}
         </div>
       </div>
       <div className="incident-right">
@@ -82,27 +96,6 @@ const Incident = props => {
       </div>
     </div>
   );
-};
-
-const renderSerial = props => {
-  if (props.serial === "" || props.serial === "?") {
-    return (
-      <p className="incident-serial">
-        <span className="incident-span">Serial Number</span>
-        {props.serial}
-      </p>
-    );
-  } else {
-    return (
-      <Link to={`/airplanes/${props.serial}`} className="incidents-link">
-        <p className="incident-serial">
-          <img src={`${process.env.PUBLIC_URL}/link.png`} alt="Link Graphic" />
-          <span className="incident-span">Serial Number</span>
-          {props.serial}
-        </p>
-      </Link>
-    );
-  }
 };
 
 const renderAdditionalLink = props => {

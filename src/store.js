@@ -20,6 +20,8 @@ import airplanesReducer from "./components/airplanes/airplanesStore/airplanesRed
 import baseReducer from "./base/baseReducer";
 import incidentsReducer from "./components/incidents/incidentsStore/incidentsReducer";
 import navReducer from "./components/header/headerStore/navReducer";
+import { reducer as formReducer } from "redux-form";
+import modalReducer from "./features/modals/modalStore/modalReducer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDbLt9jQRPWCxIop-TUaeJeDycBWcxV1NY",
@@ -54,7 +56,9 @@ const rootReducer = combineReducers({
   nav: navReducer,
   home: homeReducer,
   airplanes: airplanesReducer,
-  incidents: incidentsReducer
+  incidents: incidentsReducer,
+  form: formReducer,
+  modal: modalReducer
 });
 
 const initialState = {};
