@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { login } from "./authActions";
+import { login } from "./authStore/authActions";
 
 const actions = {
   login
@@ -18,6 +18,7 @@ const LoginForm = ({ login, handleSubmit, error }) => {
         <label htmlFor="password">password</label>
         <Field name="password" component="input" type="password" />
       </div>
+      {error && <p>{error}</p>}
       <button type="submit">submit</button>
     </form>
   );

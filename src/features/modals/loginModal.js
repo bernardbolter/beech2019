@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 
 import { closeModal } from "./modalStore/modalActions";
 import LoginForm from "../auth/loginForm";
+import LogoutForm from "../auth/logoutForm";
 
 import "./modals.sass";
 
 class LoginModal extends Component {
   render() {
-    const { closeModal } = this.props;
+    const { closeModal, auth } = this.props;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
       <section className="modal-window">
         <div className="login-modal-window">
@@ -16,7 +18,7 @@ class LoginModal extends Component {
             <p>close</p>
             <img src={`${process.env.PUBLIC_URL}/close_icon.png`} alt="Close" />
           </div>
-          <LoginForm />
+          {authenticated ? <LogoutForm auth={auth} /> : <LoginForm />}
         </div>
       </section>
     );
@@ -27,7 +29,11 @@ const actions = {
   closeModal
 };
 
+const mapState = state => ({
+  auth: state.firebase.auth
+});
+
 export default connect(
-  null,
+  mapState,
   actions
 )(LoginModal);
