@@ -1,5 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
+import { openModal } from "../../features/modals/modalStore/modalActions";
 
 import "./incident.sass";
 
@@ -59,14 +62,16 @@ const Incident = props => {
             {props.fatalities}
           </p>
           {props.loggedIn ? (
-            <p>
-              <Link to="/">
-                <img
-                  src={`${process.env.PUBLIC_URL}/edit.png`}
-                  alt="Edit Graphic"
-                />
-              </Link>
-            </p>
+            <div
+              className="edit-incidents-wrap"
+              onClick={() => props.openModal("EditIncidentModal", props)}
+            >
+              <p>edit incident</p>
+              <img
+                src={`${process.env.PUBLIC_URL}/edit.png`}
+                alt="Edit Graphic"
+              />
+            </div>
           ) : null}
         </div>
       </div>
@@ -134,4 +139,11 @@ const renderImage = props => {
   }
 };
 
-export default Incident;
+const actions = {
+  openModal
+};
+
+export default connect(
+  null,
+  actions
+)(Incident);

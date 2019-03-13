@@ -171,6 +171,10 @@ class AirplaneSingle extends Component {
                         }
                       >
                         edit airplane
+                        <img
+                          src={`${process.env.PUBLIC_URL}/edit.png`}
+                          alt="Edit Graphic"
+                        />
                       </p>
                     ) : null}
                   </div>

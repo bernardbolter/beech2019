@@ -3,6 +3,8 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { modifyAirplaneData } from "./formsStore/formsActions";
 
+import "./editAirplaneForm.sass";
+
 class EditAirplaneForm extends Component {
   constructor(props) {
     super(props);

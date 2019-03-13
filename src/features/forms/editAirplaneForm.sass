@@ -1,0 +1,127 @@
+.edit-airplane-modal-window
+    position: fixed
+    width: 320px
+    padding: 20px 0
+    top: 0
+    bottom: 0
+    left: 0
+    background: #ededed
+    display: flex
+    flex-direction: column
+    align-items: center
+    overflow-x: scroll
+
+.edit-airplane-form
+    width: 90%
+    margin: 0 auto
+    padding: 0
+    display: flex
+    flex-direction: row
+    align-items: center
+    flex-wrap: wrap
+
+    h2
+        font-size: 18px
+        text-transform: uppercase
+        color: #666
+        margin: 15px auto
+        display: block
+
+.edit-airplane-field
+    width: 100%
+    margin: 5px 0 10px
+
+    label
+        display: block
+        font-size: 18px
+        color: #666666
+        margin-bottom: 5px
+
+    input
+        padding: 5px 10px
+        color: red
+        font-size: 16px
+        background: white
+        width: 90%
+
+.edit-airplane-textarea
+    width: 100%
+
+    label
+        display: block
+        font-size: 18px
+        color: #666666
+        margin-bottom: 5px
+    
+    textarea
+        padding: 5px 10px
+        color: red
+        font-size: 16px
+        background: white
+        width: 90%
+        height: 70px
+
+.edit-airplane-sub-header
+    text-align: center
+    display: block
+
+.edit-airplane-event-wrap
+    width: 100%
+
+
+.edit-airplane-button
+    width: 100%
+    margin: 20px 0
+    padding: 0
+    cursor: pointer
+    border: 1px solid #666
+    display: flex
+    align-items: center
+    justify-content: center
+    transition: all 0.5s ease-in-out
+
+    p
+        font-size: 16px
+        color: #666666
+        padding: 0
+
+    &:hover
+        background: white
+        transition: all 0.5s ease-in-out
+
+        p
+            text-decoration: underline
+
+.edit-airplane-confirm-wrap
+    width: 90%
+    margin: 0 5%
+
+    h2
+        font-size: 20px
+        color: #666666
+        text-align: center
+        text-transform: uppercase
+
+.change-wrap
+    width: 100%
+
+    h3
+        font-size: 16px
+        padding: 0
+        margin: 0
+        color: #666
+
+    span
+        font-size: 9px
+        color: #666
+
+    .change-old
+        color: red
+        background: white
+        padding: 5px 10px
+
+    .change-new
+        color: #013220
+        font-size: 20px
+        background: white
+        padding: 5px 10px

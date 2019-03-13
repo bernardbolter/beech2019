@@ -43,7 +43,6 @@ class Incidents extends Component {
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { match } = this.props;
     const { showSearch } = this.props.nav;
-    console.log(this.props);
     return (
       <React.Fragment>
         <Header match={match} />
