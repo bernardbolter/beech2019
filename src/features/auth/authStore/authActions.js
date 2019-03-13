@@ -1,6 +1,5 @@
 import { SubmissionError } from "redux-form";
 import { closeModal } from "../../modals/modalStore/modalActions";
-import firebase from "firebase";
 
 export const login = creds => {
   return async (dispatch, getState, { getFirebase }) => {

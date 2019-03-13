@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import Header from "../header/header";
 import Event from "./event";
 
+import { openModal } from "../../features/modals/modalStore/modalActions";
+
 import { getBaseIncidents } from "../../base/baseActions";
 
 import "./airplane-single.sass";
@@ -67,9 +69,8 @@ class AirplaneSingle extends Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
-    const { match } = this.props;
+    const { match, auth, openModal } = this.props;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     return (
       <React.Fragment>
         <section>
@@ -159,6 +160,19 @@ class AirplaneSingle extends Component {
                         <span>no initial registration data</span>
                       )}
                     </p>
+                    {authenticated ? (
+                      <p
+                        className="bot-edit-button"
+                        onClick={() =>
+                          openModal(
+                            "EditAirplaneModal",
+                            this.state.airplaneData
+                          )
+                        }
+                      >
+                        edit airplane
+                      </p>
+                    ) : null}
                   </div>
                 </div>
                 <div className="airplane-single-bottom-right">
@@ -234,13 +248,19 @@ class AirplaneSingle extends Component {
 }
 
 const mapStateToProps = state => ({
-  baseData: state.baseData
+  baseData: state.baseData,
+  auth: state.firebase.auth
 });
+
+const actions = {
+  getBaseIncidents,
+  openModal
+};
 
 export default compose(
   withFirestore,
   connect(
     mapStateToProps,
-    { getBaseIncidents }
+    actions
   )
 )(AirplaneSingle);

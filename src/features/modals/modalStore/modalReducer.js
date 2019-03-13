@@ -5,13 +5,15 @@ const initialState = null;
 export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.MODAL_OPEN:
+      const thisModalProps = {
+        planeInfo: { ...action.payload.modalProps }
+      };
       return {
         ...state,
         modalType: action.payload.modalType,
-        modalProps: action.payload.modalProps
+        modalProps: thisModalProps
       };
     case actionTypes.MODAL_CLOSE:
-      console.log("reduce close");
       return null;
     default:
       return state;

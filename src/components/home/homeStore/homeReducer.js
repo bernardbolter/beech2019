@@ -21,7 +21,6 @@ export default function(state = initialState, action) {
         showLogin: !state.showLogin
       };
     case actionTypes.LOGIN_MESSAGE:
-      console.log(action);
       return {
         ...state,
         loginAnswer: action.message
