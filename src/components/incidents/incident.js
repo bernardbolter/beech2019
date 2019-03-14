@@ -96,6 +96,11 @@ const Incident = props => {
             {props.otherReport}
           </p>
         ) : null}
+        {props.image ? (
+          <div className="incident-photo-wrap">
+            <img src={props.image} alt={`photo of ariplane ${props.serial}`} />
+          </div>
+        ) : null}
         {/* {this.props.additionalInfo ? this._renderAdditionalLink() : null}
         {this._renderImage()} */}
       </div>

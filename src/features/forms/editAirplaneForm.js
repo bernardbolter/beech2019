@@ -14,7 +14,6 @@ class EditAirplaneForm extends Component {
   }
 
   submitFromForm = (values, dispatch, props) => {
-    console.log("hit submit");
     let arrayOfKeys = Object.keys(values);
     let objectOfChanges = arrayOfKeys.map((item, i) => {
       return {
@@ -24,16 +23,14 @@ class EditAirplaneForm extends Component {
         }
       };
     });
-    console.log(objectOfChanges);
     this.setState({ fieldsToBeChanged: objectOfChanges });
   };
 
   submitData = changes => {
-    this.props.modifyAirplaneData(changes);
+    this.props.modifyAirplaneData(changes, this.props.planeInfo.id);
   };
 
   cancelDataUpload = () => {
-    console.log("cancel");
     this.setState({ fieldsToBeChanged: {} });
     console.log(this.state.fieldsToBeChanged);
   };
@@ -42,7 +39,6 @@ class EditAirplaneForm extends Component {
     const { handleSubmit, error, planeInfo } = this.props;
     const { fieldsToBeChanged } = this.state;
     const eventNumbers = [...Array(14).keys()];
-    console.log(planeInfo);
     if (
       Object.keys(fieldsToBeChanged).length === 0 &&
       fieldsToBeChanged.constructor === Object

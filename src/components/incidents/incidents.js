@@ -60,13 +60,17 @@ class Incidents extends Component {
             </section>
             {this.props.incidents.incidentsLoaded ? (
               this.props.incidents.filteredIncidents.map(incident => {
-                return (
-                  <Incident
-                    key={incident.id}
-                    {...incident}
-                    loggedIn={authenticated}
-                  />
-                );
+                if (!incident.serial) {
+                  return null;
+                } else {
+                  return (
+                    <Incident
+                      key={incident.id}
+                      {...incident}
+                      loggedIn={authenticated}
+                    />
+                  );
+                }
               })
             ) : (
               <h3>Incidents are Loading....</h3>
