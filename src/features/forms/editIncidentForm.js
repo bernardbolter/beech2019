@@ -23,6 +23,7 @@ class EditIncidentForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { handleSubmit, planeInfo } = this.props;
     const { newIncident, imageLoadedForPreview } = this.state;
     return (

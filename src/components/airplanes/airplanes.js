@@ -182,9 +182,13 @@ class Airplanes extends Component {
                     <p>no airplanes were found in your search</p>
                   </div>
                 ) : (
-                  this.props.airplanes.filteredAirplanes.map((plane, i) => (
-                    <Airplane key={i} {...plane} />
-                  ))
+                  this.props.airplanes.filteredAirplanes.map((plane, i) => {
+                    if (!plane.serial) {
+                      return null;
+                    } else {
+                      return <Airplane key={i} {...plane} />;
+                    }
+                  })
                 )}
               </div>
             </div>

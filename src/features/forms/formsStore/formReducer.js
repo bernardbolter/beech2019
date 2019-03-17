@@ -1,19 +1,18 @@
-import * as actionTypes from "./formsTypes";
+import { SEND_MESSAGE } from "./formsTypes";
 
 const initialState = {
-  changePlaneObject: {}
+  changePlaneObject: {},
+  editAirplaneFormMessage: ""
 };
 
 export default function(state = initialState, action) {
-  console.log("hit reducer");
   switch (action.type) {
-    case actionTypes.MODIFY_AIRPLANE_DATA:
-      console.log(action);
+    case SEND_MESSAGE:
       return {
-        ...state
+        ...state,
+        editAirplaneFormMessage: action.payload
       };
     default:
-      console.log("hit this for some reason");
       return state;
   }
 }

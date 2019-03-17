@@ -1,15 +1,14 @@
-import * as actionTypes from "./formsTypes";
+import { SEND_MESSAGE } from "./formsTypes";
 
-export const modifyAirplaneData = (values, id) => async (
+export const modifyAirplaneData = (values, id, planeUID) => async (
   dispatch,
   getState,
   { getFirestore }
 ) => {
-  console.log(values);
-  console.log(id);
+  console.log(getState());
   const firestore = getFirestore();
+  let fullPlaneRef = firestore.collection("airplanes").doc(planeUID);
   let planeExceptRef = firestore.collection("base").doc("airplaneExcerpts");
-  let allPlanesRef = firestore.collection("base").doc("airplanes");
   const batchKeyArray = [
     "serial",
     "currentStatus",
@@ -24,24 +23,40 @@ export const modifyAirplaneData = (values, id) => async (
       const theKey = planeEntries[0][0];
       const theChange = planeEntries[0][1].new;
       const dbVar = `${id}.${theKey}`;
-      console.log(dbVar);
+      var batch = firestore.batch();
       if (batchKeyArray.indexOf(theKey) !== -1) {
-        planeExceptRef.update({
+        if (theKey === "latestCountry") {
+          let underCountry = theChange.split(" ").join("_");
+          let underCountryVar = `${id}.countryName`;
+          batch.update(planeExceptRef, {
+            [underCountryVar]: underCountry
+          });
+          console.log(underCountry);
+        }
+        batch.update(planeExceptRef, {
           [dbVar]: theChange
         });
-        // allPlanesRef.update({
-        //   [dbVar]: theChange
-        // });
+        batch.update(fullPlaneRef, {
+          [theKey]: theChange
+        });
       } else {
-        allPlanesRef.update({
-          [dbVar]: theChange
+        batch.update(fullPlaneRef, {
+          [theKey]: theChange
         });
       }
+      batch.commit().then(function() {
+        dispatch({
+          type: SEND_MESSAGE,
+          payload: "Update Successful."
+        });
+      });
     });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: SEND_MESSAGE,
+      payload: error
+    });
   }
-  console.log("finished");
 };
 
 export const uploadIncidentImage = (file, fileName, id) => async (

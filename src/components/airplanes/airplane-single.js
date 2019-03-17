@@ -22,6 +22,7 @@ class AirplaneSingle extends Component {
       eventsLoaded: false,
       incidentsLoaded: false,
       airplaneData: {},
+      airplaneDocID: "",
       events: []
     };
   }
@@ -34,7 +35,9 @@ class AirplaneSingle extends Component {
       .get()
       .then(docs => {
         docs.forEach(doc => {
-          this.setState({ airplaneData: doc.data() });
+          this.setState({
+            airplaneData: { ...doc.data(), uid: doc.id }
+          });
         });
       })
       .catch(error => {
@@ -71,6 +74,7 @@ class AirplaneSingle extends Component {
   render() {
     const { match, auth, openModal } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
+    console.log(this.state.airplaneData);
     return (
       <React.Fragment>
         <section>
@@ -166,7 +170,8 @@ class AirplaneSingle extends Component {
                         onClick={() =>
                           openModal(
                             "EditAirplaneModal",
-                            this.state.airplaneData
+                            this.state.airplaneData,
+                            this.state.airplaneDocID
                           )
                         }
                       >
