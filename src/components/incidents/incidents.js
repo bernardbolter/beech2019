@@ -11,6 +11,7 @@ import {
   getUpdatedFilteredIncidents
 } from "./incidentsStore/incidentsActions";
 import { getBaseIncidents } from "../../base/baseActions";
+import { openModal } from "../../features/modals/modalStore/modalActions";
 
 import "./incidents.sass";
 
@@ -39,9 +40,8 @@ class Incidents extends Component {
     }
   }
   render() {
-    const { auth } = this.props;
+    const { auth, match, openModal } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
-    const { match } = this.props;
     const { showSearch } = this.props.nav;
     return (
       <React.Fragment>
@@ -57,6 +57,15 @@ class Incidents extends Component {
               ) : (
                 <p>viewing {this.props.incidents.incidentsCount} results</p>
               )}
+              {authenticated ? (
+                <p
+                  onClick={() =>
+                    openModal("EditIncidentModal", this.props, "new")
+                  }
+                >
+                  + add new incident
+                </p>
+              ) : null}
             </section>
             {this.props.incidents.incidentsLoaded ? (
               this.props.incidents.filteredIncidents.map(incident => {
@@ -93,6 +102,11 @@ export default compose(
   withFirestore,
   connect(
     mapStateToProps,
-    { getBaseIncidents, getFilteredIncidents, getUpdatedFilteredIncidents }
+    {
+      getBaseIncidents,
+      getFilteredIncidents,
+      getUpdatedFilteredIncidents,
+      openModal
+    }
   )
 )(Incidents);

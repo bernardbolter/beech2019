@@ -6,7 +6,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.MODAL_OPEN:
       const thisModalProps = {
-        planeInfo: { ...action.payload.modalProps }
+        planeInfo: { ...action.payload.modalProps },
+        type: action.payload.type
       };
       return {
         ...state,

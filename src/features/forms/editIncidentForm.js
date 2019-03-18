@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import Dropzone from "react-dropzone";
-import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
-import { uploadIncidentImage } from "./formsStore/formsActions";
+import {
+  uploadIncidentImage,
+  deleteIncidentImage
+} from "./formsStore/formsActions";
 
 import "./editIncidentForm.sass";
 
@@ -17,268 +19,269 @@ class EditIncidentForm extends Component {
       newIncident: false,
       files: [],
       fileName: "",
-      cropResult: null,
-      image: {}
+      image: {},
+      incidentFieldsToBeChanges: {}
     };
   }
 
-  render() {
-    console.log(this.props);
-    const { handleSubmit, planeInfo } = this.props;
-    const { newIncident, imageLoadedForPreview } = this.state;
+  componentDidMount() {
+    if (this.props.type === "new") {
+      this.setState({
+        newIncident: true
+      });
+    }
+  }
+
+  renderField = field => {
+    if (this.state.newIncident) {
+      field.input.value = "";
+    }
     return (
-      <form
-        onSubmit={handleSubmit(this.checkForm)}
-        className="edit-indicent-form-wrap"
+      <div
+        className={
+          field.meta.dirty
+            ? "edit-airplane-field edit-airplane-changed"
+            : "edit-airplane-field"
+        }
       >
-        {newIncident ? <h2>Add New Incident</h2> : <h2>Edit Incident Form</h2>}
+        <label htmlFor={field.input.name}>{field.input.name}</label>
+        {field.type === "textarea" ? (
+          <textarea {...field.input} type="text" />
+        ) : (
+          <input {...field.input} type="text" />
+        )}
+      </div>
+    );
+  };
 
-        <div className="new-incident-wrap" onClick={this.toggleNewIncident}>
-          <div
-            className={newIncident ? "new-toggle new-toggle-on" : "new-toggle"}
-          >
-            <span
-              className={
-                newIncident ? "toggle-ball toggle-ball-on" : "toggle-ball"
-              }
-            />
-          </div>
-          <p>check to create new incident</p>
-        </div>
+  render() {
+    console.log(this.state);
+    console.log(this.props);
+    const {
+      handleSubmit,
+      planeInfo,
+      myForm: { editAirplaneFormMessage }
+    } = this.props;
+    const {
+      newIncident,
+      imageLoadedForPreview,
+      incidentFieldsToBeChanges
+    } = this.state;
+    if (
+      Object.keys(incidentFieldsToBeChanges).length === 0 &&
+      incidentFieldsToBeChanges.constructor === Object
+    ) {
+      return (
+        <form
+          onSubmit={handleSubmit(this.checkForm)}
+          className="edit-indicent-form-wrap"
+        >
+          {newIncident ? (
+            <h2>Add New Incident</h2>
+          ) : (
+            <h2>Edit Incident Form</h2>
+          )}
 
-        <div className="edit-incident-field">
-          <label htmlFor="serial">serial</label>
           <Field
             name="serial"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.serial}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="date">date</label>
           <Field
             name="date"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.date}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="registration">registration</label>
           <Field
             name="registration"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.registration}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="operator">operator</label>
           <Field
             name="operator"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.operator}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="locationCity">locationCity</label>
           <Field
             name="locationCity"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.locationCity}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="locationAirport">locationAirport</label>
           <Field
             name="locationAirport"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.locationAirport}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="fatalities">fatalities</label>
           <Field
             name="fatalities"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.fatalities}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="accidentType">accidentType</label>
           <Field
             name="accidentType"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.accidentType}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-textarea">
-          <label htmlFor="editorial">editorial</label>
           <Field
             name="editorial"
-            component="textarea"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.editorial}
+            component={this.renderField}
+            props={{ type: "textarea" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="additionalInfo">additionalInfo</label>
           <Field
             name="additionalInfo"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.additionalInfo}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="ntsbreportNumber">ntsbreportNumber</label>
           <Field
             name="ntsbreportNumber"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.ntsbreportNumber}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <label htmlFor="otherReport">otherReport</label>
           <Field
             name="otherReport"
-            component="input"
-            type="text"
-            placeholder={newIncident ? "" : planeInfo.otherReport}
+            component={this.renderField}
+            props={{ type: "input" }}
           />
-        </div>
 
-        <div className="edit-incident-field">
-          <p>
-            image:
-            {planeInfo.image === "" ? " no" : " yes"}
-          </p>
-        </div>
-
-        {imageLoadedForPreview ? (
-          <div className="dropzone-preview-cropper-wrap">
-            <div className="dropzone-cropper" />
-            <h2>Crop Image</h2>
-            <Cropper
-              className="cropper-itself"
-              ref="cropper"
-              src={this.state.files[0].preview}
-              viewMode={0}
-              dragMode="move"
-              guides={false}
-              scalable={true}
-              cropBoxMovable={true}
-              cropBoxResizable={true}
-              crop={this.cropImage}
-            />
-            <div className="dropzone-preview">
-              <h2>Image Preview</h2>
-              {this.state.files[0] && (
-                <div className="dropzone-preview">
-                  <img src={this.state.cropResult} />
+          {newIncident ? null : (
+            <div className="edit-incident-field">
+              {planeInfo.image === "" ? (
+                <p>image: yes</p>
+              ) : (
+                <div
+                  className="edit-button"
+                  onClick={this.handleDeleteImage(planeInfo.image_name)}
+                >
+                  <p>delete image</p>
                 </div>
               )}
             </div>
-            <div className="dropzone-upload" onClick={this.uploadImage}>
-              <p>upload image</p>
+          )}
+
+          {imageLoadedForPreview ? (
+            <div className="dropzone-preview-cropper-wrap">
+              <div className="dropzone-preview">
+                <h2>Image Preview</h2>
+                {this.state.files[0] && (
+                  <div className="dropzone-preview">
+                    <img
+                      src={this.state.files[0].preview}
+                      alt="dropzone preview"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="edit-button" onClick={this.uploadImage}>
+                <p>upload image</p>
+              </div>
             </div>
-            <div className="dropzone-cancel" onClick={this.cancelCrop}>
-              <p>cancel upload</p>
+          ) : (
+            <div className="dropzone-wrap">
+              <h2>{planeInfo.image === "" ? "Add Image" : "Replace Image"}</h2>
+              <Dropzone
+                className="dropzone"
+                onDrop={this.onDrop}
+                multiple={false}
+              >
+                <p>Drop photo here or click to upload</p>
+              </Dropzone>
             </div>
-          </div>
-        ) : (
-          <div className="dropzone-wrap">
-            <h2>Add Image</h2>
-            <Dropzone
-              className="dropzone"
-              onDrop={this.onDrop}
-              multiple={false}
-            >
-              <p>Drop photo here or click to upload</p>
-            </Dropzone>
-          </div>
-        )}
-      </form>
-    );
+          )}
+          {editAirplaneFormMessage !== "" ? (
+            <p>{editAirplaneFormMessage}</p>
+          ) : null}
+          <button className="edit-airplane-button submit" type="submit">
+            <p>submit</p>
+          </button>
+        </form>
+      );
+    } else {
+      return <h1>to change</h1>;
+    }
   }
 
   uploadImage = async () => {
+    const tempURL = new File([this.state.files[0]], "uploadPhoto");
     try {
       await this.props.uploadIncidentImage(
-        this.state.image,
+        tempURL,
         this.state.fileName,
         this.props.planeInfo.id
       );
-      this.cancelCrop();
+    } catch (error) {
+      this.setState({
+        editAirplaneFormMessage: error
+      });
+    }
+  };
+
+  handleDeleteImage = photoName => () => {
+    console.log(photoName);
+    try {
+      this.props.deleteIncidentImage(photoName, this.props.planeInfo.id);
     } catch (error) {
       console.log(error);
     }
   };
 
-  cancelCrop = () => {
-    this.setState({
-      files: [],
-      image: {},
-      imageLoadedForPreview: false
-    });
-  };
-
-  cropImage = () => {
-    if (typeof this.refs.cropper.getCroppedCanvas() === "undefined") {
-      return;
-    }
-
-    this.refs.cropper.getCroppedCanvas().toBlob(blob => {
-      let imageUrl = URL.createObjectURL(blob);
-      this.setState({
-        cropResult: imageUrl,
-        image: blob
-      });
-    }, "image/jpeg");
-  };
-
   onDrop = files => {
+    console.log(files);
     this.setState({
       imageLoadedForPreview: true,
       files,
       fileName: files[0].name
     });
+    console.log(this.state);
   };
 
-  toggleNewIncident = () => {
-    this.setState(prevState => ({
-      newIncident: !prevState.newIncident
-    }));
-  };
-
-  checkForm = values => {
-    console.log(values);
+  checkForm = (values, dispatch, props) => {
+    let theDiff = {};
+    Object.keys(values).forEach(key => {
+      if (values[key] !== props.planeInfo[key]) {
+        theDiff[key] = values[key];
+      }
+    });
+    let arrayOfKeys = Object.keys(theDiff);
+    let objectOfChanges = arrayOfKeys.map((item, i) => {
+      return {
+        [item]: {
+          old: props.planeInfo[item],
+          new: values[item]
+        }
+      };
+    });
+    console.log(objectOfChanges);
+    this.setState({ incidentFieldsToBeChanges: objectOfChanges });
+    console.log(this.state.incidentFieldsToBeChanges);
   };
 }
 
+const mapState = (state, props) => ({
+  initialValues: props.planeInfo,
+  myForm: state.myForm
+});
+
 const actions = {
-  uploadIncidentImage
+  uploadIncidentImage,
+  deleteIncidentImage
 };
 
 export default connect(
-  null,
+  mapState,
   actions
-)(reduxForm({ form: "editIncidentForm" })(EditIncidentForm));
+)(
+  reduxForm({ form: "editIncidentForm", enableReinitialize: true })(
+    EditIncidentForm
+  )
+);

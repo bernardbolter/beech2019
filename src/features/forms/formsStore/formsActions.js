@@ -1,4 +1,5 @@
 import { SEND_MESSAGE } from "./formsTypes";
+import cuid from "cuid";
 
 export const modifyAirplaneData = (values, id, planeUID) => async (
   dispatch,
@@ -64,24 +65,58 @@ export const uploadIncidentImage = (file, fileName, id) => async (
   getState,
   { getFirebase, getFirestore }
 ) => {
+  const uniqName = cuid();
   const firebase = getFirebase();
   const firestore = getFirestore();
   const path = "/incident_images";
   const options = {
-    name: fileName
+    name: uniqName
   };
   try {
     // upload file to firebase storage
     let uploadedFile = await firebase.uploadFile(path, file, null, options);
     let downloadURL = await uploadedFile.uploadTaskSnapshot.ref.getDownloadURL();
-    const dbUpdateVar = `${id}.image`;
+    const dbVarURL = `${id}.image`;
+    const dbVarName = `${id}.image_name`;
     await firestore
       .collection("base")
       .doc("incidents")
       .update({
-        [dbUpdateVar]: downloadURL
+        [dbVarURL]: downloadURL,
+        [dbVarName]: uniqName
+      });
+    dispatch({
+      type: SEND_MESSAGE,
+      payload: "photo uploaded succesfully"
+    });
+  } catch (error) {
+    dispatch({
+      type: SEND_MESSAGE,
+      payload: error.message
+    });
+  }
+};
+
+export const deleteIncidentImage = (photoName, id) => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const dbVarURL = `${id}.image`;
+  const dbVarName = `${id}.image_name`;
+  try {
+    await firebase.deleteFile(`/incident_images/${photoName}`);
+    await await firestore
+      .collection("base")
+      .doc("incidents")
+      .update({
+        [dbVarURL]: "",
+        [dbVarName]: ""
       });
   } catch (error) {
     console.log(error);
+    throw new Error("problem deleting the photo");
   }
 };

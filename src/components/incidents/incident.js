@@ -64,7 +64,9 @@ const Incident = props => {
           {props.loggedIn ? (
             <div
               className="edit-incidents-wrap"
-              onClick={() => props.openModal("EditIncidentModal", props)}
+              onClick={() =>
+                props.openModal("EditIncidentModal", props, "edit")
+              }
             >
               <p>edit incident</p>
               <img
@@ -96,51 +98,46 @@ const Incident = props => {
             {props.otherReport}
           </p>
         ) : null}
+
+        {renderAdditionalLink(props.additionalInfo)}
+
         {props.image ? (
           <div className="incident-photo-wrap">
-            <img src={props.image} alt={`photo of ariplane ${props.serial}`} />
+            <img src={props.image} alt={`ariplane ${props.serial}`} />
           </div>
         ) : null}
-        {/* {this.props.additionalInfo ? this._renderAdditionalLink() : null}
-        {this._renderImage()} */}
       </div>
     </div>
   );
 };
 
-const renderAdditionalLink = props => {
-  var testIfLink = props.additionalInfo.substring(0, 4);
-  if (testIfLink === "http") {
-    return (
-      <a href={props.additionalInfo}>
-        <p className="incident-additional-information">
-          <span className="incident-span">Aditional Information</span>
-          {props.additionalInfo}
-        </p>
-      </a>
-    );
-  } else {
-    return (
-      <p className="incident-additional-information">
-        <span className="incident-span">Aditional Information</span>
-        {props.additionalInfo}
-      </p>
-    );
-  }
-};
-
-const renderImage = props => {
-  if (props.image) {
-    return (
-      <a className="incident-image">
-        <img
-          src={`${process.env.PUBLIC_URL}/${props.image}`}
-          alt="the incident"
-        />
-      </a>
-    );
-  } else {
+const renderAdditionalLink = info => {
+  if (info === "" || info === undefined) {
     return null;
+  } else {
+    var testIfLink = info.substring(0, 4);
+    if (testIfLink === "http") {
+      return (
+        <a
+          href={info}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="incident-additional-information"
+        >
+          <p>
+            <span className="incident-span">Additional Information</span>
+            {info}
+          </p>
+        </a>
+      );
+    } else {
+      return (
+        <p className="incident-additional-information">
+          <span className="incident-span">Addtional Information</span>
+          {info}
+        </p>
+      );
+    }
   }
 };
 
