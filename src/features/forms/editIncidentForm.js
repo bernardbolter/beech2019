@@ -6,7 +6,8 @@ import "cropperjs/dist/cropper.css";
 
 import {
   uploadIncidentImage,
-  deleteIncidentImage
+  deleteIncidentImage,
+  modifyIncidentData
 } from "./formsStore/formsActions";
 
 import "./editIncidentForm.sass";
@@ -60,7 +61,11 @@ class EditIncidentForm extends Component {
     const {
       handleSubmit,
       planeInfo,
-      myForm: { editAirplaneFormMessage }
+      myForm: {
+        editIncidentFormMessage,
+        uploadIncidentImageMessage,
+        deleteIncidentImageMessage
+      }
     } = this.props;
     const {
       newIncident,
@@ -157,7 +162,7 @@ class EditIncidentForm extends Component {
           {newIncident ? null : (
             <div className="edit-incident-field">
               {planeInfo.image === "" ? (
-                <p>image: yes</p>
+                <p>image: none</p>
               ) : (
                 <div
                   className="edit-button"
@@ -166,6 +171,9 @@ class EditIncidentForm extends Component {
                   <p>delete image</p>
                 </div>
               )}
+              {deleteIncidentImageMessage !== "" ? (
+                <p>{deleteIncidentImageMessage}</p>
+              ) : null}
             </div>
           )}
 
@@ -198,16 +206,69 @@ class EditIncidentForm extends Component {
               </Dropzone>
             </div>
           )}
-          {editAirplaneFormMessage !== "" ? (
-            <p>{editAirplaneFormMessage}</p>
+          {uploadIncidentImageMessage !== "" ? (
+            <p>{uploadIncidentImageMessage}</p>
           ) : null}
-          <button className="edit-airplane-button submit" type="submit">
+          <button className="edit-button submit" type="submit">
             <p>submit</p>
           </button>
         </form>
       );
     } else {
-      return <h1>to change</h1>;
+      return (
+        <div className="edit-airplane-confirm-wrap">
+          <h2>Changes to be made</h2>
+          {incidentFieldsToBeChanges.length === 0 ? (
+            <h2>no changes to be made</h2>
+          ) : (
+            incidentFieldsToBeChanges.map((change, i) => {
+              let objectEnt = Object.entries(change);
+              const changeKey = objectEnt[0][0];
+              const changeOld = objectEnt[0][1].old;
+              const changeNew = objectEnt[0][1].new;
+              return (
+                <div className="change-wrap" key={i}>
+                  <h3>{changeKey}</h3>
+                  {changeOld === "" ? (
+                    "Field was blank"
+                  ) : (
+                    <p className="change-old">
+                      <span>from </span>
+                      {changeOld}
+                    </p>
+                  )}
+                  <p className="change-new">
+                    <span>to </span>
+                    {changeNew}
+                  </p>
+                </div>
+              );
+            })
+          )}
+          {editIncidentFormMessage !== "" ? (
+            <p>{editIncidentFormMessage}</p>
+          ) : null}
+          {incidentFieldsToBeChanges.length === 0 ? null : (
+            <div
+              className="edit-airplane-button changes"
+              onClick={() => this.submitIncidentData(incidentFieldsToBeChanges)}
+            >
+              <p>submit changes</p>
+            </div>
+          )}
+
+          <div
+            className="edit-airplane-button cancel"
+            onClick={this.cancelDataUpload}
+          >
+            {incidentFieldsToBeChanges.length === 0 ? (
+              <p>go back</p>
+            ) : (
+              <p>cancel</p>
+            )}
+          </div>
+        </div>
+      );
     }
   }
 
@@ -261,9 +322,15 @@ class EditIncidentForm extends Component {
         }
       };
     });
-    console.log(objectOfChanges);
     this.setState({ incidentFieldsToBeChanges: objectOfChanges });
-    console.log(this.state.incidentFieldsToBeChanges);
+  };
+
+  cancelDataUpload = () => {
+    this.setState({ incidentFieldsToBeChanges: {} });
+  };
+
+  submitIncidentData = changes => {
+    this.props.modifyIncidentData(changes, this.props.planeInfo.id);
   };
 }
 
@@ -274,7 +341,8 @@ const mapState = (state, props) => ({
 
 const actions = {
   uploadIncidentImage,
-  deleteIncidentImage
+  deleteIncidentImage,
+  modifyIncidentData
 };
 
 export default connect(

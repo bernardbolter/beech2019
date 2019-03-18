@@ -48,14 +48,16 @@ export const modifyAirplaneData = (values, id, planeUID) => async (
       batch.commit().then(function() {
         dispatch({
           type: SEND_MESSAGE,
-          payload: "Update Successful."
+          message: "Update Successful.",
+          which: "airplane update"
         });
       });
     });
   } catch (error) {
     dispatch({
       type: SEND_MESSAGE,
-      payload: error
+      message: error,
+      which: "airplane update"
     });
   }
 };
@@ -87,12 +89,14 @@ export const uploadIncidentImage = (file, fileName, id) => async (
       });
     dispatch({
       type: SEND_MESSAGE,
-      payload: "photo uploaded succesfully"
+      message: "photo uploaded succesfully.",
+      which: "upload photo"
     });
   } catch (error) {
     dispatch({
       type: SEND_MESSAGE,
-      payload: error.message
+      message: error.message,
+      which: "upload photo"
     });
   }
 };
@@ -115,8 +119,53 @@ export const deleteIncidentImage = (photoName, id) => async (
         [dbVarURL]: "",
         [dbVarName]: ""
       });
+    await dispatch({
+      type: SEND_MESSAGE,
+      message: "Image succefully deleted",
+      which: "delete photo"
+    });
   } catch (error) {
-    console.log(error);
-    throw new Error("problem deleting the photo");
+    await dispatch({
+      type: SEND_MESSAGE,
+      message: error,
+      which: "delete photo"
+    });
+  }
+};
+
+export const modifyIncidentData = (values, id) => async (
+  dispatch,
+  getState,
+  { getFirestore }
+) => {
+  const firestore = getFirestore();
+  console.log(getState());
+  console.log(values);
+  console.log(id);
+  let incidentsRef = firestore.collection("base").doc("incidents");
+  try {
+    var batch = firestore.batch();
+    await values.map(value => {
+      const planeEntries = Object.entries(value);
+      const theKey = planeEntries[0][0];
+      const theChange = planeEntries[0][1].new;
+      const dbVar = `${id}.${theKey}`;
+      batch.update(incidentsRef, {
+        [dbVar]: theChange
+      });
+    });
+    await batch.commit().then(function() {
+      dispatch({
+        type: SEND_MESSAGE,
+        message: "Update Successful.",
+        which: "update incident"
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: SEND_MESSAGE,
+      message: error.message,
+      which: "update incident"
+    });
   }
 };
