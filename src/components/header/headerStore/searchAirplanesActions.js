@@ -36,6 +36,7 @@ export const changeAirplaneDropdown = (value, selector) => {
 };
 
 export const handleAirplaneReset = () => {
+  console.log("reset");
   return {
     type: actionTypes.AIRPLANES_RESET
   };

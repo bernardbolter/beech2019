@@ -1,6 +1,7 @@
 import * as actionTypes from "./headerTypes";
 
 const initialState = {
+  comingFromHomePage: false,
   airplanesSearchText: "",
   airplanesOlderChecked: true,
   airplanesNewerChecked: false,
@@ -29,7 +30,6 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.AIRPLANE_SEARCH_TEXT:
-      console.log(action.text);
       return {
         ...state,
         airplanesSearchText: action.text

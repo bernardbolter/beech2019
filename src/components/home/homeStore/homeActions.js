@@ -1,4 +1,9 @@
 import * as actionTypes from "./homeTypes";
+import {
+  changeAirplaneFilter,
+  changeAirplaneDropdown,
+  handleAirplaneReset
+} from "../../header/headerStore/searchAirplanesActions";
 
 export const filterHomeData = homeData => {
   let sortedData = {
@@ -80,5 +85,38 @@ const sortData = array => {
 export const toggleReadMore = () => {
   return {
     type: actionTypes.OPEN_READ_MORE
+  };
+};
+
+export const decideHomePageLinks = (data, name) => {
+  return async dispatch => {
+    await dispatch(handleAirplaneReset());
+    if (name === "currentStatus") {
+      if (data.name === "Parted Out") {
+        await dispatch(changeAirplaneFilter("partedOut"));
+      }
+      if (data.name === "Operating") {
+        await dispatch(changeAirplaneFilter("operating"));
+      }
+      if (data.name === "Operating (Non-Current)") {
+        await dispatch(changeAirplaneFilter("operatingNonCurrent"));
+      }
+      if (data.name === "Non-Flying") {
+        await dispatch(changeAirplaneFilter("nonFlying"));
+      }
+      if (data.name === "Destroyed") {
+        await dispatch(changeAirplaneFilter("destroyed"));
+      }
+    }
+    if (name === "latestOperator") {
+      await dispatch(changeAirplaneDropdown(data.name, "operator"));
+    }
+    if (name === "latestCountry") {
+      await dispatch(changeAirplaneDropdown(data.name, "opercountryator"));
+    }
+    if (name === "serial") {
+      const lowerSerial = data.name.toLowerCase();
+      await dispatch(changeAirplaneFilter(lowerSerial));
+    }
   };
 };

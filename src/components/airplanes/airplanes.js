@@ -37,98 +37,103 @@ class Airplanes extends Component {
     if (this.props.airplanes.filteredAirplanes.length === 0) {
       await this.props.getFilteredAirplanes(this.props.baseData.baseAirplanes);
     }
+    this.getTheFilteredPlanes();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.searchAirplanes !== prevProps.searchAirplanes) {
-      const {
-        uaChecked,
-        ubChecked,
-        ucChecked,
-        udChecked,
-        ueChecked,
-        airplanesOlderChecked,
-        operatingChecked,
-        operatingNonCurrentChecked,
-        nonFlyingChecked,
-        partedOutChecked,
-        destroyedChecked,
-        airplanesSearchText,
-        airplanesLatestOperatorValue,
-        airplanesCountryValue
-      } = this.props.searchAirplanes;
-
-      let serialArray = [];
-      if (uaChecked) {
-        serialArray.push("A");
-      }
-      if (ubChecked) {
-        serialArray.push("B");
-      }
-      if (ucChecked) {
-        serialArray.push("C");
-      }
-      if (udChecked) {
-        serialArray.push("D");
-      }
-      if (ueChecked) {
-        serialArray.push("E");
-      }
-      let serialString = serialArray.join(", ");
-
-      if (!uaChecked && !ubChecked && !ucChecked && !udChecked && !ueChecked) {
-        serialString = "A, B, C, D, E";
-      }
-
-      let statusArray = [];
-
-      if (operatingChecked) {
-        statusArray.push("O");
-      }
-
-      if (operatingNonCurrentChecked) {
-        statusArray.push("O");
-      }
-
-      if (nonFlyingChecked) {
-        statusArray.push("N");
-      }
-
-      if (partedOutChecked) {
-        statusArray.push("P");
-      }
-
-      if (destroyedChecked) {
-        statusArray.push("D");
-      }
-
-      let statusString = statusArray.join(", ");
-
-      if (statusString === "") {
-        statusString = "O, N, P, D";
-      }
-
-      const country = airplanesCountryValue;
-
-      const operator = airplanesLatestOperatorValue;
-
-      const sorting = airplanesOlderChecked;
-
-      const filterText = airplanesSearchText;
-
-      const allPlanes = this.props.baseData.baseAirplanes;
-
-      this.props.getUpdatedFilteredAirplanes(
-        serialString,
-        statusString,
-        country,
-        operator,
-        sorting,
-        filterText,
-        allPlanes
-      );
+      this.getTheFilteredPlanes();
     }
   }
+
+  getTheFilteredPlanes = () => {
+    const {
+      uaChecked,
+      ubChecked,
+      ucChecked,
+      udChecked,
+      ueChecked,
+      airplanesOlderChecked,
+      operatingChecked,
+      operatingNonCurrentChecked,
+      nonFlyingChecked,
+      partedOutChecked,
+      destroyedChecked,
+      airplanesSearchText,
+      airplanesLatestOperatorValue,
+      airplanesCountryValue
+    } = this.props.searchAirplanes;
+
+    let serialArray = [];
+    if (uaChecked) {
+      serialArray.push("A");
+    }
+    if (ubChecked) {
+      serialArray.push("B");
+    }
+    if (ucChecked) {
+      serialArray.push("C");
+    }
+    if (udChecked) {
+      serialArray.push("D");
+    }
+    if (ueChecked) {
+      serialArray.push("E");
+    }
+    let serialString = serialArray.join(", ");
+
+    if (!uaChecked && !ubChecked && !ucChecked && !udChecked && !ueChecked) {
+      serialString = "A, B, C, D, E";
+    }
+
+    let statusArray = [];
+
+    if (operatingChecked) {
+      statusArray.push("O");
+    }
+
+    if (operatingNonCurrentChecked) {
+      statusArray.push("O");
+    }
+
+    if (nonFlyingChecked) {
+      statusArray.push("N");
+    }
+
+    if (partedOutChecked) {
+      statusArray.push("P");
+    }
+
+    if (destroyedChecked) {
+      statusArray.push("D");
+    }
+
+    let statusString = statusArray.join(", ");
+
+    if (statusString === "") {
+      statusString = "O, N, P, D";
+    }
+
+    const country = airplanesCountryValue;
+
+    const operator = airplanesLatestOperatorValue;
+
+    const sorting = airplanesOlderChecked;
+
+    const filterText = airplanesSearchText;
+
+    const allPlanes = this.props.baseData.baseAirplanes;
+
+    this.props.getUpdatedFilteredAirplanes(
+      serialString,
+      statusString,
+      country,
+      operator,
+      sorting,
+      filterText,
+      allPlanes
+    );
+  };
 
   render() {
     console.log(this.props);

@@ -2,7 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { decideHomePageLinks } from "./homeStore/homeActions";
+
 const HomeColumn = props => {
+  const { decideHomePageLinks } = props;
+  console.log(props);
   return (
     <div className={"grid-" + props.columnName}>
       <div className={"grid-cell-header grid-cell-header-" + props.columnName}>
@@ -29,7 +33,7 @@ const HomeColumn = props => {
                   : "/airplanes"
               }
               onClick={() => {
-                this._decideLinks(data, props.columnName);
+                decideHomePageLinks(data, props.columnName);
               }}
               key={i}
               className={
@@ -49,7 +53,15 @@ const HomeColumn = props => {
 };
 
 const mapStateToProps = state => ({
-  home: state.home
+  home: state.home,
+  nav: state.nav
 });
 
-export default connect(mapStateToProps)(HomeColumn);
+const actions = {
+  decideHomePageLinks
+};
+
+export default connect(
+  mapStateToProps,
+  actions
+)(HomeColumn);
