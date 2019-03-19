@@ -4,7 +4,8 @@ const initialState = {
   homeDataLoaded: false,
   homeData: {},
   showLogin: false,
-  loginMessage: ""
+  loginMessage: "",
+  openReadMore: false
 };
 
 export default function(state = initialState, action) {
@@ -24,6 +25,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loginAnswer: action.message
+      };
+    case actionTypes.OPEN_READ_MORE:
+      return {
+        ...state,
+        openReadMore: !state.openReadMore
       };
     default:
       return state;

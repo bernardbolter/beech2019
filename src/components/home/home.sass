@@ -8,44 +8,160 @@
   transform: translateY(191px)
   transition: all 0.3s ease-in
 
-.home-text
+.home-text-wrap
   width: 100%
+  background: linear-gradient($light-sky, $lighter-sky)
   margin: 0
-  padding: 10px 0 50px
-  background: $light-sky
 
+.home-lighter-gradient
+  background: linear-gradient($lighter-sky, $lightest-sky)
+  max-height: 0
+  opacity: 0
+  padding: 0
+  margin: 0
+
+.home-lighter-gradient-on
+  max-height: 600px
+  transition: max-height 0.5s ease-in-out
+  opacity: 1
+  padding: 0 0 40px
+
+.home-text
+  width: 85%
+  margin: 0 auto
+  padding: 10px 0 0
+  color: $dark-color
+  text-indent: 20px
 
   h1
-    width: 90%
-    margin: 0 auto 5px
-    color: $dark-color
+    opacity: 0.8
     font-size: 14px
-    line-height: 1.5
     font-weight: 300
-    text-indent: 20px
-    opacity: 0.75
 
-    @media screen and (min-width: 950px)
-      width: 50%
-      margin: 15px auto
-      color: $dark-color
+  h2
+    opacity: 0.8
+    font-size: 15px
+    font-weight: 300
+    margin: 15px 0
+    line-height: 1.5
+
+  h3
+    opacity: 0.9
+    font-size: 13px
+    font-weight: 400
+    margin: 5px 0
+
+  h4
+    opacity: 0.8
+    font-size: 13px
+    margin: 20px 0
+    font-weight: 200
+
+  a
+    display: block
+    color: $dark-color
+    text-decoration: none
+    transition: all 0.3s ease-in-out
+
+    &:hover
+      opacity: 0.95
+      text-decoration: underline
+      transition: all 0.3s ease-in-out
+
+  ul
+    margin: 10px 0 0 20px
+    padding: 0
+    text-indent: 0
+
+  li
+    text-indent: 0
+    font-size: 12px
+    opacity: 0.7
+    line-height: 1.5
+    list-style: none
+
+  @media screen and (min-width: 650px)
+    width: 75%
+    margin: 0 auto
+
+    h1
+      opacity: 0.7
+      font-size: 15px
+
+    h2
+      opacity: 0.8
       font-size: 16px
+      margin: 20px 0
       line-height: 1.5
-      font-weight: 300
-      text-indent: 20px
+
+    h3
+      opacity: 0.85
+      font-size: 15px
+
+    li
+      font-size: 13px
+
+  @media screen and (min-width: 950px)
+    width: 65%
+    margin: 0 auto
+
+    h1
+      opacity: 0.6
+      font-size: 16px
+
+    h2
+      opacity: 0.6
+      font-size: 15px
+
+    li
+      font-size: 14px
+
+.home-text-below
+  display: none
+
+.home-text-below-on
+  display: block
+
+.home-read-more-button
+  width: 300px
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: flex-start
+  height: 30px
+  cursor: pointer
+  transition: all 0.3 ease-in-out
 
   p
-    margin: 0 0 0 5%
-    font-size: 10px
-    color: $dark-color
-    font-weight: 400
-    top: 30px
-    position: relative
-    opacity: 0.5
+    margin-right: 10px
+    opacity: 0.4
 
-    @media screen and (min-width: 950px)
-      margin: 0 0 0 25%
-      font-size: 13px
+  img
+    opacity: 0.4
+    width: 20px
+    height: 20px
+    transform: rotate(180deg)
+    transition: transform 0.3 ease-in-out
+
+.home-read-more-button-on
+  transition: all 0.3 ease-in-out
+
+  p
+    opacity: 0.7
+
+  img
+    transform: rotate(0deg)
+    opacity: 0.6
+    transition: transform 0.3 ease-in-out
+
+.home-grid-text
+  font-size: 11px
+  text-align: right
+  padding: 7px 5%
+  background: $lightest-sky
+  margin: 0
+  position: relative
+  color: #666
 
 .home-grid
   width: 100%

@@ -76,3 +76,9 @@ const sortData = array => {
   finalList = finalList.slice(0, 10);
   return finalList;
 };
+
+export const toggleReadMore = () => {
+  return {
+    type: actionTypes.OPEN_READ_MORE
+  };
+};

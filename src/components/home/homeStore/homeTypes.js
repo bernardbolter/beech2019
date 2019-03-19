@@ -2,3 +2,4 @@ export const FILTER_HOME_DATA = "FILTER_HOME_DATA";
 export const TOGGLE_LOGIN = "TOGGLE_LOGIN";
 export const SUBMIT_LOGIN = "SUBMIT_LOGIN";
 export const LOGIN_MESSAGE = "LOGIN_MESSAGE";
+export const OPEN_READ_MORE = "OPEN_READ_MORE";
