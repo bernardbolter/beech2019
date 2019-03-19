@@ -24,7 +24,7 @@ export const getBaseAirplanes = airplanes => {
       airplaneOperators.push(plane.latestOperator);
     }
 
-    airplanesArray.push(plane);
+    return airplanesArray.push(plane);
   });
 
   let uniqueAirplaneCountries = [...new Set(airplaneCountries)].sort();

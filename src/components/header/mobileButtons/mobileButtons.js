@@ -11,7 +11,7 @@ class MobileButtons extends Component {
     const { showNavigation, showSearch } = this.props.nav;
     return (
       <div className="mobile_buttons">
-        <a
+        <div
           onClick={toggleNavigation}
           className={showNavigation ? "nav-button nav-button-on" : "nav-button"}
         >
@@ -27,8 +27,8 @@ class MobileButtons extends Component {
             <line id="nav-svg-line-mid" x1={4} y1={15} x2={26} y2={15} />
             <line id="nav-svg-line-bot" x1={4} y1={22} x2={26} y2={22} />
           </svg>
-        </a>
-        <a
+        </div>
+        <div
           onClick={toggleSearch}
           className={
             (match.path === "/" || match.path === "/facts"
@@ -55,7 +55,7 @@ class MobileButtons extends Component {
               fill="transparent"
             />
           </svg>
-        </a>
+        </div>
       </div>
     );
   }

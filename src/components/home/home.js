@@ -112,7 +112,10 @@ class Home extends Component {
                 }
               >
                 <p>read more</p>
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF4SURBVEhL3ZVJSgRBEEVbRTfiRdQ7iO5VHK/gBGqfwJ2K13C4j/N4CnGhG/W9ohKarKzMQnDTHx50RURGVGdGZPWGXhOwCVfwBB81/tamz5g/aQ1e4aeAMSvQWWNwBiHBNezDNEzWzMAB3ECIO4VRKCok/4RtyC3StwPGhiJZrYKBXzCnoaPmwTWuXdKQkof1BgZtaUjoqCYl/4lrPZNxDbHsCAPc19S2mFi/pIp4dregf11DLNtOpwcaazB5IFXkEPRdVE+RnkGn3TKoVPJAXGQWtJuroXfQOVU9pRUSt8m1+s3V0L8XCFvkELWpVCBskVdJQ5egM3XIQaUCfdB/Xj1F2gCdtlrb9OYK2KZ3oD/Zpg5HadByBfZA3wskB00tg0GOvePfVQvgmm9Y1JCTF5ZFvMB2IXfZuS2+ebiHjqEoE4Yi4r56eHaIbSj+1nYPxvjmJzACneWt2PWDU9yWNnnD2l3eLY/g59IheqhtfvVaD3QY1Ov9AksNi4wmddo3AAAAAElFTkSuQmCC" />
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF4SURBVEhL3ZVJSgRBEEVbRTfiRdQ7iO5VHK/gBGqfwJ2K13C4j/N4CnGhG/W9ohKarKzMQnDTHx50RURGVGdGZPWGXhOwCVfwBB81/tamz5g/aQ1e4aeAMSvQWWNwBiHBNezDNEzWzMAB3ECIO4VRKCok/4RtyC3StwPGhiJZrYKBXzCnoaPmwTWuXdKQkof1BgZtaUjoqCYl/4lrPZNxDbHsCAPc19S2mFi/pIp4dregf11DLNtOpwcaazB5IFXkEPRdVE+RnkGn3TKoVPJAXGQWtJuroXfQOVU9pRUSt8m1+s3V0L8XCFvkELWpVCBskVdJQ5egM3XIQaUCfdB/Xj1F2gCdtlrb9OYK2KZ3oD/Zpg5HadByBfZA3wskB00tg0GOvePfVQvgmm9Y1JCTF5ZFvMB2IXfZuS2+ebiHjqEoE4Yi4r56eHaIbSj+1nYPxvjmJzACneWt2PWDU9yWNnnD2l3eLY/g59IheqhtfvVaD3QY1Ov9AksNi4wmddo3AAAAAElFTkSuQmCC"
+                  alt="arrow icon"
+                />
               </div>
             </div>
           </div>
@@ -217,6 +220,7 @@ class Home extends Component {
                 className="bolter-link"
                 href="https://bernardbolter.com"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Bernard Bolter
               </a>{" "}

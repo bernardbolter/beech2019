@@ -62,10 +62,8 @@ class EditAirplaneForm extends Component {
   );
 
   render() {
-    console.log(this.props);
     const {
       handleSubmit,
-      error,
       planeInfo,
       myForm: { editAirplaneFormMessage }
     } = this.props;

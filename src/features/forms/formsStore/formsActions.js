@@ -32,7 +32,6 @@ export const modifyAirplaneData = (values, id, planeUID) => async (
           batch.update(planeExceptRef, {
             [underCountryVar]: underCountry
           });
-          console.log(underCountry);
         }
         batch.update(planeExceptRef, {
           [dbVar]: theChange
@@ -45,7 +44,7 @@ export const modifyAirplaneData = (values, id, planeUID) => async (
           [theKey]: theChange
         });
       }
-      batch.commit().then(function() {
+      return batch.commit().then(function() {
         dispatch({
           type: SEND_MESSAGE,
           message: "Update Successful.",
@@ -139,9 +138,6 @@ export const modifyIncidentData = (values, id) => async (
   { getFirestore }
 ) => {
   const firestore = getFirestore();
-  console.log(getState());
-  console.log(values);
-  console.log(id);
   let incidentsRef = firestore.collection("base").doc("incidents");
   try {
     var batch = firestore.batch();
@@ -150,7 +146,7 @@ export const modifyIncidentData = (values, id) => async (
       const theKey = planeEntries[0][0];
       const theChange = planeEntries[0][1].new;
       const dbVar = `${id}.${theKey}`;
-      batch.update(incidentsRef, {
+      return batch.update(incidentsRef, {
         [dbVar]: theChange
       });
     });
