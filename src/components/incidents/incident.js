@@ -78,34 +78,37 @@ const Incident = props => {
         </div>
       </div>
       <div className="incident-right">
-        <p className="incident-type">
-          <span className="incident-span">Type of Incident</span>
-          {props.accidentType}
-        </p>
-        <p className="incident-editorial-synopsis">
-          <span className="incident-span">Synopsis</span>
-          {props.editorial}
-        </p>
-        {props.ntsbreportNumber ? (
-          <p className="incident-ntsb-number">
-            <span className="incident-span">NTSB Report Number</span>
-            {props.ntsbreportNumber}
+        <div className="incident-right-left">
+          <p className="incident-type">
+            <span className="incident-span">Type of Incident</span>
+            {props.accidentType}
           </p>
-        ) : null}
-        {props.otherReport ? (
-          <p className="incident-other-report">
-            <span className="incident-span">Other Report</span>
-            {props.otherReport}
+          <p className="incident-editorial-synopsis">
+            <span className="incident-span">Synopsis</span>
+            {props.editorial}
           </p>
-        ) : null}
+          {props.ntsbreportNumber ? (
+            <p className="incident-ntsb-number">
+              <span className="incident-span">NTSB Report Number</span>
+              {props.ntsbreportNumber}
+            </p>
+          ) : null}
+          {props.otherReport ? (
+            <p className="incident-other-report">
+              <span className="incident-span">Other Report</span>
+              {props.otherReport}
+            </p>
+          ) : null}
 
-        {renderAdditionalLink(props.additionalInfo)}
-
-        {props.image ? (
-          <div className="incident-photo-wrap">
-            <img src={props.image} alt={`ariplane ${props.serial}`} />
-          </div>
-        ) : null}
+          {renderAdditionalLink(props.additionalInfo)}
+        </div>
+        <div className="incident-right-right">
+          {props.image ? (
+            <div className="incident-photo-wrap">
+              <img src={props.image} alt={`ariplane ${props.serial}`} />
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );

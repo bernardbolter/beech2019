@@ -59,6 +59,7 @@ class Incidents extends Component {
               )}
               {authenticated ? (
                 <p
+                  className="add-new-incident"
                   onClick={() =>
                     openModal("EditIncidentModal", this.props, "new")
                   }

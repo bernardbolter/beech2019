@@ -45,11 +45,3 @@ export const getBaseIncidents = incidents => {
     baseIncidents: incidentsArray
   };
 };
-
-export const getBaseFacts = facts => {
-  let factsArray = Object.keys(facts).map(key => facts[key]);
-  return {
-    type: actionTypes.GET_BASE_FACTS,
-    baseFacts: factsArray
-  };
-};

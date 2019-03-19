@@ -18,7 +18,13 @@ class Nav extends Component {
         <Link to="/airplanes">airplanes</Link>
         <Link to="/incidents">incidents</Link>
         <Link to="/facts">facts</Link>
-        <p onClick={() => openModal("NewsletterModal")}>newsletter</p>
+        <a
+          href="https://twitter.com/Beech1900dotcom"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          twitter
+        </a>
         {authenticated ? (
           <p onClick={() => openModal("LoginModal")}>{auth.email}</p>
         ) : null}
