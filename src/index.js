@@ -10,7 +10,7 @@ import Home from "./components/home/home";
 import Airplanes from "./components/airplanes/airplanes";
 import AirplaneSingle from "./components/airplanes/airplane-single";
 import Incidents from "./components/incidents/incidents";
-import Facts from "./components/facts/facts";
+import History from "./components/history/history";
 import ModalManager from "./features/modals/modalManager";
 
 const browserHistory = createBrowserHistory();
@@ -25,7 +25,7 @@ const Root = () => {
           <Route exact path="/airplanes" component={Airplanes} />
           <Route path="/airplanes/:serial" component={AirplaneSingle} />
           <Route path="/incidents" component={Incidents} />
-          <Route path="/facts" component={Facts} />
+          <Route path="/history" component={History} />
         </div>
       </Router>
     </Provider>

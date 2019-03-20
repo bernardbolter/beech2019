@@ -17,7 +17,7 @@ class Nav extends Component {
         <Link to="/">home</Link>
         <Link to="/airplanes">airplanes</Link>
         <Link to="/incidents">incidents</Link>
-        <Link to="/facts">facts</Link>
+        <Link to="/history">history</Link>
         <a
           href="https://twitter.com/Beech1900dotcom"
           target="_blank"
