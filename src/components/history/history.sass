@@ -4,21 +4,200 @@
     width: 100%
     margin: 0
     padding: 25px 0
-    background: linear-gradient($dark-sky, $light-sky)
+    background: linear-gradient($light-sky, $lighter-sky)
 
 .history-container
-    width: 90%
     margin: 0 auto
 
-
     h1
-        font-size: 24px
+        font-size: 18px
         color: $dark-color
-        font-weight: 300
+        font-weight: 400
         line-height: 1.5
+        text-align: center
+        font-family: $font-header
+        padding: 15px 0
+        margin: 10px 0 0
 
-    h3
+        @media screen and (min-width: 900px)
+            font-size: 24px
+
+    h2
         font-size: 16px
         color: $dark-color
-        opacity: 0.9
+        font-weight: 400
         line-height: 1.5
+        font-family: $font-header
+        opacity: 0.85
+
+        @media screen and (min-width: 900px)
+            font-size: 18px
+
+    h3
+        font-size: 15px
+        color: $dark-color
+        opacity: 0.9
+        line-height: 1.7
+        text-indent: 15px
+        font-weight: 400
+
+        @media screen and (min-width: 900px)
+            font-size: 17px
+
+.history-container-main
+    width: 85%
+
+    @media screen and (min-width: 600px)
+        width: 75%
+
+    @media screen and (min-width: 750px)
+        width: 70%
+
+    @media screen and (min-width: 900px)
+        width: 80%
+
+.history-container-second
+    width: 94%
+    margin: 20px 3%
+
+.history-italic
+    opacity: 0.9
+    font-style: italic
+    color: $dark-color
+    font-weight: 700
+
+.history-date
+    color: $dark-color
+    font-size: 8px
+    vertical-align: super
+
+.history-built
+    font-family: $font-base
+    color: $dark-color
+    font-size: 14px
+
+.history-intro
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    @media screen and (min-width: 900px)
+        flex-direction: row
+        align-items: flex-start
+
+.intro-two
+    @media screen and (min-width: 900px)
+        flex-direction: row-reverse
+
+.history-intro-text
+    display: flex
+    flex-direction: column
+    width: 100%
+
+    @media screen and (min-width: 900px)
+        width: 55%
+
+.history-image-wrap
+    width: 95%
+    margin: 15px
+    max-width: 600px
+
+    img
+        width: 95%
+        border: 15px solid white
+
+    p
+        font-size: 10px
+        text-align: right
+        margin: 5px 0 0 0
+        padding: 0
+        color: $dark-color
+        opacity: 0.7
+
+    @media screen and (min-width: 900px)
+        width: 40%
+        margin: 20px 2.5% 0
+        max-width: 2000px
+
+.image-one
+    @media screen and (min-width: 900px)
+        margin: 25px 0 0 5%
+
+.image-two
+    @media screen and (min-width: 900px)
+        margin: 25px 5% 0 0
+
+// HISTORY VARIENTS
+
+.history-varients-wrap
+    display: flex
+    flex-direction: column
+
+    @media screen and (min-width: 900px)
+        flex-direction: row
+
+
+.history-varients-column
+    display: flex
+    flex-direction: column
+    width: 100%
+
+    @media screen and (min-width: 900px)
+        width: 45%
+        margin: 2.5%
+
+// HISTORY STORY
+.history-story-year
+    font-family: $font-base
+    font-size: 14px
+    opacity: 0.8
+
+    @media screen and (min-width: 900px)
+        font-size: 16px
+
+.history-story-title-extra
+    font-family: $font-base
+    font-size: 14px
+    text-align: center
+    padding: 0
+    margin: 0
+    opacity: 0.7
+
+    @media screen and (min-width: 900px)
+        font-size: 18px
+
+
+// SERVICE CHARTS
+
+.history-charts-wrap
+    width: 100%
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+
+.service-chart-wrap
+    width: 96%
+    margin: 2%
+
+    @media screen and (min-width: 600px)
+        width: 46%
+
+    @media screen and (min-width: 1000px)
+        width: 29%
+
+    h1
+        width: 100%
+    p
+        font-family: $font-base
+        font-size: 14px
+        text-align: right
+        color: $dark-color
+        opacity: 0.8
+
+    img
+        width: 100%
+        border: 1px solid #bbb
+        cursor: pointer
+
+

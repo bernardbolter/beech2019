@@ -49,20 +49,11 @@ $incidents-odd: #aaaaaa;
 
 $mobile-break: 950px;
 
-.container {
-  width: 100%;
-}
+// FONTS
 
-@import url("https://fonts.googleapis.com/css?family=Cabin:400,400i,700");
-
-$font-base: "Cabin", san-serif;
+$font-base: "Quattrocento Sans", sans-serif;
+$font-header: "Francois One", sans-serif;
 
 html {
   font-family: $font-base;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0px;
 }

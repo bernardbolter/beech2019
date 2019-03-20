@@ -13,6 +13,8 @@ import Incidents from "./components/incidents/incidents";
 import History from "./components/history/history";
 import ModalManager from "./features/modals/modalManager";
 
+import "./app.scss";
+
 const browserHistory = createBrowserHistory();
 
 const Root = () => {
