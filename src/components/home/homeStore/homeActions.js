@@ -21,41 +21,41 @@ export const setIncidents = incidents => {
 
 export const filterHomeData = (planes, incidents) => {
   const planesArray = Object.keys(planes).map(key => planes[key]);
-  console.log(planesArray);
   const incidentsArray = Object.keys(incidents).map(key => incidents[key]);
-  console.log(incidentsArray);
   let sortedData = {
-    accidentType: [],
-    currentStatus: [],
-    airplaneProduction: [],
-    latestCountry: [],
-    latestOperator: [],
+    accidentCategory: [],
+    status: [],
+    currentCountry: [],
+    currentOperator: [],
     serial: []
   };
 
-  incidentsArray.map(i => sortedData.accidentType.push(i.accidentType));
+  incidentsArray.map(i => {
+    if (
+      i.accidentCategory !== "" &&
+      i.accidentCategory !== undefined &&
+      i.accidentCategory !== "Other"
+    ) {
+      sortedData.accidentCategory.push(i.accidentCategory);
+    }
+  });
   planesArray.map(a => {
     // status data
-    if (a.currentStatus !== "?" && a.currentStatus !== undefined) {
-      sortedData.currentStatus.push(a.currentStatus);
-    }
-    // production run data
-    if (a.factoryDate !== "?" && a.factoryDate !== undefined) {
-      var theYear = a.factoryDate.slice(-2);
-      if (theYear.charAt(0) === ("0" || "1")) {
-        theYear = "20" + theYear;
-      } else {
-        theYear = "19" + theYear;
-      }
-      sortedData.airplaneProduction.push(theYear);
+    if (a.status !== "?" && a.status !== undefined) {
+      sortedData.status.push(a.status);
     }
     // country data
-    if (a.latestCountry !== "?" && a.latestCountry !== undefined) {
-      sortedData.latestCountry.push(a.latestCountry);
+    if (a.currentCountry !== "?" && a.currentCountry !== undefined) {
+      sortedData.currentCountry.push(a.currentCountry);
     }
     // operator data
-    if (a.latestOperator !== "?" && a.latestOperator !== undefined) {
-      sortedData.latestOperator.push(a.latestOperator);
+    if (
+      a.currentOperator !== "?" &&
+      a.currentOperator !== undefined &&
+      a.currentOperator !== "No Data" &&
+      a.currentOperator !== "not operating"
+    ) {
+      sortedData.currentOperator.push(a.currentOperator);
     }
     // serial data
     if (a.serial !== "?" && a.serial !== undefined) {
@@ -67,11 +67,10 @@ export const filterHomeData = (planes, incidents) => {
   });
 
   // sort the individual data into objects of 10 or less
-  sortedData.accidentType = sortData(sortedData.accidentType);
-  sortedData.currentStatus = sortData(sortedData.currentStatus);
-  sortedData.airplaneProduction = sortData(sortedData.airplaneProduction);
-  sortedData.latestCountry = sortData(sortedData.latestCountry);
-  sortedData.latestOperator = sortData(sortedData.latestOperator);
+  sortedData.accidentCategory = sortData(sortedData.accidentCategory);
+  sortedData.status = sortData(sortedData.status);
+  sortedData.currentCountry = sortData(sortedData.currentCountry);
+  sortedData.currentOperator = sortData(sortedData.currentOperator);
   sortedData.serial = sortData(sortedData.serial);
 
   return {

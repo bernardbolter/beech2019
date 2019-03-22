@@ -173,22 +173,17 @@
   flex-wrap: wrap
   margin-bottom: 100px
 
-.grid-currentStatus
+.grid-status
   width: 100%
   @media screen and (min-width: $mobile-break)
     width: 20%
 
-.grid-airplaneProduction
-  width: 100%
-  @media screen and (min-width: $mobile-break)
-    width: 10%
-
-.grid-latestOperator
+.grid-currentOperator
   width: 100%
   @media screen and (min-width: $mobile-break)
     width: 20%
 
-.grid-latestCountry
+.grid-currentCountry
   width: 100%
   @media screen and (min-width: $mobile-break)
     width: 20%
@@ -196,9 +191,9 @@
 .grid-serial
   width: 100%
   @media screen and (min-width: $mobile-break)
-    width: 10%
+    width: 20%
 
-.grid-accidentType
+.grid-accidentCategory
   width: 100%
   @media screen and (min-width: $mobile-break)
     width: 20%
@@ -222,22 +217,19 @@
     font-size: 14px
     text-align: center
 
-.grid-cell-header-currentStatus
+.grid-cell-header-status
   background-color: $home-first
 
-.grid-cell-header-airplaneProduction
-  background-color: $home-second
-
-.grid-cell-header-latestOperator
+.grid-cell-header-currentOperator
   background-color: $home-third
 
-.grid-cell-header-latestCountry
+.grid-cell-header-currentCountry
   background-color: $home-fourth
 
 .grid-cell-header-serial
   background-color: $home-fifth
 
-.grid-cell-header-accidentType
+.grid-cell-header-accidentCategory
   background-color: $home-sixth
 
 // GRID STYLES
@@ -261,6 +253,7 @@
     display: block
     font-size: 14px
     padding: 15px 30px
+    color: $dark-color
 
     @media screen and (min-width: 500px)
       padding: 20px 50px
@@ -268,7 +261,7 @@
 
     @media screen and (min-width: 950px)
       padding: 20px 10px
-      font-size: 13px
+      font-size: 14px
 
 .grid-name
   align-self: flex-start
@@ -283,26 +276,23 @@
 .grid-cell-odd
   opacity: 0.7
 
-.grid-cell-currentStatus
+.grid-cell-status
   background-color: lighten($home-first, 77%)
 
-.grid-cell-airplaneProduction
-  background-color: lighten($home-second, 75%)
-  border-right: 1px solid $light-gray
-  border-left: 1px solid $light-gray
 
-.grid-cell-latestOperator
+.grid-cell-currentOperator
   background-color: lighten($home-third, 71%)
+  border-left: 1px solid $light-gray
   border-right: 1px solid $light-gray
 
-.grid-cell-latestCountry
+.grid-cell-currentCountry
   background-color: lighten($home-fourth, 63%)
   border-right: 1px solid $light-gray
 
 .grid-cell-serial
   background-color: lighten($home-fifth, 58%)
 
-.grid-cell-accidentType
+.grid-cell-accidentCategory
   background-color: lighten($home-sixth, 43%)
   border-left: 1px solid $light-gray
 

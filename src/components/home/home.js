@@ -18,63 +18,19 @@ import "./home.sass";
 
 class Home extends Component {
   async componentDidMount() {
-    let beach1900airplaneRef = this.props.firestore
-      .collection("base")
-      .doc("airplaneExcerpts");
-    let beech1900incidentRef = this.props.firestore
-      .collection("base")
-      .doc("incidents");
-    await beech1900incidentRef.onSnapshot(incidentSnap => {
-      this.props.setIncidents(incidentSnap.data());
+    this.props.firestore.collection("base").onSnapshot(snapshots => {
+      let planes = {};
+      let incidents = {};
+      snapshots.forEach(doc => {
+        const documentKey = Object.keys(doc.data())[0];
+        if (documentKey === "UA-1") {
+          planes = doc.data();
+        } else {
+          incidents = doc.data();
+        }
+      });
+      this.props.filterHomeData(planes, incidents);
     });
-    await beach1900airplaneRef.onSnapshot(planeSnap => {
-      this.props.setAirplanes(planeSnap.data());
-      this.props.filterHomeData(
-        this.props.home.homePlanes,
-        this.props.home.homeIncidents
-      );
-    });
-    // if (this.props.baseData.baseAirplanes.length === 0) {
-    //   let fireplanesRef = await this.props.firestore
-    //     .collection("base")
-    //     .doc("airplaneExcerpts");
-    //   await fireplanesRef
-    //     .get()
-    //     .then(doc => {
-    //       if (!doc.exists) {
-    //         console.log("No such document.");
-    //       } else {
-    //         this.props.getBaseAirplanes(doc.data());
-    //       }
-    //     })
-    //     .catch(err => {
-    //       console.log("Error getting document".err);
-    //     });
-    // }
-    // if (this.props.baseData.baseIncidents.length === 0) {
-    //   let incidentsRef = await this.props.firestore
-    //     .collection("base")
-    //     .doc("incidents");
-    //   await incidentsRef
-    //     .get()
-    //     .then(doc => {
-    //       if (!doc.exists) {
-    //         console.log("No such document.");
-    //       } else {
-    //         this.props.getBaseIncidents(doc.data());
-    //       }
-    //     })
-    //     .catch(err => {
-    //       console.log("Error getting document".err);
-    //     });
-    // }
-    // if (Object.keys(this.props.home.homeData).length === 0) {
-    //   let homeObject = {};
-    //   console.log(this.props.home);
-    //   homeObject.airplanes = this.props.home.homePlanes;
-    //   homeObject.incidents = this.props.home.homeIncidents;
-    //   await this.props.filterHomeData(homeObject);
-    // }
   }
 
   render() {
@@ -85,7 +41,6 @@ class Home extends Component {
       toggleReadMore,
       home: { homeDataLoaded, openReadMore }
     } = this.props;
-    console.log(this.props);
     return (
       <React.Fragment>
         <div>
@@ -204,25 +159,18 @@ class Home extends Component {
           </p>
           {homeDataLoaded ? (
             <div className="home-grid">
+              <HomeColumn columnName="status" columnHeader="Current Status" />
               <HomeColumn
-                columnName="currentStatus"
-                columnHeader="Current Status"
-              />
-              <HomeColumn
-                columnName="airplaneProduction"
-                columnHeader="Prod. Runs"
-              />
-              <HomeColumn
-                columnName="latestOperator"
+                columnName="currentOperator"
                 columnHeader="Top Operators"
               />
               <HomeColumn
-                columnName="latestCountry"
+                columnName="currentCountry"
                 columnHeader="Top Countries"
               />
               <HomeColumn columnName="serial" columnHeader="Serial Series" />
               <HomeColumn
-                columnName="accidentType"
+                columnName="accidentCategory"
                 columnHeader="Top Incident Type"
               />
             </div>
