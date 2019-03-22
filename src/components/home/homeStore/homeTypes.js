@@ -1,4 +1,6 @@
 export const FILTER_HOME_DATA = "FILTER_HOME_DATA";
+export const SET_AIRPLANES = "SET_AIRPLANES";
+export const SET_INCIDENTS = "SET_INCIDENTS";
 export const TOGGLE_LOGIN = "TOGGLE_LOGIN";
 export const SUBMIT_LOGIN = "SUBMIT_LOGIN";
 export const LOGIN_MESSAGE = "LOGIN_MESSAGE";

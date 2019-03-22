@@ -9,6 +9,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.FILTER_AIRPLANES:
+      console.log("snap reduce");
       return {
         ...state,
         filteredAirplanes: action.planes,

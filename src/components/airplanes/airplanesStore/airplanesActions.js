@@ -1,6 +1,7 @@
 import * as actionTypes from "./airplanesTypes";
 
 export const getFilteredAirplanes = airplanes => {
+  console.log(airplanes);
   return {
     type: actionTypes.FILTER_AIRPLANES,
     planes: airplanes,

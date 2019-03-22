@@ -3,6 +3,8 @@ import * as actionTypes from "./homeTypes";
 const initialState = {
   homeDataLoaded: false,
   homeData: {},
+  homePlanes: {},
+  homeIncidents: {},
   showLogin: false,
   loginMessage: "",
   openReadMore: false
@@ -10,6 +12,17 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.SET_AIRPLANES:
+      console.log(action.payload);
+      return {
+        ...state,
+        homePlanes: action.payload
+      };
+    case actionTypes.SET_INCIDENTS:
+      return {
+        ...state,
+        homeIncidents: action.payload
+      };
     case actionTypes.FILTER_HOME_DATA:
       return {
         ...state,

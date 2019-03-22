@@ -6,54 +6,75 @@ import { withFirestore, withFirebase } from "react-redux-firebase";
 import Header from "../header/header";
 import HomeColumn from "./homeColumn";
 
-import { filterHomeData, toggleReadMore } from "./homeStore/homeActions";
-import { getBaseAirplanes, getBaseIncidents } from "../../base/baseActions";
+import {
+  setAirplanes,
+  setIncidents,
+  filterHomeData,
+  toggleReadMore
+} from "./homeStore/homeActions";
 import { openModal } from "../../features/modals/modalStore/modalActions";
 
 import "./home.sass";
 
 class Home extends Component {
   async componentDidMount() {
-    if (this.props.baseData.baseAirplanes.length === 0) {
-      let fireplanesRef = await this.props.firestore
-        .collection("base")
-        .doc("airplaneExcerpts");
-      await fireplanesRef
-        .get()
-        .then(doc => {
-          if (!doc.exists) {
-            console.log("No such document.");
-          } else {
-            this.props.getBaseAirplanes(doc.data());
-          }
-        })
-        .catch(err => {
-          console.log("Error getting document".err);
-        });
-    }
-    if (this.props.baseData.baseIncidents.length === 0) {
-      let incidentsRef = await this.props.firestore
-        .collection("base")
-        .doc("incidents");
-      await incidentsRef
-        .get()
-        .then(doc => {
-          if (!doc.exists) {
-            console.log("No such document.");
-          } else {
-            this.props.getBaseIncidents(doc.data());
-          }
-        })
-        .catch(err => {
-          console.log("Error getting document".err);
-        });
-    }
-    if (Object.keys(this.props.home.homeData).length === 0) {
-      let homeObject = {};
-      homeObject.airplanes = this.props.baseData.baseAirplanes;
-      homeObject.incidents = this.props.baseData.baseIncidents;
-      await this.props.filterHomeData(homeObject);
-    }
+    let beach1900airplaneRef = this.props.firestore
+      .collection("base")
+      .doc("airplaneExcerpts");
+    let beech1900incidentRef = this.props.firestore
+      .collection("base")
+      .doc("incidents");
+    await beech1900incidentRef.onSnapshot(incidentSnap => {
+      this.props.setIncidents(incidentSnap.data());
+    });
+    await beach1900airplaneRef.onSnapshot(planeSnap => {
+      this.props.setAirplanes(planeSnap.data());
+      this.props.filterHomeData(
+        this.props.home.homePlanes,
+        this.props.home.homeIncidents
+      );
+    });
+    // if (this.props.baseData.baseAirplanes.length === 0) {
+    //   let fireplanesRef = await this.props.firestore
+    //     .collection("base")
+    //     .doc("airplaneExcerpts");
+    //   await fireplanesRef
+    //     .get()
+    //     .then(doc => {
+    //       if (!doc.exists) {
+    //         console.log("No such document.");
+    //       } else {
+    //         this.props.getBaseAirplanes(doc.data());
+    //       }
+    //     })
+    //     .catch(err => {
+    //       console.log("Error getting document".err);
+    //     });
+    // }
+    // if (this.props.baseData.baseIncidents.length === 0) {
+    //   let incidentsRef = await this.props.firestore
+    //     .collection("base")
+    //     .doc("incidents");
+    //   await incidentsRef
+    //     .get()
+    //     .then(doc => {
+    //       if (!doc.exists) {
+    //         console.log("No such document.");
+    //       } else {
+    //         this.props.getBaseIncidents(doc.data());
+    //       }
+    //     })
+    //     .catch(err => {
+    //       console.log("Error getting document".err);
+    //     });
+    // }
+    // if (Object.keys(this.props.home.homeData).length === 0) {
+    //   let homeObject = {};
+    //   console.log(this.props.home);
+    //   homeObject.airplanes = this.props.home.homePlanes;
+    //   homeObject.incidents = this.props.home.homeIncidents;
+    //   await this.props.filterHomeData(homeObject);
+    // }
   }
 
   render() {
@@ -64,6 +85,7 @@ class Home extends Component {
       toggleReadMore,
       home: { homeDataLoaded, openReadMore }
     } = this.props;
+    console.log(this.props);
     return (
       <React.Fragment>
         <div>
@@ -73,10 +95,10 @@ class Home extends Component {
           <div className="home-text-wrap home-text-wrap-above">
             <div className="home-text">
               <h2>Welcome to Beech1900.com</h2>
-              <h2>
+              <h1>
                 My goal is to bring you high fidelity, current, and interesting
                 information.
-              </h2>
+              </h1>
               <h1>
                 The <b>"Airplane Database"</b> is the most comprehensive and
                 current database you'll find publically, with information about
@@ -92,7 +114,7 @@ class Home extends Component {
                 airline fleet information, aggregated for your convenience.
               </h1>
               <h3>Thanks for coming by!</h3>
-              <h3>Aaron</h3>
+              <h2>Aaron</h2>
               <h4>
                 I welcome your feedback and questions:
                 <a
@@ -133,22 +155,22 @@ class Home extends Component {
                   : "home-text home-text-below"
               }
             >
-              <h2>
+              <h1>
                 This site is curated by a former Beech 1900 Captain at a
                 scheduled US passenger airline. Please have a look around! If
                 you have any feedback, check out twitter @beech1900dotcom and
                 leave a note.
-              </h2>
-              <h1>Why I created Beech1900.com:</h1>
-              <h2>
+              </h1>
+              <h2>Why I created Beech1900.com:</h2>
+              <h1>
                 About 15 years ago, I began to regularly use Wikipedia and
                 happened upon their page dedicated to the Beech 1900. My first
                 instinct was to jump on Wikipedia and start editing that page
                 like mad. Slowly it became clear that what I really wanted to do
                 was more comprehensive. Goodness, I had been a Beech 1900
                 Captain... I've designed websites... I can do this!
-              </h2>
-              <h2>
+              </h1>
+              <h1>
                 For the last ten years, I've been researching, tweaking, and
                 creating. My motivation: build one place on the web where a
                 person could discover anything and everything about this one
@@ -162,8 +184,8 @@ class Home extends Component {
                 >
                   smoothism.com
                 </a>
-              </h2>
-              <h1>About me:</h1>
+              </h1>
+              <h2>About me:</h2>
               <ul>
                 <li>
                   Former Beech 1900 Captain, US Airways Express (Colgan Air)
@@ -249,8 +271,8 @@ const mapStateToProps = state => ({
 
 const actions = {
   filterHomeData,
-  getBaseAirplanes,
-  getBaseIncidents,
+  setAirplanes,
+  setIncidents,
   openModal,
   toggleReadMore
 };

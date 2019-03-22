@@ -5,7 +5,25 @@ import {
   handleAirplaneReset
 } from "../../header/headerStore/searchAirplanesActions";
 
-export const filterHomeData = homeData => {
+export const setAirplanes = planes => {
+  return {
+    type: actionTypes.SET_AIRPLANES,
+    payload: planes
+  };
+};
+
+export const setIncidents = incidents => {
+  return {
+    type: actionTypes.SET_INCIDENTS,
+    payload: incidents
+  };
+};
+
+export const filterHomeData = (planes, incidents) => {
+  const planesArray = Object.keys(planes).map(key => planes[key]);
+  console.log(planesArray);
+  const incidentsArray = Object.keys(incidents).map(key => incidents[key]);
+  console.log(incidentsArray);
   let sortedData = {
     accidentType: [],
     currentStatus: [],
@@ -15,8 +33,8 @@ export const filterHomeData = homeData => {
     serial: []
   };
 
-  homeData.incidents.map(i => sortedData.accidentType.push(i.accidentType));
-  homeData.airplanes.map(a => {
+  incidentsArray.map(i => sortedData.accidentType.push(i.accidentType));
+  planesArray.map(a => {
     // status data
     if (a.currentStatus !== "?" && a.currentStatus !== undefined) {
       sortedData.currentStatus.push(a.currentStatus);

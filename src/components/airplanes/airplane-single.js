@@ -127,11 +127,11 @@ class AirplaneSingle extends Component {
                   </div>
                   <div className="airplane-single-latest-operator">
                     <h3>Latest Operator</h3>
-                    <p>{this.displayOperator()}</p>
+                    <p>{this.state.airplaneData.latestOperator}</p>
                   </div>
                   <div className="airplane-single-country">
                     <h3>Country</h3>
-                    <p>{this.displayCountries()}</p>
+                    <p>{this.state.airplaneData.latestCountry}</p>
                   </div>
                 </div>
               </div>

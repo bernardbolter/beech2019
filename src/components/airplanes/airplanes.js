@@ -16,28 +16,14 @@ import "./airplanes.sass";
 
 class Airplanes extends Component {
   async componentDidMount() {
-    if (this.props.baseData.baseAirplanes.length === 0) {
-      let fireplanesRef = await this.props.firestore
-        .collection("base")
-        .doc("airplaneExcerpts");
-      await fireplanesRef
-        .get()
-        .then(doc => {
-          if (!doc.exists) {
-            console.log("No such document.");
-          } else {
-            this.props.getBaseAirplanes(doc.data());
-          }
-        })
-        .catch(err => {
-          console.log("Error getting document".err);
-        });
-      this.props.getFilteredAirplanes(this.props.baseData.baseAirplanes);
-    }
-    if (this.props.airplanes.filteredAirplanes.length === 0) {
-      await this.props.getFilteredAirplanes(this.props.baseData.baseAirplanes);
-    }
-    this.getTheFilteredPlanes();
+    let fireplanesRef = await this.props.firestore
+      .collection("base")
+      .doc("airplaneExcerpts");
+    await fireplanesRef.onSnapshot(snapshot => {
+      let snapper = snapshot.data();
+      let airplanesArrayRaw = Object.keys(snapper).map(key => snapper[key]);
+      this.props.getFilteredAirplanes(airplanesArrayRaw);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -46,7 +32,8 @@ class Airplanes extends Component {
     }
   }
 
-  getTheFilteredPlanes = () => {
+  getTheFilteredPlanes = thePlanes => {
+    console.log(thePlanes);
     const {
       uaChecked,
       ubChecked,
@@ -122,7 +109,7 @@ class Airplanes extends Component {
 
     const filterText = airplanesSearchText;
 
-    const allPlanes = this.props.baseData.baseAirplanes;
+    const allPlanes = thePlanes;
 
     this.props.getUpdatedFilteredAirplanes(
       serialString,
@@ -162,11 +149,11 @@ class Airplanes extends Component {
                   <div className="serial-header">
                     <p>Serial #</p>
                   </div>
-                  <div className="current-status-header">
-                    <p>Current Status</p>
-                  </div>
                   <div className="date-made-header">
                     <p>Date Made</p>
+                  </div>
+                  <div className="current-status-header">
+                    <p>Current Status</p>
                   </div>
                   <div className="registration-header">
                     <p>Registration</p>
