@@ -67,6 +67,7 @@ class EditAirplaneForm extends Component {
       planeInfo,
       myForm: { editAirplaneFormMessage }
     } = this.props;
+    console.log(editAirplaneFormMessage);
     const { fieldsToBeChanged } = this.state;
     const eventNumbers = [...Array(14).keys()];
     if (
@@ -86,31 +87,31 @@ class EditAirplaneForm extends Component {
           </div>
 
           <Field
-            name="currentStatus"
+            name="status"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="factoryDate"
+            name="prodDate"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="latestReg"
+            name="currentReg"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="latestOperator"
+            name="currentOperator"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="latestCountry"
+            name="currentCountry"
             component={this.renderField}
             props={{ type: "input" }}
           />
@@ -120,31 +121,49 @@ class EditAirplaneForm extends Component {
           </p>
 
           <Field
-            name="currentstatusDate"
+            name="currentDataSourceLink"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="dataSource"
+            name="currentDataSourceDate"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="statusType"
+            name="currentDataSourceType"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="factoryReg"
+            name="currentOwner"
             component={this.renderField}
             props={{ type: "input" }}
           />
 
           <Field
-            name="initialopReg"
+            name="currentConfiguration"
+            component={this.renderField}
+            props={{ type: "input" }}
+          />
+
+          <Field
+            name="currentRegDate"
+            component={this.renderField}
+            props={{ type: "input" }}
+          />
+
+          <Field
+            name="currentRegStatus"
+            component={this.renderField}
+            props={{ type: "input" }}
+          />
+
+          <Field
+            name="prodReg"
             component={this.renderField}
             props={{ type: "input" }}
           />
@@ -156,19 +175,7 @@ class EditAirplaneForm extends Component {
           />
 
           <Field
-            name="latestOwner"
-            component={this.renderField}
-            props={{ type: "input" }}
-          />
-
-          <Field
-            name="latestregDate"
-            component={this.renderField}
-            props={{ type: "input" }}
-          />
-
-          <Field
-            name="latestregStatus"
+            name="initialOperatorReg"
             component={this.renderField}
             props={{ type: "input" }}
           />

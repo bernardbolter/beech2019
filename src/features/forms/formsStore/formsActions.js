@@ -6,7 +6,6 @@ export const modifyAirplaneData = (values, id, planeUID) => async (
   getState,
   { getFirestore }
 ) => {
-  console.log(getState());
   const firestore = getFirestore();
   let fullPlaneRef = firestore.collection("airplanes").doc(planeUID);
   let planeExceptRef = firestore.collection("base").doc("airplaneExcerpts");

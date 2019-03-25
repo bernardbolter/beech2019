@@ -11,11 +11,14 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case SEND_MESSAGE:
+      console.log(action.message);
+      console.log(action.which);
       switch (action.which) {
-        case "update airplane":
+        case "airplane update":
+          console.log("doing it");
           return {
             ...state,
-            editAirplaneFormMessage: action.payload
+            editAirplaneFormMessage: action.message
           };
         case "update incident":
           return {
