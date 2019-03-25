@@ -28,7 +28,6 @@ class AirplaneSearch extends Component {
 
   render() {
     const {
-      showSearch,
       airplanesOlderChecked,
       airplanesNewerChecked,
       airplanesSearchText,

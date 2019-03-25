@@ -1,14 +1,25 @@
 @import '../../vars.scss'
     
 .airplanes
-    width: 100%
-    top: 0
-    transition: top 300ms ease-in-out
-    position: relative
+  width: 100%
+  top: 0
+  transition: top 300ms ease-in-out
+  position: relative
 
 .airplanes-search-open
-    top: 268px
+  top: 432px
+  transition: top 300ms ease-in-out
+
+  @media screen and (min-width: 650px)
+    top: 0
+
+.airplanes-nav-open
+    top: 195px
     transition: top 300ms ease-in-out
+
+    @media screen and (min-width: 650px)
+      top: 0
+  
 
 .airplane-data
   width: 100%

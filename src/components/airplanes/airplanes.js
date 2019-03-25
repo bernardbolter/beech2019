@@ -128,19 +128,25 @@ class Airplanes extends Component {
     );
   };
 
+  renderAirplaneClass = () => {
+    const { showSearch, showNavigation } = this.props.nav;
+    if (showNavigation) {
+      return "airplanes airplanes-nav-open";
+    } else if (showSearch) {
+      return "airplanes airplanes-search-open";
+    } else {
+      return "airplanes";
+    }
+  };
+
   render() {
     console.log(this.props);
     const { match } = this.props;
-    const { showSearch } = this.props.nav;
+    const { showSearch, showNavigation } = this.props.nav;
     return (
       <React.Fragment>
         <Header match={match} />
-        <section
-          id="airplanes"
-          className={
-            showSearch ? "airplanes airplanes-search-open" : "airplanes"
-          }
-        >
+        <section id="airplanes" className={this.renderAirplaneClass()}>
           {this.props.airplanes.airplanesLoaded ? (
             <div>
               <section className="airplane-top-info">
