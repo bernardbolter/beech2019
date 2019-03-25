@@ -24,6 +24,7 @@ import navReducer from "./components/header/headerStore/navReducer";
 import { reducer as formReducer } from "redux-form";
 import modalReducer from "./features/modals/modalStore/modalReducer";
 import myFormReducer from "./features/forms/formsStore/formReducer";
+import authReducer from "./features/auth/authStore/authReducer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDbLt9jQRPWCxIop-TUaeJeDycBWcxV1NY",
@@ -72,7 +73,8 @@ const rootReducer = combineReducers({
   incidents: incidentsReducer,
   form: formReducer,
   myForm: myFormReducer,
-  modal: modalReducer
+  modal: modalReducer,
+  loginState: authReducer
 });
 
 const initialState = {};

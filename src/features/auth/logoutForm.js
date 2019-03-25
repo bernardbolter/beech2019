@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { logout } from "./authStore/authActions";
 
+import "./log.sass";
+
 const actions = {
   logout
 };

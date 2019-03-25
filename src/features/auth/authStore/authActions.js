@@ -1,20 +1,16 @@
-import { SubmissionError } from "redux-form";
 import { closeModal } from "../../modals/modalStore/modalActions";
+import { LOGIN_MESSAGE } from "./authTypes";
 
 export const login = creds => {
   return async (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
     try {
-      console.log("loging in");
       await firebase
         .auth()
         .signInWithEmailAndPassword(creds.email, creds.password);
-      dispatch(closeModal());
+      dispatch(loginMessage("You are Logged In"));
     } catch (error) {
-      console.log(error);
-      throw new SubmissionError({
-        _error: error.message
-      });
+      dispatch(loginMessage(error.message));
     }
   };
 };
@@ -26,10 +22,14 @@ export const logout = () => {
       await firebase.logout();
       dispatch(closeModal());
     } catch (error) {
-      console.log(error);
-      throw new SubmissionError({
-        _error: error.message
-      });
+      dispatch(loginMessage(error.message));
     }
+  };
+};
+
+const loginMessage = message => {
+  return {
+    type: LOGIN_MESSAGE,
+    message: message
   };
 };

@@ -6,7 +6,6 @@ import { decideHomePageLinks } from "./homeStore/homeActions";
 
 const HomeColumn = props => {
   const { decideHomePageLinks } = props;
-  console.log(props);
   return (
     <div className={"grid-" + props.columnName}>
       <div className={"grid-cell-header grid-cell-header-" + props.columnName}>
