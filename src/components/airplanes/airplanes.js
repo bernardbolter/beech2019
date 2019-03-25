@@ -140,9 +140,7 @@ class Airplanes extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { match } = this.props;
-    const { showSearch, showNavigation } = this.props.nav;
     return (
       <React.Fragment>
         <Header match={match} />

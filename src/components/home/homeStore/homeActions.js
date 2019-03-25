@@ -38,6 +38,8 @@ export const filterHomeData = (planes, incidents) => {
     ) {
       sortedData.accidentCategory.push(i.accidentCategory);
     }
+
+    return null;
   });
   planesArray.map(a => {
     // status data
@@ -106,10 +108,12 @@ export const toggleReadMore = () => {
 };
 
 export const decideHomePageLinks = (data, name) => {
+  console.log(data.name);
   return async dispatch => {
     await dispatch(handleAirplaneReset());
-    if (name === "currentStatus") {
+    if (name === "status") {
       if (data.name === "Parted Out") {
+        console.log("parted");
         await dispatch(changeAirplaneFilter("partedOut"));
       }
       if (data.name === "Operating") {
@@ -125,10 +129,10 @@ export const decideHomePageLinks = (data, name) => {
         await dispatch(changeAirplaneFilter("destroyed"));
       }
     }
-    if (name === "latestOperator") {
+    if (name === "currentOperator") {
       await dispatch(changeAirplaneDropdown(data.name, "operator"));
     }
-    if (name === "latestCountry") {
+    if (name === "currentCountry") {
       await dispatch(changeAirplaneDropdown(data.name, "opercountryator"));
     }
     if (name === "serial") {
