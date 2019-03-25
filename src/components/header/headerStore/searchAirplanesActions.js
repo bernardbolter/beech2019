@@ -35,8 +35,44 @@ export const changeAirplaneDropdown = (value, selector) => {
   };
 };
 
+export const getCountriesAndOperators = airplanes => {
+  const airplaneCountries = [];
+  const airplaneOperators = [];
+  airplanes.map(plane => {
+    if (
+      plane.currentCountry !== "?" &&
+      plane.currentCountry !== undefined &&
+      plane.currentCountry !== "" &&
+      plane.currentCountry !== "No Data"
+    ) {
+      airplaneCountries.push(plane.currentCountry);
+    }
+
+    if (
+      plane.currentOperator !== "?" &&
+      plane.currentOperator !== undefined &&
+      plane.currentOperator !== "" &&
+      plane.currentOperator !== " " &&
+      plane.currentOperator !== "No Data" &&
+      plane.currentOperator !== "not operating"
+    ) {
+      airplaneOperators.push(plane.currentOperator);
+    }
+
+    return null;
+  });
+
+  const uniqueAirplaneCountries = [...new Set(airplaneCountries)].sort();
+  const uniqueAirplaneOperators = [...new Set(airplaneOperators)].sort();
+
+  return {
+    type: actionTypes.COUNTRIES_OPERATORS,
+    countries: uniqueAirplaneCountries,
+    operators: uniqueAirplaneOperators
+  };
+};
+
 export const handleAirplaneReset = () => {
-  console.log("reset");
   return {
     type: actionTypes.AIRPLANES_RESET
   };

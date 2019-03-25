@@ -1,7 +1,6 @@
 import * as actionTypes from "./headerTypes";
 
 const initialState = {
-  comingFromHomePage: false,
   airplanesSearchText: "",
   airplanesOlderChecked: true,
   airplanesNewerChecked: false,
@@ -11,14 +10,14 @@ const initialState = {
   udChecked: false,
   ueChecked: false,
   operatingChecked: false,
-  operatingNonCurrentChecked: false,
   nonFlyingChecked: false,
   partedOutChecked: false,
   destroyedChecked: false,
-  airplanesLatestOperatorValue: "",
-  airplanesLatestOperator: [],
+  unknownChecked: false,
+  airplanesOperatorValue: "",
+  airplanesOperators: [],
   airplanesCountryValue: "",
-  airplanesCountry: [],
+  airplanesCountries: [],
   // Incident Variables
   incidentsFilter: "",
   incidentsOlderChecked: false,
@@ -29,6 +28,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.COUNTRIES_OPERATORS:
+      return {
+        ...state,
+        airplanesCountries: action.countries,
+        airplanesOperators: action.operators
+      };
     case actionTypes.AIRPLANE_SEARCH_TEXT:
       return {
         ...state,
@@ -61,12 +66,12 @@ export default function(state = initialState, action) {
         operator = action.dropValue;
         country = state.airplanesCountryValue;
       } else {
-        operator = state.airplanesLatestOperatorValue;
+        operator = state.airplanesOperatorValue;
         country = action.dropValue;
       }
       return {
         ...state,
-        airplanesLatestOperatorValue: operator,
+        airplanesOperatorValue: operator,
         airplanesCountryValue: country
       };
     case actionTypes.AIRPLANES_RESET:
@@ -85,7 +90,7 @@ export default function(state = initialState, action) {
         nonFlyingChecked: false,
         partedOutChecked: false,
         destroyedChecked: false,
-        airplanesLatestOperatorValue: "",
+        airplanesOperatorValue: "",
         airplanesCountryValue: ""
       };
     default:

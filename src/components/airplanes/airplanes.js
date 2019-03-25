@@ -6,11 +6,8 @@ import { withFirestore } from "react-redux-firebase";
 import Header from "../header/header";
 import Airplane from "./airplane";
 
-import {
-  getFilteredAirplanes,
-  getUpdatedFilteredAirplanes
-} from "./airplanesStore/airplanesActions";
-import { getBaseAirplanes } from "../../base/baseActions";
+import { filterAirplanes } from "./airplanesStore/airplanesActions";
+import { getCountriesAndOperators } from "../header/headerStore/searchAirplanesActions";
 
 import "./airplanes.sass";
 
@@ -19,21 +16,30 @@ class Airplanes extends Component {
     let fireplanesRef = await this.props.firestore
       .collection("base")
       .doc("airplaneExcerpts");
-    await fireplanesRef.onSnapshot(snapshot => {
-      let snapper = snapshot.data();
-      let airplanesArrayRaw = Object.keys(snapper).map(key => snapper[key]);
-      this.props.getFilteredAirplanes(airplanesArrayRaw);
-    });
+    await fireplanesRef.onSnapshot(
+      { includeMetadataChanges: true },
+      snapshot => {
+        let snap = snapshot.data();
+        let airplanesArray = Object.keys(snap).map(key => snap[key]);
+        this.props.filterAirplanes(airplanesArray, this.props.searchAirplanes);
+        this.props.getCountriesAndOperators(airplanesArray);
+
+        var source = snapshot.metadata.fromCache ? "local cache" : "server";
+        console.log("Data came from " + source);
+      }
+    );
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.searchAirplanes !== prevProps.searchAirplanes) {
-      this.getTheFilteredPlanes();
+      this.props.filterAirplanes(
+        this.props.airplanes.allPlanes,
+        this.props.searchAirplanes
+      );
     }
   }
 
   getTheFilteredPlanes = thePlanes => {
-    console.log(thePlanes);
     const {
       uaChecked,
       ubChecked,
@@ -147,22 +153,22 @@ class Airplanes extends Component {
               <div className="airplane-data-wrapper">
                 <section className="airplane-data-headers">
                   <div className="serial-header">
-                    <p>Serial #</p>
+                    <p>Serial</p>
                   </div>
                   <div className="date-made-header">
-                    <p>Date Made</p>
+                    <p>Prod. Date</p>
                   </div>
                   <div className="current-status-header">
-                    <p>Current Status</p>
+                    <p>Status</p>
                   </div>
                   <div className="registration-header">
-                    <p>Registration</p>
+                    <p>Current Reg.</p>
                   </div>
                   <div className="latest-operator-header">
-                    <p>Latest Operator</p>
+                    <p>Current Operator</p>
                   </div>
                   <div className="country-header">
-                    <p>Country</p>
+                    <p>Current Country</p>
                   </div>
                 </section>
                 {!this.props.airplanes.filteredAirplanes.length ? (
@@ -193,18 +199,21 @@ class Airplanes extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapState = state => ({
   searchAirplanes: state.searchAirplanes,
   nav: state.nav,
-  airplanes: state.airplanes,
-  base: state.firestore.ordered.base,
-  baseData: state.baseData
+  airplanes: state.airplanes
 });
+
+const actions = {
+  filterAirplanes,
+  getCountriesAndOperators
+};
 
 export default compose(
   withFirestore,
   connect(
-    mapStateToProps,
-    { getFilteredAirplanes, getUpdatedFilteredAirplanes, getBaseAirplanes }
+    mapState,
+    actions
   )
 )(Airplanes);

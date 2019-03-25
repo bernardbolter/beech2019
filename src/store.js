@@ -41,6 +41,17 @@ const rrfConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+firebase
+  .firestore()
+  .enablePersistence()
+  .catch(function(err) {
+    if (err.code === "failed-precondition") {
+      console.log(err.code);
+    } else if (err.code === "unimplemented") {
+      console.log(err.code);
+    }
+  });
+
 const firestore = firebase.firestore();
 const settings = {};
 firestore.settings(settings);
