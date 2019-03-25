@@ -9,8 +9,6 @@ import Event from "./event";
 
 import { openModal } from "../../features/modals/modalStore/modalActions";
 
-import { getBaseIncidents } from "../../base/baseActions";
-
 import "./airplane-single.sass";
 
 class AirplaneSingle extends Component {
@@ -29,52 +27,47 @@ class AirplaneSingle extends Component {
 
   async componentDidMount() {
     const serial = this.props.match.params.serial;
-    const airplaneRef = this.props.firestore.collection("airplanes");
-    await airplaneRef
+    await this.props.firestore
+      .collection("airplanes")
       .where("serial", "==", serial)
-      .get()
-      .then(docs => {
-        docs.forEach(doc => {
+      .onSnapshot(querySnapshot => {
+        querySnapshot.forEach(doc => {
           this.setState({
             airplaneData: { ...doc.data(), uid: doc.id }
           });
         });
-      })
-      .catch(error => {
-        console.log("Error getting document:", error);
       });
     await this.setState({ airplaneLoaded: true });
-    await this.getEvents(this.state.airplaneData);
-    await this.setState({ eventsLoaded: true });
-    if (this.state.airplaneData.incidentHistory) {
-      if (this.props.baseData.baseIncidents.length === 0) {
-        console.log("geting base incidents");
-        let incidentsRef = await this.props.firestore
-          .collection("base")
-          .doc("incidents");
-        await incidentsRef
-          .get()
-          .then(doc => {
-            if (!doc.exists) {
-              console.log("No such document.");
-            } else {
-              this.props.getBaseIncidents(doc.data());
-            }
-          })
-          .catch(err => {
-            console.log("Error getting document".err);
-          });
-      }
-      console.log(this.state.airplaneData.incidentHistory);
-    } else {
-      console.log("no incident history");
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.airplaneData !== prevState.airplaneData) {
+      this.getEvents(this.state.airplaneData);
     }
   }
 
   render() {
     const { match, auth, openModal } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
-    console.log(this.state.airplaneData);
+    const {
+      serial,
+      prodDate,
+      status,
+      currentReg,
+      currentRegDate,
+      currentRegStatus,
+      currentOwner,
+      currentConfiguration,
+      currentOperator,
+      currentCountry,
+      currentDataSourceLink,
+      currentDataSourceDate,
+      currentDataSourceType,
+      initialOperator,
+      initialOperatorReg,
+      prodReg,
+      notes
+    } = this.state.airplaneData;
     return (
       <React.Fragment>
         <section>
@@ -111,59 +104,112 @@ class AirplaneSingle extends Component {
                 <div className="airplane-single-colors">
                   <div className="airplane-single-serial">
                     <h3>Serial</h3>
-                    <p>{this.state.airplaneData.serial}</p>
+                    <p>{serial}</p>
+                  </div>
+                  <div className="airplane-single-date-made">
+                    <h3>Production Date</h3>
+                    <p>{prodDate}</p>
                   </div>
                   <div className="airplane-single-current-status">
                     <h3>Current Status</h3>
-                    <p>{this.state.airplaneData.currentStatus}</p>
-                  </div>
-                  <div className="airplane-single-date-made">
-                    <h3>Date Made</h3>
-                    <p>{this.state.airplaneData.factoryDate}</p>
+                    <p>{status}</p>
                   </div>
                   <div className="airplane-single-registration">
-                    <h3>Registration</h3>
-                    <p>{this.state.airplaneData.latestReg}</p>
+                    <h3>Current Registration</h3>
+                    <p>{currentReg}</p>
                   </div>
                   <div className="airplane-single-latest-operator">
-                    <h3>Latest Operator</h3>
-                    <p>{this.state.airplaneData.latestOperator}</p>
+                    <h3>Current Operator</h3>
+                    <p>{currentOperator}</p>
                   </div>
                   <div className="airplane-single-country">
-                    <h3>Country</h3>
-                    <p>{this.state.airplaneData.latestCountry}</p>
+                    <h3>Current Country</h3>
+                    <p>{currentCountry}</p>
                   </div>
                 </div>
               </div>
               <section className="airplane-single-bottom-container">
                 <div className="airplane-single-bottom-left">
                   <div className="bot-info-left">
-                    <p className="bot-info-title">Current Status Date</p>
-                    <p className="bot-info-data">
-                      {this.state.airplaneData.currentstatusDate}
-                    </p>
-                    <p className="bot-info-title">Current Data Source</p>
-                    <p className="bot-info-data bot-info-line">
-                      {this.state.airplaneData.dataSource}
-                    </p>
-                  </div>
-                  <div className="bot-info-right">
-                    <p className="bot-info-title">Initial Operator</p>
-                    <p className="bot-info-data">
-                      {this.state.airplaneData.initialOperator !== "" ? (
-                        this.state.airplaneData.initialOperator
-                      ) : (
-                        <span>no initial operator data</span>
-                      )}
-                    </p>
-                    <p className="bot-info-title">Initial Registration</p>
-                    <p className="bot-info-data">
-                      {this.state.airplaneData.initialopReg !== "" ? (
-                        this.state.airplaneData.initialopReg
-                      ) : (
-                        <span>no initial registration data</span>
-                      )}
-                    </p>
+                    {currentDataSourceLink !== "" ? (
+                      <div className="single-info-left">
+                        <p className="bot-info-title">
+                          Current Data Source Link
+                        </p>
+                        <p className="bot-info-data">
+                          <a
+                            href={`http://${currentDataSourceLink}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {currentDataSourceLink}
+                          </a>
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {currentDataSourceDate !== "" ? (
+                      <div className="single-info-left">
+                        <p className="bot-info-title">
+                          Current Data Source Date
+                        </p>
+                        <p className="bot-info-data bot-info-line">
+                          {currentDataSourceDate}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {currentDataSourceType !== "" ? (
+                      <div className="single-info-left">
+                        <p className="bot-info-title">
+                          Current Data Source Type
+                        </p>
+                        <p className="bot-info-data bot-info-line">
+                          {currentDataSourceType}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {currentOwner !== "" ? (
+                      <div className="single-info-left">
+                        <p className="bot-info-title">Current Owner</p>
+                        <p className="bot-info-data bot-info-line">
+                          {currentOwner}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {currentConfiguration !== "" ? (
+                      <div className="single-info-left">
+                        <p className="bot-info-title">Current Configuration</p>
+                        <p className="bot-info-data bot-info-line">
+                          {currentConfiguration}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {currentRegDate !== "" ? (
+                      <div className="single-info-left">
+                        <p className="bot-info-title">
+                          Current Registration Date
+                        </p>
+                        <p className="bot-info-data bot-info-line">
+                          {currentRegDate}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {currentRegStatus !== "" &&
+                    currentRegStatus !== undefined ? (
+                      <div className="single-info-left">
+                        <p className="bot-info-title">
+                          Current Registration Date
+                        </p>
+                        <p className="bot-info-data bot-info-line">
+                          {currentRegStatus}
+                        </p>
+                      </div>
+                    ) : null}
                     {authenticated ? (
                       <p
                         className="bot-edit-button"
@@ -185,17 +231,88 @@ class AirplaneSingle extends Component {
                   </div>
                 </div>
                 <div className="airplane-single-bottom-right">
-                  <h1>Events</h1>
-                  {!this.state.eventsLoaded ||
-                  this.state.airplaneData.event1Owner === "" ? (
-                    <div className="event-container odd">
-                      No Events for this Airplane
+                  {prodReg !== "" && prodReg !== undefined ? (
+                    <div className="single-info-right">
+                      <p className="bot-info-title">Production Registration</p>
+                      <p className="bot-info-data bot-info-line">{prodReg}</p>
+                    </div>
+                  ) : null}
+                  {initialOperator !== "" && initialOperator !== undefined ? (
+                    <div className="single-info-right">
+                      <p className="bot-info-title">Initial Operator</p>
+                      <p className="bot-info-data bot-info-line">
+                        {initialOperator}
+                      </p>
+                    </div>
+                  ) : null}
+                  {initialOperatorReg !== "" &&
+                  initialOperatorReg !== undefined ? (
+                    <div className="single-info-right">
+                      <p className="bot-info-title">
+                        Initial Operator Registration
+                      </p>
+                      <p className="bot-info-data bot-info-line">
+                        {initialOperatorReg}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+                <div className="airplane-single-events">
+                  <div className="airplane-single-bottom-right-events">
+                    {prodReg !== "" && prodReg !== undefined ? (
+                      <div className="single-info-right">
+                        <p className="bot-info-title">
+                          Production Registration
+                        </p>
+                        <p className="bot-info-data bot-info-line">{prodReg}</p>
+                      </div>
+                    ) : null}
+                    {initialOperator !== "" && initialOperator !== undefined ? (
+                      <div className="single-info-right">
+                        <p className="bot-info-title">Initial Operator</p>
+                        <p className="bot-info-data bot-info-line">
+                          {initialOperator}
+                        </p>
+                      </div>
+                    ) : null}
+                    {initialOperatorReg !== "" &&
+                    initialOperatorReg !== undefined ? (
+                      <div className="single-info-right">
+                        <p className="bot-info-title">
+                          Initial Operator Registration
+                        </p>
+                        <p className="bot-info-data bot-info-line">
+                          {initialOperatorReg}
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+                  {this.state.eventsLoaded ? (
+                    <div>
+                      <h1>Events</h1>
+                      {!this.state.eventsLoaded ||
+                      this.state.airplaneData.event1Owner === "" ? (
+                        <div className="event-container odd">
+                          No Events for this Airplane
+                        </div>
+                      ) : (
+                        this.state.events.map(event => {
+                          return <Event key={event.key} {...event} />;
+                        })
+                      )}
                     </div>
                   ) : (
-                    this.state.events.map(event => {
-                      return <Event key={event.key} {...event} />;
-                    })
+                    <div className="event-loading">
+                      <p>Loading Airplane Details...</p>
+                    </div>
                   )}
+
+                  {notes !== "" && notes !== undefined ? (
+                    <div className="single-notes">
+                      <p className="single-notes-title">notes</p>
+                      <p className="single-notes-text">{notes}</p>
+                    </div>
+                  ) : null}
                 </div>
               </section>
             </div>
@@ -204,24 +321,6 @@ class AirplaneSingle extends Component {
       </React.Fragment>
     );
   }
-
-  displayCountries = () => {
-    if (this.state.airplaneData.latestCountry.charAt(0) === `(`) {
-      var noCountry = this.state.airplaneData.latestCountry.slice(1, -1);
-      return noCountry;
-    } else {
-      return this.state.airplaneData.latestCountry;
-    }
-  };
-
-  displayOperator = () => {
-    if (this.state.airplaneData.latestOperator.charAt(0) === `(`) {
-      var noOperate = this.state.airplaneData.latestOperator.slice(1, -1);
-      return noOperate;
-    } else {
-      return this.state.airplaneData.latestOperator;
-    }
-  };
 
   getEvents = events => {
     let eventsArray = [];
@@ -252,17 +351,18 @@ class AirplaneSingle extends Component {
         });
       }
     }
-    this.setState({ events: eventsArray });
+    this.setState({
+      events: eventsArray,
+      eventsLoaded: true
+    });
   };
 }
 
 const mapStateToProps = state => ({
-  baseData: state.baseData,
   auth: state.firebase.auth
 });
 
 const actions = {
-  getBaseIncidents,
   openModal
 };
 
