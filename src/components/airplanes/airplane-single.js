@@ -43,7 +43,6 @@ class AirplaneSingle extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.airplaneData !== prevState.airplaneData) {
       this.getEvents(this.state.airplaneData);
-      console.log(this.state.airplaneData);
     }
   }
 

@@ -8,35 +8,22 @@ import "./incident.sass";
 
 const Incident = props => {
   return (
-    <div
+    <Link
+      to={{ pathname: `/incidents/${props.id}`, incident: props }}
       className={
         parseInt(props.id, 10) & 1
-          ? "incident-excerpt incident-odd"
-          : "incident-excerpt incident-even"
+          ? "incident incident-odd"
+          : "incident incident-even"
       }
     >
       <p className="incident-date">
         <span className="incident-span">Date of Incident</span>
         {props.date}
       </p>
-      {props.serial === "" || props.serial === "?" ? (
-        <p className="incident-serial">
-          <span className="incident-span">Serial Number</span>
-          {props.serial}
-        </p>
-      ) : (
-        <Link to={`/airplanes/${props.serial}`} className="incidents-link">
-          <p className="incident-serial">
-            <img
-              src={`${process.env.PUBLIC_URL}/link.png`}
-              alt="Link Graphic"
-            />
-            <span className="incident-span">Serial Number</span>
-            {props.serial}
-          </p>
-        </Link>
-      )}
-
+      <p className="incident-serial">
+        <span className="incident-span">Serial Number</span>
+        {props.serial}
+      </p>
       <p className="incident-registration">
         <span className="incident-span">Registration</span>
         {props.registration}
@@ -45,7 +32,7 @@ const Incident = props => {
         <span className="incident-span">Operator</span>
         {props.operator}
       </p>
-      <p className="incident-location">
+      <p className="incident-city">
         <span className="incident-span">Location</span>
         {props.locationCity}
       </p>
@@ -53,19 +40,19 @@ const Incident = props => {
         <span className="incident-span">Airport</span>
         {props.locationAirport}
       </p>
-      <p className="incident-fatalities">
-        <span className="incident-span">Fatalities</span>
-        {props.fatalities}
-      </p>
       <p className="incident-category">
         <span className="incident-span">Category</span>
+        {props.accidentCategory}
+      </p>
+      <p className="incident-fatalities">
+        <span className="incident-span">Fatalities</span>
         {props.fatalities}
       </p>
       <p className="incident-photo">
         <span className="incident-span">photo</span>
         no
       </p>
-    </div>
+    </Link>
   );
 };
 
