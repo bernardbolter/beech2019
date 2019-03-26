@@ -3,16 +3,42 @@ import { connect } from "react-redux";
 
 import "./search.sass";
 
+import {
+  changeIncidentsSearchText,
+  changeIncidentsSort,
+  changeIncidentsFilter,
+  changeIncidentsDropdown,
+  incidentsSearchReset
+} from "../headerStore/searchIncidentsActions";
+
 class IncidentSearch extends Component {
+  handleTextChange = e => {
+    this.props.changeIncidentsSearchText(e.target.value);
+  };
+
+  handleSortChange = e => {
+    this.props.changeIncidentsSort(e.target.value);
+  };
+
+  handleFilterChange = e => {
+    this.props.changeIncidentsFilter(e.target.value);
+  };
+
+  handleDropdownChange = e => {
+    this.props.changeIncidentsDropdown(e.target.value, e.target.id);
+  };
+
   render() {
+    const { showSearch } = this.props.nav;
     const {
-      showSearch,
+      incidentsSearchText,
       incidentsOlderChecked,
       incidentsNewerChecked,
-      incidentsFilter,
       incidentsFatalitiesChecked,
-      incidentsType
-    } = this.props.nav;
+      incidentsCategory,
+      uniqueIncidents
+    } = this.props.searchIncidents;
+    console.log(this.props);
     return (
       <div
         className={
@@ -22,41 +48,52 @@ class IncidentSearch extends Component {
         }
       >
         <div className="incident-column-one">
-          <p>sort by</p>
-          <label htmlFor="older" className="sort-label check-older">
-            <span>older </span>
+          <p className="search-heading">sort by</p>
+          <div className="checkbox-wrap">
             <input
+              className="check-input"
               type="checkbox"
               id="older"
               value="older"
               checked={incidentsOlderChecked}
-              //   onChange={this.toggleSorting}
+              onChange={this.handleSortChange}
             />
-          </label>
-          <label htmlFor="newer" className="sort-label check-newer">
-            <span>newer </span>
+            <label htmlFor="older" className="checkbox check-older">
+              <div className="check-circle">
+                <span className="circle-inside" />
+              </div>
+              <p>older</p>
+            </label>
+          </div>
+          <div className="checkbox-wrap">
             <input
+              className="check-input"
               type="checkbox"
               id="newer"
               value="newer"
               checked={incidentsNewerChecked}
-              //   onChange={this.toggleSorting}
+              onChange={this.handleSortChange}
             />
-          </label>
-
+            <label htmlFor="newer" className="checkbox check-newer">
+              <div className="check-circle">
+                <span className="circle-inside" />
+              </div>
+              <p>newer</p>
+            </label>
+          </div>
           <input
             className="search-input filter"
             placeholder="search city, airport, operator, reg"
             type="text"
-            value={incidentsFilter}
-            // onChange={this.filterIncidents}
+            value={incidentsSearchText}
+            onChange={this.handleTextChange}
           />
         </div>
 
         <div className="incident-column-two">
           <div
             className="search-reset"
-            // onClick={this.props.store.incidentsSearchReset}
+            onClick={this.props.incidentsSearchReset}
           >
             <svg
               id="reset-svg"
@@ -72,26 +109,33 @@ class IncidentSearch extends Component {
             <p>reset</p>
           </div>
           <p>filter by</p>
-          <label htmlFor="fatalities" className="filter-label check-fatalities">
+          <div className="checkbox-wrap">
             <input
+              className="check-input"
               type="checkbox"
               id="fatalities"
               value="fatalities"
               checked={incidentsFatalitiesChecked}
-              //   onChange={this.toggleFatalities}
+              onChange={this.handleFilterChange}
             />
-            <span> Fatalities</span>
-          </label>
+            <label htmlFor="fatalities" className="checkbox check-ue">
+              <div className="check-square">
+                <span className="square-inside">&#10003;</span>
+              </div>
+              <p> Fatalities</p>
+            </label>
+          </div>
           <select
-            value={incidentsType}
-            // onChange={this.handleIncidentTypeChange}
+            id="incidents"
+            value={incidentsCategory}
+            onChange={this.handleDropdownChange}
           >
-            {/* <option>Select Incident Type</option>
-            {this.state.incidentTypeCount.map(incidents => (
-              <option key={incidents} value={incidents}>
-                {incidents}
+            <option>Select Accident Type</option>
+            {uniqueIncidents.map((incident, i) => (
+              <option key={i} value={incident}>
+                {incident}
               </option>
-            ))} */}
+            ))}
           </select>
         </div>
       </div>
@@ -99,8 +143,20 @@ class IncidentSearch extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapState = state => ({
+  searchIncidents: state.searchIncidents,
   nav: state.nav
 });
 
-export default connect(mapStateToProps)(IncidentSearch);
+const actions = {
+  changeIncidentsSearchText,
+  changeIncidentsSort,
+  changeIncidentsFilter,
+  changeIncidentsDropdown,
+  incidentsSearchReset
+};
+
+export default connect(
+  mapState,
+  actions
+)(IncidentSearch);

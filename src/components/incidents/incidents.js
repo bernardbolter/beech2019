@@ -7,6 +7,7 @@ import Header from "../header/header";
 import Incident from "./incident";
 
 import { filterIncidents } from "./incidentsStore/incidentsActions";
+import { getIncidentTypes } from "../header/headerStore/searchIncidentsActions";
 
 import "./incidents.sass";
 
@@ -19,6 +20,9 @@ class Incidents extends Component {
       let snap = snapshot.data();
       let incidentsArray = Object.keys(snap).map(key => snap[key]);
       this.props.filterIncidents(incidentsArray, this.props.searchIncidents);
+      if (this.props.searchIncidents.uniqueIncidents.length === 0) {
+        this.props.getIncidentTypes(incidentsArray);
+      }
     });
   }
 
@@ -124,7 +128,8 @@ const mapState = state => ({
 });
 
 const actions = {
-  filterIncidents
+  filterIncidents,
+  getIncidentTypes
 };
 
 export default compose(
