@@ -1,15 +1,22 @@
+@import '../../vars.scss'
+  
 .incidents
-    width: 100%
-    top: 0
-    position: relative
-    transition: top 300ms ease-in-out
-
+  width: 100%
+  top: 0
+  position: relative
+  transition: top 300ms ease-in-out
 
 .incidents-search-on
-    top: 165px
-    transition: top 300ms ease-in-out
-    @media screen and (min-width: 650px)
-        top: 0
+  top: 165px
+  transition: top 300ms ease-in-out
+  @media screen and (min-width: 650px)
+    top: 0
+
+.incidents-nav-on
+  top: 165px
+  tansition: top 300ms ease-in-out
+  @media screen and (min-width: 650px)
+    top: 0
 
 .incidents-top-info
   width: 100%
@@ -25,26 +32,66 @@
     color: #666666
     margin: 3px 0 0 3%
 
-.add-new-incident
-  margin: 3px 3% 0 0 !important
-  cursor: pointer
-
-.incident_wrap
-  top: 0
+.incidents-wrap
+  width: 100%
   position: relative
-  transition: top 300ms ease-in-out
 
-.incident_wrap_search
-  transform: translateY(169px)
-  transition: all 300ms ease-in-out
-  @media screen and (min-width: 650px)
-    top: 0
+// INCIDENT HEADER
 
-.incident_wrap_menu
-  transform: translateY(169px)
-  transition: all 300ms ease-in-out
-  @media screen and (min-width: 650px)
-    transform: translateY(0)
+.incidents-headers
+  width: 100%
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+
+  p
+    text-align: center
+    font-family: $font-header
+    font-size: 16px
+    font-weight: 400
+    color: #666
+    padding: 8px 0
+    margin: 0
+
+.inc-date-header
+  width: 12%
+  background: $inc-date
+
+.inc-serial-header
+  width: 7%
+  background: $inc-serial
+
+.inc-reg-header
+  width: 9%
+  background: $inc-reg
+
+.inc-operator-header
+  width: 16%
+  background: $inc-operator
+
+.inc-city-header
+  width: 16%
+  background: $inc-city
+
+.inc-airport-header
+  width: 8%
+  background: $inc-airport
+
+.inc-category-header
+  width: 15%
+  background: $inc-category
+
+.inc-fatalities-header
+  width: 10%
+  background: $inc-fatalities
+
+.inc-photos-header
+  width: 7%
+  background: $inc-photos
+
+
+// NO INCIDENT IN SEARCH
 
 .no-incident
   width: 100%

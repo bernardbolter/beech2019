@@ -39,95 +39,6 @@ class Airplanes extends Component {
     }
   }
 
-  getTheFilteredPlanes = thePlanes => {
-    const {
-      uaChecked,
-      ubChecked,
-      ucChecked,
-      udChecked,
-      ueChecked,
-      airplanesOlderChecked,
-      operatingChecked,
-      operatingNonCurrentChecked,
-      nonFlyingChecked,
-      partedOutChecked,
-      destroyedChecked,
-      airplanesSearchText,
-      airplanesLatestOperatorValue,
-      airplanesCountryValue
-    } = this.props.searchAirplanes;
-
-    let serialArray = [];
-    if (uaChecked) {
-      serialArray.push("A");
-    }
-    if (ubChecked) {
-      serialArray.push("B");
-    }
-    if (ucChecked) {
-      serialArray.push("C");
-    }
-    if (udChecked) {
-      serialArray.push("D");
-    }
-    if (ueChecked) {
-      serialArray.push("E");
-    }
-    let serialString = serialArray.join(", ");
-
-    if (!uaChecked && !ubChecked && !ucChecked && !udChecked && !ueChecked) {
-      serialString = "A, B, C, D, E";
-    }
-
-    let statusArray = [];
-
-    if (operatingChecked) {
-      statusArray.push("O");
-    }
-
-    if (operatingNonCurrentChecked) {
-      statusArray.push("O");
-    }
-
-    if (nonFlyingChecked) {
-      statusArray.push("N");
-    }
-
-    if (partedOutChecked) {
-      statusArray.push("P");
-    }
-
-    if (destroyedChecked) {
-      statusArray.push("D");
-    }
-
-    let statusString = statusArray.join(", ");
-
-    if (statusString === "") {
-      statusString = "O, N, P, D";
-    }
-
-    const country = airplanesCountryValue;
-
-    const operator = airplanesLatestOperatorValue;
-
-    const sorting = airplanesOlderChecked;
-
-    const filterText = airplanesSearchText;
-
-    const allPlanes = thePlanes;
-
-    this.props.getUpdatedFilteredAirplanes(
-      serialString,
-      statusString,
-      country,
-      operator,
-      sorting,
-      filterText,
-      allPlanes
-    );
-  };
-
   renderAirplaneClass = () => {
     const { showSearch, showNavigation } = this.props.nav;
     if (showNavigation) {
@@ -141,15 +52,20 @@ class Airplanes extends Component {
 
   render() {
     const { match } = this.props;
+    const {
+      airplaneCount,
+      airplanesLoaded,
+      filteredAirplanes
+    } = this.props.airplanes;
     return (
       <React.Fragment>
         <Header match={match} />
         <section id="airplanes" className={this.renderAirplaneClass()}>
-          {this.props.airplanes.airplanesLoaded ? (
+          {airplanesLoaded ? (
             <div>
               <section className="airplane-top-info">
-                {this.props.airplanes.airplaneCount !== 0 ? (
-                  <p>Viewing {this.props.airplanes.airplaneCount} Records</p>
+                {airplaneCount !== 0 ? (
+                  <p>Viewing {airplaneCount} Records</p>
                 ) : (
                   <p>There are no aiplane results for your search.</p>
                 )}
@@ -175,7 +91,7 @@ class Airplanes extends Component {
                     <p>Current Country</p>
                   </div>
                 </section>
-                {!this.props.airplanes.filteredAirplanes.length ? (
+                {!filteredAirplanes.length ? (
                   <div className="no-incident">
                     <img
                       src={`${process.env.PUBLIC_URL}/b1900-logo.png`}
@@ -184,7 +100,7 @@ class Airplanes extends Component {
                     <p>no airplanes were found in your search</p>
                   </div>
                 ) : (
-                  this.props.airplanes.filteredAirplanes.map((plane, i) => {
+                  filteredAirplanes.map((plane, i) => {
                     if (!plane.serial) {
                       return null;
                     } else {

@@ -16,9 +16,9 @@ import {
 } from "redux-firestore";
 
 import searchAirplanesReducer from "./components/header/headerStore/searchAirplanesReducer";
+import searchIncidentsReducer from "./components/header/headerStore/searchIncidentsReducer";
 import homeReducer from "./components/home/homeStore/homeReducer";
 import airplanesReducer from "./components/airplanes/airplanesStore/airplanesReducer";
-import baseReducer from "./base/baseReducer";
 import incidentsReducer from "./components/incidents/incidentsStore/incidentsReducer";
 import navReducer from "./components/header/headerStore/navReducer";
 import { reducer as formReducer } from "redux-form";
@@ -65,8 +65,8 @@ const createStoreWithFirebase = compose(
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
-  baseData: baseReducer,
   searchAirplanes: searchAirplanesReducer,
+  searchIncidents: searchIncidentsReducer,
   nav: navReducer,
   home: homeReducer,
   airplanes: airplanesReducer,

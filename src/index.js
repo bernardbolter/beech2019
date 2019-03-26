@@ -10,6 +10,7 @@ import Home from "./components/home/home";
 import Airplanes from "./components/airplanes/airplanes";
 import AirplaneSingle from "./components/airplanes/airplane-single";
 import Incidents from "./components/incidents/incidents";
+import IncidentSingle from "./components/incidents/incident-single";
 import History from "./components/history/history";
 import ModalManager from "./features/modals/modalManager";
 
@@ -26,7 +27,8 @@ const Root = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/airplanes" component={Airplanes} />
           <Route path="/airplanes/:serial" component={AirplaneSingle} />
-          <Route path="/incidents" component={Incidents} />
+          <Route exact path="/incidents" component={Incidents} />
+          <Route exact path="/incidents/:id" component={IncidentSingle} />
           <Route path="/history" component={History} />
         </div>
       </Router>

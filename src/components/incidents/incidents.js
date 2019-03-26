@@ -33,37 +33,84 @@ class Incidents extends Component {
 
   render() {
     const { match } = this.props;
-    const { showSearch } = this.props.nav;
+    const { showSearch, showNavigation } = this.props.nav;
+    const {
+      incidentsCount,
+      filteredIncidents,
+      incidentsLoaded
+    } = this.props.incidents;
     console.log(this.props);
     return (
       <React.Fragment>
         <Header match={match} />
         <section
           id="incidents"
-          className={showSearch ? "incidents incidents-search-on" : "incidents"}
+          className={
+            (showSearch ? "incidents-search-on" : " incidents") +
+            (showNavigation ? " incidents-nav-on" : " incidents")
+          }
         >
-          <div className="incident-data">
-            <section className="incidents-top-info">
-              <h1>Incidents</h1>
-            </section>
-            {/* {this.props.incidents.incidentsLoaded ? (
-              this.props.incidents.filteredIncidents.map(incident => {
-                if (!incident.serial) {
-                  return null;
-                } else {
-                  return (
-                    <Incident
-                      key={incident.id}
-                      {...incident}
-                      loggedIn={authenticated}
-                    />
-                  );
-                }
-              })
-            ) : (
-              <h3>Incidents are Loading....</h3>
-            )} */}
-          </div>
+          {incidentsLoaded ? (
+            <div className="incident-data">
+              <section className="incidents-top-info">
+                {incidentsCount !== 0 ? (
+                  <p>Viewing {incidentsCount} Records</p>
+                ) : (
+                  <p>There are no incident results for your search.</p>
+                )}
+              </section>
+              <section className="incidents-wrap">
+                <div className="incidents-headers">
+                  <div className="inc-date-header">
+                    <p>Date</p>
+                  </div>
+                  <div className="inc-serial-header">
+                    <p>Serial</p>
+                  </div>
+                  <div className="inc-reg-header">
+                    <p>Reg</p>
+                  </div>
+                  <div className="inc-operator-header">
+                    <p>Operator</p>
+                  </div>
+                  <div className="inc-city-header">
+                    <p>City</p>
+                  </div>
+                  <div className="inc-airport-header">
+                    <p>Airport</p>
+                  </div>
+                  <div className="inc-category-header">
+                    <p>Category</p>
+                  </div>
+                  <div className="inc-fatalities-header">
+                    <p>Fatalities</p>
+                  </div>
+                  <div className="inc-photos-header">
+                    <p>Photos</p>
+                  </div>
+                </div>
+              </section>
+              {!filteredIncidents.length ? (
+                <div className="no-incident">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/b1900-logo.png`}
+                    alt="BEECH 1900 Graphic"
+                  />
+                  <p>no incidents were found in your search</p>
+                </div>
+              ) : (
+                filteredIncidents.map((incident, i) => {
+                  if (!incident.serial) {
+                    return null;
+                  } else {
+                    return <Incident key={i} {...incident} />;
+                  }
+                })
+              )}
+            </div>
+          ) : (
+            <h1>Loading Incidents....</h1>
+          )}
         </section>
       </React.Fragment>
     );
@@ -72,6 +119,7 @@ class Incidents extends Component {
 
 const mapState = state => ({
   nav: state.nav,
+  searchIncidents: state.searchIncidents,
   incidents: state.incidents
 });
 
