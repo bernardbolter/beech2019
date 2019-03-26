@@ -6,43 +6,35 @@ import { withFirestore } from "react-redux-firebase";
 import Header from "../header/header";
 import Incident from "./incident";
 
-import {
-  getFilteredIncidents,
-  getUpdatedFilteredIncidents
-} from "./incidentsStore/incidentsActions";
-import { getBaseIncidents } from "../../base/baseActions";
-import { openModal } from "../../features/modals/modalStore/modalActions";
+import { filterIncidents } from "./incidentsStore/incidentsActions";
 
 import "./incidents.sass";
 
 class Incidents extends Component {
   async componentDidMount() {
-    if (this.props.baseData.baseIncidents.length === 0) {
-      let incidentsRef = await this.props.firestore
-        .collection("base")
-        .doc("incidents");
-      await incidentsRef
-        .get()
-        .then(doc => {
-          if (!doc.exists) {
-            console.log("No such document.");
-          } else {
-            this.props.getBaseIncidents(doc.data());
-          }
-        })
-        .catch(err => {
-          console.log("Error getting document".err);
-        });
-    }
-    this.props.getFilteredIncidents(this.props.baseData.baseIncidents);
-    if (this.props.incidents.filteredIncidents.length === 0) {
-      this.props.getFilteredIncidents(this.props.baseData.baseIncidents);
+    let firedentsRef = await this.props.firestore
+      .collection("base")
+      .doc("incidents");
+    await firedentsRef.onSnapshot(snapshot => {
+      let snap = snapshot.data();
+      let incidentsArray = Object.keys(snap).map(key => snap[key]);
+      this.props.filterIncidents(incidentsArray, this.props.searchIncidents);
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.searchIncidents !== prevProps.searchIncidents) {
+      this.props.filterIncidents(
+        this.props.incidents.allIncidents,
+        this.props.searchIncidents
+      );
     }
   }
+
   render() {
-    const { auth, match, openModal } = this.props;
-    const authenticated = auth.isLoaded && !auth.isEmpty;
+    const { match } = this.props;
     const { showSearch } = this.props.nav;
+    console.log(this.props);
     return (
       <React.Fragment>
         <Header match={match} />
@@ -52,23 +44,9 @@ class Incidents extends Component {
         >
           <div className="incident-data">
             <section className="incidents-top-info">
-              {this.props.incidents.incidentsCount === 0 ? (
-                <p>there are no incident results from your search</p>
-              ) : (
-                <p>viewing {this.props.incidents.incidentsCount} results</p>
-              )}
-              {authenticated ? (
-                <p
-                  className="add-new-incident"
-                  onClick={() =>
-                    openModal("EditIncidentModal", this.props, "new")
-                  }
-                >
-                  + add new incident
-                </p>
-              ) : null}
+              <h1>Incidents</h1>
             </section>
-            {this.props.incidents.incidentsLoaded ? (
+            {/* {this.props.incidents.incidentsLoaded ? (
               this.props.incidents.filteredIncidents.map(incident => {
                 if (!incident.serial) {
                   return null;
@@ -84,7 +62,7 @@ class Incidents extends Component {
               })
             ) : (
               <h3>Incidents are Loading....</h3>
-            )}
+            )} */}
           </div>
         </section>
       </React.Fragment>
@@ -92,22 +70,19 @@ class Incidents extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapState = state => ({
   nav: state.nav,
-  baseData: state.baseData,
-  incidents: state.incidents,
-  auth: state.firebase.auth
+  incidents: state.incidents
 });
+
+const actions = {
+  filterIncidents
+};
 
 export default compose(
   withFirestore,
   connect(
-    mapStateToProps,
-    {
-      getBaseIncidents,
-      getFilteredIncidents,
-      getUpdatedFilteredIncidents,
-      openModal
-    }
+    mapState,
+    actions
   )
 )(Incidents);
