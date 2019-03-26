@@ -48,7 +48,7 @@ class IncidentSearch extends Component {
         }
       >
         <div className="incident-column-one">
-          <p className="search-heading">sort by</p>
+          <p className="incident-heading">sort by</p>
           <div className="checkbox-wrap">
             <input
               className="check-input"
@@ -81,6 +81,28 @@ class IncidentSearch extends Component {
               <p>newer</p>
             </label>
           </div>
+        </div>
+
+        <div className="incident-search-divider" />
+
+        <div className="incident-column-two">
+          <p className="incident-heading">filter by</p>
+          <div className="checkbox-wrap">
+            <input
+              className="check-input"
+              type="checkbox"
+              id="fatalities"
+              value="fatalities"
+              checked={incidentsFatalitiesChecked}
+              onChange={this.handleFilterChange}
+            />
+            <label htmlFor="fatalities" className="checkbox check-ue">
+              <div className="check-square">
+                <span className="square-inside">&#10003;</span>
+              </div>
+              <p> Fatalities</p>
+            </label>
+          </div>
           <input
             className="search-input filter"
             placeholder="search city, airport, operator, reg"
@@ -88,9 +110,18 @@ class IncidentSearch extends Component {
             value={incidentsSearchText}
             onChange={this.handleTextChange}
           />
-        </div>
-
-        <div className="incident-column-two">
+          <select
+            id="incidents"
+            value={incidentsCategory}
+            onChange={this.handleDropdownChange}
+          >
+            <option>Select Accident Type</option>
+            {uniqueIncidents.map((incident, i) => (
+              <option key={i} value={incident}>
+                {incident}
+              </option>
+            ))}
+          </select>
           <div
             className="search-reset"
             onClick={this.props.incidentsSearchReset}
@@ -108,35 +139,6 @@ class IncidentSearch extends Component {
             </svg>
             <p>reset</p>
           </div>
-          <p>filter by</p>
-          <div className="checkbox-wrap">
-            <input
-              className="check-input"
-              type="checkbox"
-              id="fatalities"
-              value="fatalities"
-              checked={incidentsFatalitiesChecked}
-              onChange={this.handleFilterChange}
-            />
-            <label htmlFor="fatalities" className="checkbox check-ue">
-              <div className="check-square">
-                <span className="square-inside">&#10003;</span>
-              </div>
-              <p> Fatalities</p>
-            </label>
-          </div>
-          <select
-            id="incidents"
-            value={incidentsCategory}
-            onChange={this.handleDropdownChange}
-          >
-            <option>Select Accident Type</option>
-            {uniqueIncidents.map((incident, i) => (
-              <option key={i} value={incident}>
-                {incident}
-              </option>
-            ))}
-          </select>
         </div>
       </div>
     );
