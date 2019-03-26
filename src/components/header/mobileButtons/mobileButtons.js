@@ -32,7 +32,7 @@ class MobileButtons extends Component {
           onClick={toggleSearch}
           className={
             (match.path === "/" ||
-            match.path === "/facts" ||
+            match.path === "/history" ||
             match.path === "/airplanes/:serial"
               ? "search-button-hide "
               : "") +
