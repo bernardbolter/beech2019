@@ -16,42 +16,60 @@ const Incident = props => {
           : "incident incident-even"
       }
     >
-      <p className="incident-date">
-        <span className="incident-span">Date of Incident</span>
-        {props.date}
-      </p>
-      <p className="incident-serial">
-        <span className="incident-span">Serial Number</span>
-        {props.serial}
-      </p>
-      <p className="incident-registration">
-        <span className="incident-span">Registration</span>
-        {props.registration}
-      </p>
-      <p className="incident-operator">
-        <span className="incident-span">Operator</span>
-        {props.operator}
-      </p>
-      <p className="incident-city">
-        <span className="incident-span">Location</span>
-        {props.locationCity}
-      </p>
-      <p className="incident-airport">
-        <span className="incident-span">Airport</span>
-        {props.locationAirport}
-      </p>
-      <p className="incident-category">
-        <span className="incident-span">Category</span>
-        {props.accidentCategory}
-      </p>
-      <p className="incident-fatalities">
-        <span className="incident-span">Fatalities</span>
-        {props.fatalities}
-      </p>
-      <p className="incident-photo">
-        <span className="incident-span">photo</span>
-        no
-      </p>
+      <div className="incident-field incident-date">
+        <p>
+          <span className="incident-span">Date of Incident</span>
+          {props.date}
+        </p>
+      </div>
+      <div className="incident-field incident-serial">
+        <p>
+          <span className="incident-span">Serial Number</span>
+          {props.serial}
+        </p>
+      </div>
+      <div className="incident-field incident-registration">
+        <p>
+          <span className="incident-span">Registration</span>
+          {props.registration}
+        </p>
+      </div>
+      <div className="incident-field incident-operator">
+        <p>
+          <span className="incident-span">Operator</span>
+          {props.operator}
+        </p>
+      </div>
+      <div className="incident-field incident-city">
+        <p>
+          <span className="incident-span">Location</span>
+          {props.locationCity}
+        </p>
+      </div>
+      <div className="incident-field incident-airport">
+        <p>
+          <span className="incident-span">Airport</span>
+          {props.locationAirport}
+        </p>
+      </div>
+      <div className="incident-field incident-category">
+        <p>
+          <span className="incident-span">Category</span>
+          {props.accidentCategory}
+        </p>
+      </div>
+      <div className="incident-field incident-fatalities">
+        <p>
+          <span className="incident-span">Fatalities</span>
+          {props.fatalities}
+        </p>
+      </div>
+      <div className="incident-field incident-photo">
+        <p>
+          <span className="incident-span">photo</span>
+          no
+        </p>
+      </div>
     </Link>
   );
 };

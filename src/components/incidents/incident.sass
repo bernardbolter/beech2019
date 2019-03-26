@@ -3,96 +3,110 @@
 .incident
   width: 100%
   display: flex
-  flex-direction: column
+  flex-direction: row
+  flex-wrap: wrap
   border-bottom: 1px solid #999999
   padding: 0
   margin: 0
+  text-decoration: none
+  cursor: pointer
   @media screen and (min-width: 650px)
     flex-direction: row
 
+  &:hover
+    p
+      color: black
+
   span
     display: block
+    font-size: 11px
+    margin: 0 0 4px
+    color: $dark-color
+    opacity: 0.8
 
     @media screen and (min-width: 650px)
       display: none
 
   p
-    padding: 0
+    padding: 10px 0 10px 10px
     margin: 0
     color: $dark-color
     font-weight: 400
-    font-size: 14px
+    font-size: 16px
 
     @media screen and (min-width: 650px)
       font-size: 13px
       text-align: center
-      padding: 5px 0
+      padding: 14px 0
+
+    @media screen and (min-width: 900px)
+      font-size: 15px
 
 .incident-date
-  width: 100%
+  width: 70%
   background: lighten($inc-date, 15%)
 
   @media screen and (min-width: 650px)
     width: 12%
 
 .incident-serial
-  width: 100%
+  width: 30%
   background: lighten($inc-serial, 12%)
+
+  @media screen and (min-width: 650px)
+    width: 5%
+
+.incident-registration
+  width: 30%
+  background: lighten($inc-reg, 7%)
 
   @media screen and (min-width: 650px)
     width: 7%
 
-.incident-registration
-  width: 100%
-  background: lighten($inc-reg, 7%)
-
-  @media screen and (min-width: 650px)
-    width: 9%
-
 .incident-operator
-  width: 100%
+  width: 70%
   background: lighten($inc-operator, 12%)
 
   @media screen and (min-width: 650px)
-    width: 16%
+    width: 18%
 
 .incident-city
-  width: 100%
-  background: lighten($inc-city, 12%)
+  width: 75%
+  background: lighten($inc-city, 8%)
   
   @media screen and (min-width: 650px)
-    width: 16%
+    width: 18%
 
 .incident-airport
-  width: 100%
+  width: 25%
   background: lighten($inc-airport, 12%)
 
   @media screen and (min-width: 650px)
     width: 8%
 
 .incident-category
-  width: 100%
+  width: 66%
   background: lighten($inc-category, 12%)
 
   @media screen and (min-width: 650px)
-    width: 15%
+    width: 17%
 
 .incident-fatalities
-  width: 100%
+  width: 20%
   background: lighten($inc-fatalities, 12%)
 
   @media screen and (min-width: 650px)
-    width: 10%
+    width: 8%
 
 .incident-photos
-  width: 100%
+  width: 12%
   background: lighten($inc-photos, 10%)
 
   @media screen and (min-width: 650px)
     width: 7%
 
 .incident-odd
-  opacity: 0.9
+  opacity: 1
 
 .incident-even
-  opacity: 0.8
+  opacity: 0.7
