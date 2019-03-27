@@ -115,7 +115,13 @@ class Airplanes extends Component {
               </div>
             </div>
           ) : (
-            <h1>Airplanes</h1>
+            <div className="airplanes-no-data">
+              <h1>Loading Airplane Data </h1>
+              <img
+                src={`${process.env.PUBLIC_URL}/three-dots.gif`}
+                alt="animates dots"
+              />
+            </div>
           )}
         </section>
       </React.Fragment>

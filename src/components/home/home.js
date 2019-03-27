@@ -154,29 +154,35 @@ class Home extends Component {
               </ul>
             </div>
           </div>
-          <p className="home-grid-text">
-            below are the top rankings of the stats
-          </p>
           {homeDataLoaded ? (
-            <div className="home-grid">
-              <HomeColumn columnName="status" columnHeader="Current Status" />
-              <HomeColumn
-                columnName="currentOperator"
-                columnHeader="Top Operators"
-              />
-              <HomeColumn
-                columnName="currentCountry"
-                columnHeader="Top Countries"
-              />
-              <HomeColumn columnName="serial" columnHeader="Serial Series" />
-              <HomeColumn
-                columnName="accidentCategory"
-                columnHeader="Top Incident Type"
-              />
-            </div>
+            <React.Fragment>
+              <p className="home-grid-text">
+                below are the top rankings of the stats
+              </p>
+              <div className="home-grid">
+                <HomeColumn columnName="status" columnHeader="Current Status" />
+                <HomeColumn
+                  columnName="currentOperator"
+                  columnHeader="Top Operators"
+                />
+                <HomeColumn
+                  columnName="currentCountry"
+                  columnHeader="Top Countries"
+                />
+                <HomeColumn columnName="serial" columnHeader="Serial Series" />
+                <HomeColumn
+                  columnName="accidentCategory"
+                  columnHeader="Top Incident Type"
+                />
+              </div>
+            </React.Fragment>
           ) : (
-            <div>
-              <h1>NO DATA</h1>
+            <div className="home-no-data">
+              <h1>Loading Top Ranking of the Stats...</h1>
+              <img
+                src={`${process.env.PUBLIC_URL}/three-dots.gif`}
+                alt="animates dots"
+              />
             </div>
           )}
 

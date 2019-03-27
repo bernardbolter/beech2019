@@ -73,7 +73,13 @@ class AirplaneSingle extends Component {
         <section>
           <Header match={match} />
           {!this.state.airplaneLoaded ? (
-            <h1>Loading Airplane Data</h1>
+            <div className="airplane-no-data">
+              <h1>Loading Airplane Details....</h1>
+              <img
+                src={`${process.env.PUBLIC_URL}/three-dots.gif`}
+                alt="animates dots"
+              />
+            </div>
           ) : (
             <div className="airplane-container">
               <div className="airplane-single">
@@ -303,7 +309,7 @@ class AirplaneSingle extends Component {
                     </div>
                   ) : (
                     <div className="event-loading">
-                      <p>Loading Airplane Details...</p>
+                      <p>Loading Airplane Event Details...</p>
                     </div>
                   )}
 
