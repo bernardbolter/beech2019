@@ -1,3 +1,144 @@
 @import '../../vars.scss'
 
-    
+.incident-single
+    width: 100%
+
+    a
+        text-decoration: none
+        color: #888
+
+.incident-single-top
+    width: 90%
+    margin-left: 10%
+    height: 25px
+    display: relative
+    right: 0
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    border-top: 1px solid #999999
+
+    a
+        text-decoration: none
+
+    svg
+        margin-top: -10px
+        position: relative
+        z-index: 500
+
+    p
+        color: #666666
+        text-decoration: none
+        padding: 0
+        font-size: 11px
+        text-transform: uppercase
+        margin: 5px 0 0 10px
+        position: relative
+        z-index: 500
+
+.incident-single-colors
+
+    div
+        display: flex
+        flex-direction: row
+        justify-content: space-around
+        margin: 1px 0
+
+    h3
+        padding: 0
+        margin: 0
+        color: #fff
+        text-transform: uppercase
+        font-size: 10px
+        width: 47%
+        padding: 10px 3% 10px 0
+        text-align: right
+        background: rgba(0,0,0,0.2)
+        @media screen and (min-width: 650px)
+            font-size: 12px
+            width: 29%
+            padding: 10px 1% 10px 0
+
+    p
+        padding: 0
+        margin: 0
+        color: #444
+        font-size: 14px
+        width: 47%
+        padding: 10px 0 10px 3%
+        text-align: left
+        @media screen and (min-width: 650px)
+            font-size: 22px
+            width: 69%
+            padding: 10px 0 10px 1%
+
+.incident-single-date
+    background: lighten($inc-date, 5%)
+
+.incident-single-serial
+    background: lighten($inc-serial, 5%)
+
+.incident-single-registration
+    background: lighten($inc-reg, 5%)
+
+.incident-single-operator
+    background: lighten($inc-operator, 5%)
+
+.incident-single-city
+    background: lighten($inc-city, 5%)
+
+.incident-single-airport
+    background: lighten($inc-airport, 5%)
+
+.incident-single-accident
+    background: lighten($inc-category, 5%)
+
+.incident-single-fatalities
+    background: lighten($inc-fatalities, 5%)
+
+.incident-bot-wrap
+    width: 100%
+    display: flex
+    flex-direction: row
+
+.incident-bot-left
+    width: 47%
+    padding: 3% 3% 5% 0
+    background: #eeeeee
+
+    h5
+        font-size: 14px
+        color: #999999
+        font-weight: 700
+        padding: 5px 0 0
+        margin: 0
+
+    h4
+        font-size: 20px
+        color: $dark-color
+        padding: 5px 0
+        margin: 0
+
+.incidetn-bot-left-data
+    text-align: right
+
+.incident-bot-right
+    width: 47%
+    padding: 3% 0 5% 3%
+
+.incidetn-bot-right-data
+    text-align: left
+
+    h5
+        font-size: 14px
+        color: #999999
+        font-weight: 700
+        padding: 0
+        margin: 0
+
+    h4
+        font-size: 20px
+        color: $dark-color
+        padding: 5px 0
+        margin: 0
+        word-break: break-all

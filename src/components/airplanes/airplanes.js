@@ -57,6 +57,7 @@ class Airplanes extends Component {
       airplanesLoaded,
       filteredAirplanes
     } = this.props.airplanes;
+    console.log(this.props);
     return (
       <React.Fragment>
         <Header match={match} />

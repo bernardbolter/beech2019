@@ -6,7 +6,10 @@ import { withFirestore } from "react-redux-firebase";
 import Header from "../header/header";
 import Incident from "./incident";
 
-import { filterIncidents } from "./incidentsStore/incidentsActions";
+import {
+  filterIncidents,
+  filterFirstIncidents
+} from "./incidentsStore/incidentsActions";
 import { getIncidentTypes } from "../header/headerStore/searchIncidentsActions";
 
 import "./incidents.sass";
@@ -19,7 +22,7 @@ class Incidents extends Component {
     await firedentsRef.onSnapshot(snapshot => {
       let snap = snapshot.data();
       let incidentsArray = Object.keys(snap).map(key => snap[key]);
-      this.props.filterIncidents(incidentsArray, this.props.searchIncidents);
+      this.props.filterFirstIncidents(incidentsArray);
       if (this.props.searchIncidents.uniqueIncidents.length === 0) {
         this.props.getIncidentTypes(incidentsArray);
       }
@@ -128,6 +131,7 @@ const mapState = state => ({
 });
 
 const actions = {
+  filterFirstIncidents,
   filterIncidents,
   getIncidentTypes
 };

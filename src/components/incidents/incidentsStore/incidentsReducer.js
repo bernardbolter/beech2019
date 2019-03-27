@@ -9,11 +9,19 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.FIRST_INCIDENTS:
+      return {
+        ...state,
+        filteredIncidents: action.firstIncidents,
+        incidentsCount: action.firstIncidents.length + 1,
+        allIncidents: action.firstIncidents,
+        incidentsLoaded: true
+      };
     case actionTypes.FILTER_INCIDENTS:
       return {
         ...state,
         filteredIncidents: action.filteredIncidents,
-        incidentsCount: action.filteredIncidents.length,
+        incidentsCount: action.filteredIncidents.length + 1,
         allIncidents: action.allIncidents,
         incidentsLoaded: true
       };

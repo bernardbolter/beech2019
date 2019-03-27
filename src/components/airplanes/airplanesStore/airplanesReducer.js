@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
         ...state,
         allPlanes: action.allAirplanes,
         filteredAirplanes: action.filteredAirplanes,
-        airplaneCount: action.filteredAirplanes.length,
+        airplaneCount: action.filteredAirplanes.length + 1,
         airplanesLoaded: true
       };
     default:

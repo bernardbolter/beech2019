@@ -2,7 +2,7 @@
   "serviceCharts": [
     {
       "id": 1,
-      "name": "Bar Harbour Airlines",
+      "name": "Bar Harbor Airlines",
       "thumb": "bar-harbour-airlines-thumb.png",
       "image": "bar-harbour-airlines.png"
     },
@@ -56,36 +56,48 @@
     },
     {
       "id": 10,
+      "name": "Mesa",
+      "thumb": "mesa-thumb.png",
+      "image": "mesa.png"
+    },
+    {
+      "id": 11,
       "name": "Metro Air Northeast",
       "thumb": "metro-air-northeast-thumb.png",
       "image": "metro-air-northeast.png"
     },
     {
-      "id": 11,
+      "id": 12,
       "name": "Pennsylvania Airlines",
       "thumb": "pennsylvania-airlines-thumb.png",
       "image": "pennsylvania-airlines.png"
     },
     {
-      "id": 12,
+      "id": 13,
       "name": "Proteus Airlines",
       "thumb": "proteus-airlines-thumb.png",
       "image": "proteus-airlines.png"
     },
     {
-      "id": 13,
+      "id": 14,
       "name": "Rocky Mountain Airways",
       "thumb": "rocky-mountain-airways-thumb.png",
       "image": "rocky-mountain-airways.png"
     },
     {
-      "id": 14,
+      "id": 15,
       "name": "Silver Airways",
       "thumb": "silver-airways-thumb.png",
       "image": "silver-airways.png"
     },
     {
-      "id": 15,
+      "id": 16,
+      "name": "Skyway Airlines",
+      "thumb": "skyway-airlines-thumb.png",
+      "image": "skyway-airlines.png"
+    },
+    {
+      "id": 17,
       "name": "Stateswest",
       "thumb": "stateswest-thumb.png",
       "image": "stateswest.png"
