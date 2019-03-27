@@ -61,6 +61,12 @@ export const filterIncidents = (incidents, search) => {
     });
   }
 
+  if (search.incidentsPhotosChecked) {
+    filteredIncidents = filteredIncidents.filter(fate => {
+      return fate.hasPhoto !== undefined && fate.hasPhoto === true;
+    });
+  }
+
   if (
     search.incidentsCategory !== "" &&
     search.incidentsCategory !== "Select Accident Type"

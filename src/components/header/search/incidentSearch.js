@@ -35,6 +35,7 @@ class IncidentSearch extends Component {
       incidentsOlderChecked,
       incidentsNewerChecked,
       incidentsFatalitiesChecked,
+      incidentsPhotosChecked,
       incidentsCategory,
       uniqueIncidents
     } = this.props.searchIncidents;
@@ -87,21 +88,39 @@ class IncidentSearch extends Component {
 
         <div className="incident-column-two">
           <p className="incident-heading">filter by</p>
-          <div className="checkbox-wrap">
-            <input
-              className="check-input"
-              type="checkbox"
-              id="fatalities"
-              value="fatalities"
-              checked={incidentsFatalitiesChecked}
-              onChange={this.handleFilterChange}
-            />
-            <label htmlFor="fatalities" className="checkbox check-ue">
-              <div className="check-square">
-                <span className="square-inside">&#10003;</span>
-              </div>
-              <p> Fatalities</p>
-            </label>
+          <div className="incident-filters">
+            <div className="checkbox-wrap">
+              <input
+                className="check-input"
+                type="checkbox"
+                id="fatalities"
+                value="fatalities"
+                checked={incidentsFatalitiesChecked}
+                onChange={this.handleFilterChange}
+              />
+              <label htmlFor="fatalities" className="checkbox check-ue">
+                <div className="check-square">
+                  <span className="square-inside">&#10003;</span>
+                </div>
+                <p> Fatalities</p>
+              </label>
+            </div>
+            <div className="checkbox-wrap">
+              <input
+                className="check-input"
+                type="checkbox"
+                id="photos"
+                value="photos"
+                checked={incidentsPhotosChecked}
+                onChange={this.handleFilterChange}
+              />
+              <label htmlFor="photos" className="checkbox check-ue">
+                <div className="check-square">
+                  <span className="square-inside">&#10003;</span>
+                </div>
+                <p> Photos</p>
+              </label>
+            </div>
           </div>
           <input
             className="search-input filter"

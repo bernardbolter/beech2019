@@ -26,9 +26,6 @@ class Airplanes extends Component {
         let airplanesArray = Object.keys(snap).map(key => snap[key]);
         this.props.filterAirplanes(airplanesArray, this.props.searchAirplanes);
         this.props.getCountriesAndOperators(airplanesArray);
-
-        var source = snapshot.metadata.fromCache ? "local cache" : "server";
-        console.log("Data came from " + source);
       }
     );
   }
@@ -60,7 +57,6 @@ class Airplanes extends Component {
       airplanesLoaded,
       filteredAirplanes
     } = this.props.airplanes;
-    console.log(this.props);
     return (
       <React.Fragment>
         <Header match={match} />
@@ -108,7 +104,7 @@ class Airplanes extends Component {
                     if (!plane.serial) {
                       return null;
                     } else {
-                      return <Airplane key={i} {...plane} />;
+                      return <Airplane key={i} {...plane} evenOdd={i} />;
                     }
                   })
                 )}

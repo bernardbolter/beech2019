@@ -63,82 +63,142 @@
         padding: 0
         margin: 0
         color: #444
-        font-size: 14px
+        font-size: 17px
         width: 47%
         padding: 10px 0 10px 3%
         text-align: left
+        @media screen and (min-width: 500px)
+            font-size: 19px
         @media screen and (min-width: 650px)
             font-size: 22px
             width: 69%
             padding: 10px 0 10px 1%
 
+        img
+            opacity: 0.4
+            width: 20px
+            margin: 0 0 0 10px
+            padding: 0
+            top: 2px
+            position: relative
+
+            &:hover
+                opacity: 0.8
+
 .incident-single-date
-    background: lighten($inc-date, 5%)
+    background: lighten($inc-date, 40%)
 
 .incident-single-serial
-    background: lighten($inc-serial, 5%)
+    background: lighten($inc-serial, 20%)
 
 .incident-single-registration
-    background: lighten($inc-reg, 5%)
+    background: lighten($inc-reg, 10%)
 
 .incident-single-operator
-    background: lighten($inc-operator, 5%)
+    background: lighten($inc-operator, 20%)
 
 .incident-single-city
-    background: lighten($inc-city, 5%)
+    background: lighten($inc-city, 28%)
 
 .incident-single-airport
-    background: lighten($inc-airport, 5%)
+    background: lighten($inc-airport, 26%)
 
 .incident-single-accident
-    background: lighten($inc-category, 5%)
+    background: lighten($inc-category, 40%)
 
 .incident-single-fatalities
-    background: lighten($inc-fatalities, 5%)
+    background: lighten($inc-fatalities, 15%)
 
 .incident-bot-wrap
     width: 100%
     display: flex
-    flex-direction: row
+    flex-direction: column
+
+    @media screen and (min-width: 650px)
+        flex-direction: row
 
 .incident-bot-left
-    width: 47%
-    padding: 3% 3% 5% 0
+    width: 90%
+    padding: 5%
     background: #eeeeee
 
+    @media screen and (min-width: 500px)
+        width: 80%
+        padding: 5% 10%
+
+    @media screen and (min-width: 650px)
+        width: 30%
+        padding: 5%
+
     h5
-        font-size: 14px
+        font-size: 12px
         color: #999999
         font-weight: 700
         padding: 5px 0 0
         margin: 0
+        text-transform: uppercase
+
+        @media screen and (min-width: 650px)
+            font-size: 13px
 
     h4
-        font-size: 20px
+        font-size: 16px
         color: $dark-color
         padding: 5px 0
         margin: 0
+
+        @media screen and (min-width: 500px)
+            font-szie: 17px
+
+        @media screen and (min-width: 650px)
+            font-size: 18px
 
 .incidetn-bot-left-data
     text-align: right
 
 .incident-bot-right
-    width: 47%
-    padding: 3% 0 5% 3%
+    width: 90%
+    padding: 5%
+
+    @media screen and (min-width: 500px)
+        width: 80%
+        padding: 5% 10%
+
+    @media screen and (min-width: 650px)
+        width: 60%
+        padding: 5%
 
 .incidetn-bot-right-data
     text-align: left
 
     h5
-        font-size: 14px
+        font-size: 12px
         color: #999999
         font-weight: 700
         padding: 0
         margin: 0
+        text-tranform: uppercase
+
+        @media screen and (min-width: 650px)
+            font-size: 13px
 
     h4
-        font-size: 20px
+        font-size: 16px
         color: $dark-color
         padding: 5px 0
         margin: 0
         word-break: break-all
+
+        @media screen and (min-width: 500px)
+            font-szie: 17px
+
+        @media screen and (min-width: 650px)
+            font-size: 18px
+
+.incident-image-wrap
+    width: 100%
+    cursor: pointer
+    margin: 0 0 10px
+
+    img
+        width: 100%

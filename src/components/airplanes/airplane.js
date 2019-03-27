@@ -5,7 +5,7 @@ const Airplane = props => {
   return (
     <div
       className={
-        parseInt(props.id, 10) & 1
+        parseInt(props.evenOdd, 10) & 1
           ? "airplane-excerpt excerpt-odd"
           : "airplane-excerpt excerpt-even"
       }

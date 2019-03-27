@@ -112,7 +112,13 @@ class Incidents extends Component {
               )}
             </div>
           ) : (
-            <h1>Loading Incidents....</h1>
+            <div className="airplanes-no-data">
+              <h1>Loading Incident Data </h1>
+              <img
+                src={`${process.env.PUBLIC_URL}/three-dots.gif`}
+                alt="animates dots"
+              />
+            </div>
           )}
         </section>
       </React.Fragment>

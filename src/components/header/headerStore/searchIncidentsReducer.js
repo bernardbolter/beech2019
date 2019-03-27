@@ -6,6 +6,7 @@ const initialState = {
   incidentsNewerChecked: true,
   incidentsFilter: "",
   incidentsFatalitiesChecked: false,
+  incidentsPhotosChecked: false,
   incidentsCategory: "",
   uniqueIncidents: []
 };
@@ -18,10 +19,19 @@ export default function(state = initialState, action) {
         incidentSearchText: action.text
       };
     case actionTypes.INCIDENT_FILTER:
-      return {
-        ...state,
-        incidentsFatalitiesChecked: !state.incidentsFatalitiesChecked
-      };
+      if (action.filterValue === "fatalities") {
+        return {
+          ...state,
+          incidentsFatalitiesChecked: !state.incidentsFatalitiesChecked
+        };
+      } else if (action.filterValue === "photos") {
+        return {
+          ...state,
+          incidentsPhotosChecked: !state.incidentsPhotosChecked
+        };
+      } else {
+        return state;
+      }
     case actionTypes.INCIDENT_SORT:
       console.log(action);
       if (action.sortValue === "newer") {

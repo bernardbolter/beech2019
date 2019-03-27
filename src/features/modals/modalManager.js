@@ -4,12 +4,14 @@ import LoginModal from "./loginModal";
 import EditAirplaneModal from "./editAirplaneModal";
 import EditIncidentModal from "./editIncidentModal";
 import ChartModal from "./chartModal";
+import IncidentPhotoModal from "./incidentPhotoModal";
 
 const modalLookup = {
   LoginModal,
   EditAirplaneModal,
   EditIncidentModal,
-  ChartModal
+  ChartModal,
+  IncidentPhotoModal
 };
 
 const ModalManager = ({ currentModal }) => {

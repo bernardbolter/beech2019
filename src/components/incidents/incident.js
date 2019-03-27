@@ -59,7 +59,7 @@ const Incident = props => {
         </p>
       </div>
       <div className="incident-field incident-photo">
-        {props.image_1 !== undefined ? (
+        {props.hasPhoto === true && props.hasPhoto !== undefined ? (
           <img src={`${process.env.PUBLIC_URL}/camera.png`} alt="camera icon" />
         ) : null}
       </div>

@@ -43,7 +43,7 @@ class IncidentSingle extends Component {
 
   render() {
     const { incidentLoaded, incidentData } = this.state;
-    const { match } = this.props;
+    const { match, openModal } = this.props;
     console.log(incidentData);
     return (
       <React.Fragment>
@@ -79,10 +79,18 @@ class IncidentSingle extends Component {
                 <h3>Date</h3>
                 <p>{incidentData.date}</p>
               </div>
-              <div className="incident-single-serial">
-                <h3>Serial</h3>
-                <p>{incidentData.serial}</p>
-              </div>
+              <Link to={`/airplanes/${incidentData.serial}`}>
+                <div className="incident-single-serial">
+                  <h3>Serial Nmber</h3>
+                  <p>
+                    {incidentData.serial}
+                    <img
+                      src={`${process.env.PUBLIC_URL}/link.png`}
+                      alt="Link Graphic"
+                    />
+                  </p>
+                </div>
+              </Link>
               <div className="incident-single-registration">
                 <h3>Registation</h3>
                 <p>{incidentData.registration}</p>
@@ -91,13 +99,13 @@ class IncidentSingle extends Component {
                 <h3>Operator</h3>
                 <p>{incidentData.operator}</p>
               </div>
-              <div className="incident-single-city">
-                <h3>Location City</h3>
-                <p>{incidentData.locationCity}</p>
-              </div>
               <div className="incident-single-airport">
                 <h3>Airport</h3>
                 <p>{incidentData.locationAirport}</p>
+              </div>
+              <div className="incident-single-city">
+                <h3>Location City</h3>
+                <p>{incidentData.locationCity}</p>
               </div>
               <div className="incident-single-accident">
                 <h3>Accident Category</h3>
@@ -154,6 +162,78 @@ class IncidentSingle extends Component {
                 ) : null}
               </div>
               <div className="incident-bot-right">
+                {incidentData.image_1 !== undefined ? (
+                  <div
+                    className="incident-image-wrap"
+                    onClick={() =>
+                      openModal("IncidentPhotoModal", {
+                        url: incidentData.image_1,
+                        name: incidentData.operator
+                      })
+                    }
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/incident_photos/${
+                        incidentData.image_1
+                      }`}
+                      alt={`${incidentData.operator} airplane`}
+                    />
+                  </div>
+                ) : null}
+                {incidentData.image_2 !== undefined ? (
+                  <div
+                    className="incident-image-wrap"
+                    onClick={() =>
+                      openModal("IncidentPhotoModal", {
+                        url: incidentData.image_2,
+                        name: incidentData.operator
+                      })
+                    }
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/incident_photos/${
+                        incidentData.image_2
+                      }`}
+                      alt={`${incidentData.operator} airplane`}
+                    />
+                  </div>
+                ) : null}
+                {incidentData.image_3 !== undefined ? (
+                  <div
+                    className="incident-image-wrap"
+                    onClick={() =>
+                      openModal("IncidentPhotoModal", {
+                        url: incidentData.image_3,
+                        name: incidentData.operator
+                      })
+                    }
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/incident_photos/${
+                        incidentData.image_3
+                      }`}
+                      alt={`${incidentData.operator} airplane`}
+                    />
+                  </div>
+                ) : null}
+                {incidentData.image_4 !== undefined ? (
+                  <div
+                    className="incident-image-wrap"
+                    onClick={() =>
+                      openModal("IncidentPhotoModal", {
+                        url: incidentData.image_4,
+                        name: incidentData.operator
+                      })
+                    }
+                  >
+                    <img
+                      src={`${process.env.PUBLIC_URL}/incident_photos/${
+                        incidentData.image_4
+                      }`}
+                      alt={`${incidentData.operator} airplane`}
+                    />
+                  </div>
+                ) : null}
                 {incidentData.primaryReference !== "" ? (
                   <div className="incidetn-bot-right-data">
                     <h5>Primary Reference</h5>
@@ -182,32 +262,18 @@ class IncidentSingle extends Component {
             </div>
           </section>
         ) : (
-          <section className="no-incident">
-            <h1>Incident Loading</h1>
-          </section>
+          <div className="airplanes-no-data">
+            <h1>Loading Incident Data </h1>
+            <img
+              src={`${process.env.PUBLIC_URL}/three-dots.gif`}
+              alt="animates dots"
+            />
+          </div>
         )}
       </React.Fragment>
     );
   }
 }
-
-// {serial === "" || serial === "?" ? (
-//   <p className="incident-serial">
-//     <span className="incident-span">Serial Number</span>
-//     {serial}
-//   </p>
-// ) : (
-//   <Link to={`/airplanes/${serial}`} className="incidents-link">
-//     <p className="incident-serial">
-//       <img
-//         src={`${process.env.PUBLIC_URL}/link.png`}
-//         alt="Link Graphic"
-//       />
-//       <span className="incident-span">Serial Number</span>
-//       {serial}
-//     </p>
-//   </Link>
-// )}
 
 const mapState = state => ({
   incidents: state.incidents

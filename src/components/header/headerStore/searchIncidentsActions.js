@@ -15,9 +15,10 @@ export const changeIncidentsSort = value => {
   };
 };
 
-export const changeIncidentsFilter = () => {
+export const changeIncidentsFilter = value => {
   return {
-    type: actionTypes.INCIDENT_FILTER
+    type: actionTypes.INCIDENT_FILTER,
+    filterValue: value
   };
 };
 
