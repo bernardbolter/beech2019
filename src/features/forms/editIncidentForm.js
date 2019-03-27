@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import Dropzone from "react-dropzone";
-import "cropperjs/dist/cropper.css";
 
 import {
   uploadIncidentImage,

@@ -26,7 +26,8 @@ class EditAirplaneForm extends Component {
         [item]: {
           old: props.planeInfo[item],
           new: values[item]
-        }
+        },
+        serial: props.planeInfo.serial
       };
     });
     this.setState({ fieldsToBeChanged: objectOfChanges });

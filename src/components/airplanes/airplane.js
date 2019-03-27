@@ -46,22 +46,36 @@ const Airplane = props => {
             <span className="mobile-excerpt">Current Country</span>
             {props.currentCountry}
           </p>
-          <img
-            src={
-              props.flag === "?" || props.flag === undefined
-                ? null
-                : [`${process.env.PUBLIC_URL}/flags/${props.flag}.png`]
-            }
-            alt={
-              props.flag === "?" || props.flag === undefined
-                ? null
-                : [`${props.latestCountry} Flag`]
-            }
-          />
+          {imageExists(`${process.env.PUBLIC_URL}/flags/${props.flag}.png`) ? (
+            <img
+              src={
+                props.flag === "?" || props.flag === undefined
+                  ? null
+                  : [`${process.env.PUBLIC_URL}/flags/${props.flag}.png`]
+              }
+              alt={
+                props.flag === "?" || props.flag === undefined
+                  ? null
+                  : [`${props.latestCountry} Flag`]
+              }
+            />
+          ) : null}
         </div>
       </Link>
     </div>
   );
+};
+
+const imageExists = url => {
+  let image = new Image();
+  image.src = url;
+  if (!image.complete) {
+    return false;
+  } else if (image.height === 0) {
+    return false;
+  }
+
+  return true;
 };
 
 export default Airplane;

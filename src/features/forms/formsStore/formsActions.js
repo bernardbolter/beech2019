@@ -20,16 +20,18 @@ export const modifyAirplaneData = (values, id, planeUID) => async (
   try {
     await values.map(value => {
       console.log(value);
+      console.log(value.serial);
       const planeEntries = Object.entries(value);
       const theKey = planeEntries[0][0];
       const theChange = planeEntries[0][1].new;
-      const dbVar = `${id}.${theKey}`;
+      const dbVar = `${value.serial}.${theKey}`;
+      console.log(dbVar);
       var batch = firestore.batch();
       if (batchKeyArray.indexOf(theKey) !== -1) {
         console.log(theKey);
         if (theKey === "currentCountry") {
           let underCountry = theChange.split(" ").join("_");
-          let underCountryVar = `${id}.flag`;
+          let underCountryVar = `${value.serial}.flag`;
           batch.update(planeExceptRef, {
             [underCountryVar]: underCountry
           });
