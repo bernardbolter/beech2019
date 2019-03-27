@@ -22,7 +22,6 @@ export default function(state = initialState, action) {
         ...state,
         filteredIncidents: action.filteredIncidents,
         incidentsCount: action.filteredIncidents.length + 1,
-        allIncidents: action.allIncidents,
         incidentsLoaded: true
       };
     default:

@@ -46,7 +46,6 @@ export const filterFirstIncidents = incidents => {
 };
 
 export const filterIncidents = (incidents, search) => {
-  let allIncidents = incidents;
   let filteredIncidents = incidents;
 
   if (search.incidentsOlderChecked) {
@@ -82,7 +81,6 @@ export const filterIncidents = (incidents, search) => {
 
   return {
     type: actionTypes.FILTER_INCIDENTS,
-    filteredIncidents,
-    allIncidents
+    filteredIncidents
   };
 };

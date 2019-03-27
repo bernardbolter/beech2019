@@ -11,7 +11,7 @@ const Incident = props => {
     <Link
       to={{ pathname: `/incidents/${props.id}`, incident: props }}
       className={
-        parseInt(props.id, 10) & 1
+        parseInt(props.evenOdd, 10) & 1
           ? "incident incident-odd"
           : "incident incident-even"
       }
@@ -40,16 +40,16 @@ const Incident = props => {
           {props.operator}
         </p>
       </div>
-      <div className="incident-field incident-city">
-        <p>
-          <span className="incident-span">Location</span>
-          {props.locationCity}
-        </p>
-      </div>
       <div className="incident-field incident-airport">
         <p>
           <span className="incident-span">Airport</span>
           {props.locationAirport}
+        </p>
+      </div>
+      <div className="incident-field incident-city">
+        <p>
+          <span className="incident-span">Location</span>
+          {props.locationCity}
         </p>
       </div>
       <div className="incident-field incident-fatalities">

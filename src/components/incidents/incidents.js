@@ -22,6 +22,7 @@ class Incidents extends Component {
     await firedentsRef.onSnapshot(snapshot => {
       let snap = snapshot.data();
       let incidentsArray = Object.keys(snap).map(key => snap[key]);
+      console.log(incidentsArray);
       this.props.filterFirstIncidents(incidentsArray);
       if (this.props.searchIncidents.uniqueIncidents.length === 0) {
         this.props.getIncidentTypes(incidentsArray);
@@ -80,11 +81,11 @@ class Incidents extends Component {
                   <div className="inc-operator-header">
                     <p>Operator</p>
                   </div>
-                  <div className="inc-city-header">
-                    <p>City</p>
-                  </div>
                   <div className="inc-airport-header">
                     <p>Airport</p>
+                  </div>
+                  <div className="inc-city-header">
+                    <p>City</p>
                   </div>
                   <div className="inc-fatalities-header">
                     <p>Fatalities</p>
@@ -102,11 +103,7 @@ class Incidents extends Component {
                 </div>
               ) : (
                 filteredIncidents.map((incident, i) => {
-                  if (!incident.serial) {
-                    return null;
-                  } else {
-                    return <Incident key={i} {...incident} />;
-                  }
+                  return <Incident key={i} {...incident} evenOdd={i} />;
                 })
               )}
             </div>
