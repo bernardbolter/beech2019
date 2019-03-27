@@ -7,7 +7,10 @@ import Header from "../header/header";
 import Airplane from "./airplane";
 
 import { filterAirplanes } from "./airplanesStore/airplanesActions";
-import { getCountriesAndOperators } from "../header/headerStore/searchAirplanesActions";
+import {
+  getCountriesAndOperators,
+  handleAirplaneReset
+} from "../header/headerStore/searchAirplanesActions";
 
 import "./airplanes.sass";
 
@@ -128,7 +131,8 @@ const mapState = state => ({
 
 const actions = {
   filterAirplanes,
-  getCountriesAndOperators
+  getCountriesAndOperators,
+  handleAirplaneReset
 };
 
 export default compose(

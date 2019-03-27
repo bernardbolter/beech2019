@@ -54,28 +54,28 @@
   background: lighten($inc-serial, 12%)
 
   @media screen and (min-width: 650px)
-    width: 5%
+    width: 10%
 
 .incident-registration
   width: 30%
   background: lighten($inc-reg, 7%)
 
   @media screen and (min-width: 650px)
-    width: 7%
+    width: 9%
 
 .incident-operator
   width: 70%
   background: lighten($inc-operator, 12%)
 
   @media screen and (min-width: 650px)
-    width: 18%
+    width: 23%
 
 .incident-city
   width: 75%
   background: lighten($inc-city, 8%)
   
   @media screen and (min-width: 650px)
-    width: 18%
+    width: 23%
 
 .incident-airport
   width: 25%
@@ -84,22 +84,23 @@
   @media screen and (min-width: 650px)
     width: 8%
 
-.incident-category
-  width: 66%
-  background: lighten($inc-category, 12%)
-
-  @media screen and (min-width: 650px)
-    width: 17%
-
 .incident-fatalities
   width: 20%
   @media screen and (min-width: 650px)
-    width: 8%
+    width: 10%
 
-.incident-photos
+.incident-photo
   width: 12%
+  display: flex
+  justify-content: center
+  align-items: center
   @media screen and (min-width: 650px)
-    width: 7%
+    width: 5%
+
+  img
+    width: 60%
+    margin: 0 20%
+    opacity: 0.6
 
 .incident-odd
   .incident-photos

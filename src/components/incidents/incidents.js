@@ -86,15 +86,10 @@ class Incidents extends Component {
                   <div className="inc-airport-header">
                     <p>Airport</p>
                   </div>
-                  <div className="inc-category-header">
-                    <p>Category</p>
-                  </div>
                   <div className="inc-fatalities-header">
                     <p>Fatalities</p>
                   </div>
-                  <div className="inc-photos-header">
-                    <p>Photos</p>
-                  </div>
+                  <div className="inc-photos-header" />
                 </div>
               </section>
               {!filteredIncidents.length ? (

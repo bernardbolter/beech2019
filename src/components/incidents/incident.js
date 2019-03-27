@@ -52,12 +52,6 @@ const Incident = props => {
           {props.locationAirport}
         </p>
       </div>
-      <div className="incident-field incident-category">
-        <p>
-          <span className="incident-span">Category</span>
-          {props.accidentCategory}
-        </p>
-      </div>
       <div className="incident-field incident-fatalities">
         <p>
           <span className="incident-span">Fatalities</span>
@@ -65,10 +59,7 @@ const Incident = props => {
         </p>
       </div>
       <div className="incident-field incident-photo">
-        <p>
-          <span className="incident-span">photo</span>
-          no
-        </p>
+        <img src={`${process.env.PUBLIC_URL}/camera.png`} alt="camera icon" />
       </div>
     </Link>
   );
