@@ -53,22 +53,6 @@ class IncidentSearch extends Component {
             <input
               className="check-input"
               type="checkbox"
-              id="older"
-              value="older"
-              checked={incidentsOlderChecked}
-              onChange={this.handleSortChange}
-            />
-            <label htmlFor="older" className="checkbox check-older">
-              <div className="check-circle">
-                <span className="circle-inside" />
-              </div>
-              <p>older</p>
-            </label>
-          </div>
-          <div className="checkbox-wrap">
-            <input
-              className="check-input"
-              type="checkbox"
               id="newer"
               value="newer"
               checked={incidentsNewerChecked}
@@ -79,6 +63,22 @@ class IncidentSearch extends Component {
                 <span className="circle-inside" />
               </div>
               <p>newer</p>
+            </label>
+          </div>
+          <div className="checkbox-wrap">
+            <input
+              className="check-input"
+              type="checkbox"
+              id="older"
+              value="older"
+              checked={incidentsOlderChecked}
+              onChange={this.handleSortChange}
+            />
+            <label htmlFor="older" className="checkbox check-older">
+              <div className="check-circle">
+                <span className="circle-inside" />
+              </div>
+              <p>older</p>
             </label>
           </div>
         </div>

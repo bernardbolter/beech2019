@@ -22,7 +22,6 @@ class Incidents extends Component {
     await firedentsRef.onSnapshot(snapshot => {
       let snap = snapshot.data();
       let incidentsArray = Object.keys(snap).map(key => snap[key]);
-      console.log(incidentsArray);
       this.props.filterFirstIncidents(incidentsArray);
       if (this.props.searchIncidents.uniqueIncidents.length === 0) {
         this.props.getIncidentTypes(incidentsArray);
@@ -90,7 +89,12 @@ class Incidents extends Component {
                   <div className="inc-fatalities-header">
                     <p>Fatalities</p>
                   </div>
-                  <div className="inc-photos-header" />
+                  <div className="inc-photos-header">
+                    <img
+                      src={`${process.env.PUBLIC_URL}/white_camera.png`}
+                      alt="Camera Icon"
+                    />
+                  </div>
                 </div>
               </section>
               {!filteredIncidents.length ? (

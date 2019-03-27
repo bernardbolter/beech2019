@@ -10,6 +10,7 @@
 
 # flags
 /public/flags
+/public/incident_photos
 
 # production
 /build

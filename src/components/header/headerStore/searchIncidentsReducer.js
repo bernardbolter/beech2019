@@ -23,6 +23,7 @@ export default function(state = initialState, action) {
         incidentsFatalitiesChecked: !state.incidentsFatalitiesChecked
       };
     case actionTypes.INCIDENT_SORT:
+      console.log(action);
       if (action.sortValue === "newer") {
         return {
           ...state,

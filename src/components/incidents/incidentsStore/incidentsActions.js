@@ -2,7 +2,10 @@ import * as actionTypes from "./incidentsTypes";
 
 export const filterFirstIncidents = incidents => {
   let firstIncidents = incidents.filter(field => {
-    return field.editorialOrSupplemental !== "*Removed*";
+    return (
+      field.editorialOrSupplemental !== "*removed*" &&
+      field.editorialOrSupplemental !== "*Removed*"
+    );
   });
 
   const MONTHS = {
