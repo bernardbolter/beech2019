@@ -10,9 +10,9 @@ const HistoryStory = () => {
       </h2>
       <h3>
         Walter H. Beech founded Travel Air in 1924; this company was purchased
-        by the much larger aircraft manufacturer Curtiss-Wright in 1929. Though
-        Walter Beech was appointed soon thereafter as Curtiss-Wright President
-        of Airplanes Division, and Vice President of Sales. Reportedly, he
+        by the much larger aircraft manufacturer Curtiss-Wright in 1929. Walter
+        Beech was appointed soon thereafter as Curtiss-Wright President of
+        Airplanes Division, and Vice President of Sales. However, he reportedly
         desired to return to airplane design.
       </h3>
       <h2>

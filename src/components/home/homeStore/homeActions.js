@@ -4,6 +4,10 @@ import {
   changeAirplaneDropdown,
   handleAirplaneReset
 } from "../../header/headerStore/searchAirplanesActions";
+import {
+  incidentsSearchReset,
+  changeIncidentsDropdown
+} from "../../header/headerStore/searchIncidentsActions";
 
 export const setAirplanes = planes => {
   return {
@@ -109,9 +113,9 @@ export const toggleReadMore = () => {
 };
 
 export const decideHomePageLinks = (data, name) => {
-  console.log(data.name);
   return async dispatch => {
     await dispatch(handleAirplaneReset());
+    await dispatch(incidentsSearchReset());
     if (name === "status") {
       if (data.name === "Parted Out") {
         console.log("parted");
@@ -139,6 +143,9 @@ export const decideHomePageLinks = (data, name) => {
     if (name === "serial") {
       const lowerSerial = data.name.toLowerCase();
       await dispatch(changeAirplaneFilter(lowerSerial));
+    }
+    if (name === "accidentCategory") {
+      await dispatch(changeIncidentsDropdown(data.name));
     }
   };
 };

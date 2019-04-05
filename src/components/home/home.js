@@ -22,8 +22,7 @@ class Home extends Component {
       let planes = {};
       let incidents = {};
       snapshots.forEach(doc => {
-        const documentKey = Object.keys(doc.data())[0];
-        if (documentKey === "UA-1") {
+        if (doc.id === "airplaneExcerpts") {
           planes = doc.data();
         } else {
           incidents = doc.data();

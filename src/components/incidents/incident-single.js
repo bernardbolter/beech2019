@@ -44,7 +44,6 @@ class IncidentSingle extends Component {
   render() {
     const { incidentLoaded, incidentData } = this.state;
     const { match, openModal } = this.props;
-    console.log(incidentData);
     return (
       <React.Fragment>
         <Header match={match} />

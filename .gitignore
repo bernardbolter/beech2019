@@ -12,6 +12,9 @@
 /public/flags
 /public/incident_photos
 
+# config
+/src/fbConfig.js
+
 # production
 /build
 

@@ -27,7 +27,7 @@ const HomeColumn = props => {
           return (
             <Link
               to={
-                props.columnName === "accidentType"
+                props.columnName === "accidentCategory"
                   ? "/incidents"
                   : "/airplanes"
               }

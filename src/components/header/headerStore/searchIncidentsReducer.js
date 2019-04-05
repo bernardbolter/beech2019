@@ -55,6 +55,7 @@ export default function(state = initialState, action) {
         incidentsNewerChecked: true,
         incidentsFilter: "",
         incidentsFatalitiesChecked: false,
+        incidentsPhotosChecked: false,
         incidentsCategory: ""
       };
     case actionTypes.INCIDENT_DROPDOWN:

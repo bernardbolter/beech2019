@@ -1,17 +1,9 @@
 import * as actionTypes from "./headerTypes";
 
 export const changeIncidentsSearchText = value => {
-  console.log("got here");
   return {
     type: actionTypes.INCIDENT_SEARCH_TEXT,
     text: value
-  };
-};
-
-export const changeIncidentsSort = value => {
-  return {
-    type: actionTypes.INCIDENT_SORT,
-    sortValue: value
   };
 };
 

@@ -23,10 +23,10 @@ class Nav extends Component {
       <div className={showNavigation ? "nav nav-open" : "nav"}>
         <Link to="/">home</Link>
         <Link to="/airplanes" onClick={() => handleAirplaneReset()}>
-          airplanes
+          airplanes database
         </Link>
         <Link to="/incidents" onClick={() => incidentsSearchReset()}>
-          incidents
+          incidents database
         </Link>
         <Link to="/history">history</Link>
         <a

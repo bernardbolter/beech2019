@@ -1,7 +1,8 @@
 import * as actionTypes from "./incidentsTypes";
 
 export const filterFirstIncidents = incidents => {
-  let firstIncidents = incidents.filter(field => {
+  console.log(incidents);
+  var firstIncidents = incidents.filter(field => {
     return (
       field.editorialOrSupplemental !== "*removed*" &&
       field.editorialOrSupplemental !== "*Removed*"
@@ -39,7 +40,7 @@ export const filterFirstIncidents = incidents => {
 
     return aaa - bbb || MONTHS[aa[1]] - MONTHS[bb[1]] || aaa[0] - bbb[0];
   });
-
+  console.log(firstIncidents);
   firstIncidents = firstIncidents.reverse();
 
   return {
@@ -50,10 +51,6 @@ export const filterFirstIncidents = incidents => {
 
 export const filterIncidents = (incidents, search) => {
   let filteredIncidents = incidents;
-
-  if (search.incidentsOlderChecked) {
-    filteredIncidents = filteredIncidents.reverse();
-  }
 
   if (search.incidentsFatalitiesChecked) {
     filteredIncidents = filteredIncidents.filter(fate => {
@@ -88,8 +85,25 @@ export const filterIncidents = (incidents, search) => {
     );
   }
 
+  console.log(filteredIncidents);
+
+  console.log(search.incidentsNewerChecked);
+
+  // if (search.incidentsNewerChecked === true) {
+  //   console.log("reveresed");
+  //   filteredIncidents = filteredIncidents.reverse();
+  // }
+
   return {
     type: actionTypes.FILTER_INCIDENTS,
     filteredIncidents
+  };
+};
+
+export const reverseIncidents = incidents => {
+  const reverseInts = incidents.reverse();
+  return {
+    type: actionTypes.REVERSE_INCIDENTS,
+    reverseInts
   };
 };

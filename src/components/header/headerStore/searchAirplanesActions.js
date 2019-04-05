@@ -21,7 +21,6 @@ export const changeAirplaneSort = value => {
 };
 
 export const changeAirplaneFilter = value => {
-  console.log(value);
   return {
     type: actionTypes.AIRPLANE_FILTER,
     filterValue: value

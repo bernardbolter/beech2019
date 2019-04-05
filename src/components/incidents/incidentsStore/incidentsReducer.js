@@ -10,9 +10,9 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.FIRST_INCIDENTS:
+      console.log("hit first incidents");
       return {
         ...state,
-        filteredIncidents: action.firstIncidents,
         incidentsCount: action.firstIncidents.length + 1,
         allIncidents: action.firstIncidents,
         incidentsLoaded: true
@@ -23,6 +23,11 @@ export default function(state = initialState, action) {
         filteredIncidents: action.filteredIncidents,
         incidentsCount: action.filteredIncidents.length + 1,
         incidentsLoaded: true
+      };
+    case actionTypes.REVERSE_INCIDENTS:
+      return {
+        ...state,
+        filteredIncidents: action.reverseInts
       };
     default:
       return state;

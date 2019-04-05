@@ -26,14 +26,7 @@ import modalReducer from "./features/modals/modalStore/modalReducer";
 import myFormReducer from "./features/forms/formsStore/formReducer";
 import authReducer from "./features/auth/authStore/authReducer";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDbLt9jQRPWCxIop-TUaeJeDycBWcxV1NY",
-  authDomain: "beech1900-fb559.firebaseapp.com",
-  databaseURL: "https://beech1900-fb559.firebaseio.com",
-  projectId: "beech1900-fb559",
-  storageBucket: "beech1900-fb559.appspot.com",
-  messagingSenderId: "483728069839"
-};
+import { firebaseConfig } from "./fbConfig";
 
 const rrfConfig = {
   userProfile: "users",

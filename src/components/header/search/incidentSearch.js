@@ -5,11 +5,12 @@ import "./search.sass";
 
 import {
   changeIncidentsSearchText,
-  changeIncidentsSort,
   changeIncidentsFilter,
   changeIncidentsDropdown,
   incidentsSearchReset
 } from "../headerStore/searchIncidentsActions";
+
+import { reverseIncidents } from "../../incidents/incidentsStore/incidentsActions";
 
 class IncidentSearch extends Component {
   handleTextChange = e => {
@@ -17,7 +18,7 @@ class IncidentSearch extends Component {
   };
 
   handleSortChange = e => {
-    this.props.changeIncidentsSort(e.target.value);
+    this.props.reverseIncidents();
   };
 
   handleFilterChange = e => {
@@ -39,7 +40,6 @@ class IncidentSearch extends Component {
       incidentsCategory,
       uniqueIncidents
     } = this.props.searchIncidents;
-    console.log(this.props);
     return (
       <div
         className={
@@ -171,10 +171,10 @@ const mapState = state => ({
 
 const actions = {
   changeIncidentsSearchText,
-  changeIncidentsSort,
   changeIncidentsFilter,
   changeIncidentsDropdown,
-  incidentsSearchReset
+  incidentsSearchReset,
+  reverseIncidents
 };
 
 export default connect(
