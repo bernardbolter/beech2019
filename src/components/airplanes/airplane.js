@@ -31,19 +31,19 @@ const Airplane = props => {
         </div>
         <div className="airplane-registration">
           <p>
-            <span className="mobile-excerpt">Current Reg.</span>
+            <span className="mobile-excerpt">Latest Reg.</span>
             {props.currentReg}
           </p>
         </div>
         <div className="airplane-latest-operator">
           <p>
-            <span className="mobile-excerpt">Current Operator</span>
+            <span className="mobile-excerpt">Latest Operator</span>
             {props.currentOperator}
           </p>
         </div>
         <div className="airplane-country">
           <p>
-            <span className="mobile-excerpt">Current Country</span>
+            <span className="mobile-excerpt">Latest Country</span>
             {props.currentCountry}
           </p>
           {imageExists(`${process.env.PUBLIC_URL}/flags/${props.flag}.png`) ? (

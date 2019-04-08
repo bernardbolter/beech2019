@@ -83,13 +83,13 @@ class Airplanes extends Component {
                     <p>Status</p>
                   </div>
                   <div className="registration-header">
-                    <p>Current Reg.</p>
+                    <p>Latest Reg.</p>
                   </div>
                   <div className="latest-operator-header">
-                    <p>Current Operator</p>
+                    <p>Latest Operator</p>
                   </div>
                   <div className="country-header">
-                    <p>Current Country</p>
+                    <p>Latest Country</p>
                   </div>
                 </section>
                 {!filteredAirplanes.length ? (

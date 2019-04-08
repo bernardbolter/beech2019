@@ -51,7 +51,7 @@ class AirplaneSingle extends Component {
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const {
       serial,
-      prodDate,
+      productionDate,
       status,
       currentReg,
       currentRegDate,
@@ -63,11 +63,12 @@ class AirplaneSingle extends Component {
       currentDataSourceLink,
       currentDataSourceDate,
       currentDataSourceType,
+      initialOpReg,
       initialOperator,
-      initialOperatorReg,
-      prodReg,
+      productionReg,
       notes
     } = this.state.airplaneData;
+    console.log(this.state.airplaneData);
     return (
       <React.Fragment>
         <section>
@@ -114,22 +115,22 @@ class AirplaneSingle extends Component {
                   </div>
                   <div className="airplane-single-date-made">
                     <h3>Production Date</h3>
-                    <p>{prodDate}</p>
+                    <p>{productionDate}</p>
                   </div>
                   <div className="airplane-single-current-status">
-                    <h3>Current Status</h3>
+                    <h3>Status</h3>
                     <p>{status}</p>
                   </div>
                   <div className="airplane-single-registration">
-                    <h3>Current Registration</h3>
+                    <h3>Latest Registration</h3>
                     <p>{currentReg}</p>
                   </div>
                   <div className="airplane-single-latest-operator">
-                    <h3>Current Operator</h3>
+                    <h3>Latest Operator</h3>
                     <p>{currentOperator}</p>
                   </div>
                   <div className="airplane-single-country">
-                    <h3>Current Country</h3>
+                    <h3>Latest Country</h3>
                     <p>{currentCountry}</p>
                   </div>
                 </div>
@@ -140,7 +141,7 @@ class AirplaneSingle extends Component {
                     {currentDataSourceLink !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">
-                          Current Data Source Link
+                          Latest Data Source Link
                         </p>
                         <p className="bot-info-data">
                           <a
@@ -157,7 +158,7 @@ class AirplaneSingle extends Component {
                     {currentDataSourceDate !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">
-                          Current Data Source Date
+                          Latest Data Source Date
                         </p>
                         <p className="bot-info-data bot-info-line">
                           {currentDataSourceDate}
@@ -167,9 +168,7 @@ class AirplaneSingle extends Component {
 
                     {currentDataSourceType !== "" ? (
                       <div className="single-info-left">
-                        <p className="bot-info-title">
-                          Current Data Source Type
-                        </p>
+                        <p className="bot-info-title">Latest Data Type</p>
                         <p className="bot-info-data bot-info-line">
                           {currentDataSourceType}
                         </p>
@@ -178,7 +177,7 @@ class AirplaneSingle extends Component {
 
                     {currentOwner !== "" ? (
                       <div className="single-info-left">
-                        <p className="bot-info-title">Current Owner</p>
+                        <p className="bot-info-title">Latest Owner</p>
                         <p className="bot-info-data bot-info-line">
                           {currentOwner}
                         </p>
@@ -187,7 +186,7 @@ class AirplaneSingle extends Component {
 
                     {currentConfiguration !== "" ? (
                       <div className="single-info-left">
-                        <p className="bot-info-title">Current Configuration</p>
+                        <p className="bot-info-title">Configuration</p>
                         <p className="bot-info-data bot-info-line">
                           {currentConfiguration}
                         </p>
@@ -196,9 +195,7 @@ class AirplaneSingle extends Component {
 
                     {currentRegDate !== "" ? (
                       <div className="single-info-left">
-                        <p className="bot-info-title">
-                          Current Registration Date
-                        </p>
+                        <p className="bot-info-title">Registration Date</p>
                         <p className="bot-info-data bot-info-line">
                           {currentRegDate}
                         </p>
@@ -208,9 +205,7 @@ class AirplaneSingle extends Component {
                     {currentRegStatus !== "" &&
                     currentRegStatus !== undefined ? (
                       <div className="single-info-left">
-                        <p className="bot-info-title">
-                          Current Registration Date
-                        </p>
+                        <p className="bot-info-title">Registration Status</p>
                         <p className="bot-info-data bot-info-line">
                           {currentRegStatus}
                         </p>
@@ -237,10 +232,12 @@ class AirplaneSingle extends Component {
                   </div>
                 </div>
                 <div className="airplane-single-bottom-right">
-                  {prodReg !== "" && prodReg !== undefined ? (
+                  {productionReg !== "" && productionReg !== undefined ? (
                     <div className="single-info-right">
                       <p className="bot-info-title">Production Registration</p>
-                      <p className="bot-info-data bot-info-line">{prodReg}</p>
+                      <p className="bot-info-data bot-info-line">
+                        {productionReg}
+                      </p>
                     </div>
                   ) : null}
                   {initialOperator !== "" && initialOperator !== undefined ? (
@@ -251,26 +248,27 @@ class AirplaneSingle extends Component {
                       </p>
                     </div>
                   ) : null}
-                  {initialOperatorReg !== "" &&
-                  initialOperatorReg !== undefined ? (
+                  {initialOpReg !== "" && initialOpReg !== undefined ? (
                     <div className="single-info-right">
                       <p className="bot-info-title">
                         Initial Operator Registration
                       </p>
                       <p className="bot-info-data bot-info-line">
-                        {initialOperatorReg}
+                        {initialOpReg}
                       </p>
                     </div>
                   ) : null}
                 </div>
                 <div className="airplane-single-events">
                   <div className="airplane-single-bottom-right-events">
-                    {prodReg !== "" && prodReg !== undefined ? (
+                    {productionReg !== "" && productionReg !== undefined ? (
                       <div className="single-info-right">
                         <p className="bot-info-title">
                           Production Registration
                         </p>
-                        <p className="bot-info-data bot-info-line">{prodReg}</p>
+                        <p className="bot-info-data bot-info-line">
+                          {productionReg}
+                        </p>
                       </div>
                     ) : null}
                     {initialOperator !== "" && initialOperator !== undefined ? (
@@ -281,14 +279,13 @@ class AirplaneSingle extends Component {
                         </p>
                       </div>
                     ) : null}
-                    {initialOperatorReg !== "" &&
-                    initialOperatorReg !== undefined ? (
+                    {initialOpReg !== "" && initialOpReg !== undefined ? (
                       <div className="single-info-right">
                         <p className="bot-info-title">
                           Initial Operator Registration
                         </p>
                         <p className="bot-info-data bot-info-line">
-                          {initialOperatorReg}
+                          {initialOpReg}
                         </p>
                       </div>
                     ) : null}
