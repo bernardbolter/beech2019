@@ -58,7 +58,7 @@ export const filterIncidents = (incidents, search) => {
 
   if (search.incidentsPhotosChecked) {
     filteredIncidents = filteredIncidents.filter(fate => {
-      return fate.hasPhoto !== undefined && fate.hasPhoto === true;
+      return fate.image_1 !== undefined && fate.image_1 !== "";
     });
   }
 
@@ -71,11 +71,11 @@ export const filterIncidents = (incidents, search) => {
     });
   }
 
-  if (search.incidentSearchText !== "") {
-    const matchFilter = new RegExp(search.incidentSearchText, "i");
+  if (search.incidentsSearchText !== "") {
+    const matchFilter = new RegExp(search.incidentsSearchText, "i");
     filteredIncidents = filteredIncidents.filter(
       inc =>
-        !search.incidentSearchText ||
+        !search.incidentsSearchText ||
         matchFilter.test(inc.locationCity) ||
         matchFilter.test(inc.locationAirport) ||
         matchFilter.test(inc.operator) ||

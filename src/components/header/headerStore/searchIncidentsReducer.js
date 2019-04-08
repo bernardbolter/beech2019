@@ -1,7 +1,7 @@
 import * as actionTypes from "./headerTypes";
 
 const initialState = {
-  incidentSearchText: "",
+  incidentsSearchText: "",
   incidentsOlderChecked: false,
   incidentsNewerChecked: true,
   incidentsFilter: "",
@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
     case actionTypes.INCIDENT_SEARCH_TEXT:
       return {
         ...state,
-        incidentSearchText: action.text
+        incidentsSearchText: action.text
       };
     case actionTypes.INCIDENT_FILTER:
       if (action.filterValue === "fatalities") {
@@ -50,7 +50,7 @@ export default function(state = initialState, action) {
     case actionTypes.INCIDENT_RESET:
       return {
         ...state,
-        incidentSearchText: "",
+        incidentsSearchText: "",
         incidentsOlderChecked: false,
         incidentsNewerChecked: true,
         incidentsFilter: "",

@@ -161,7 +161,8 @@ class IncidentSingle extends Component {
                 ) : null}
               </div>
               <div className="incident-bot-right">
-                {incidentData.image_1 !== undefined ? (
+                {incidentData.image_1 !== "" &&
+                incidentData.image_1 !== undefined ? (
                   <div
                     className="incident-image-wrap"
                     onClick={() =>
@@ -179,7 +180,8 @@ class IncidentSingle extends Component {
                     />
                   </div>
                 ) : null}
-                {incidentData.image_2 !== undefined ? (
+                {incidentData.image_2 !== "" &&
+                incidentData.image_2 !== undefined ? (
                   <div
                     className="incident-image-wrap"
                     onClick={() =>
@@ -197,7 +199,8 @@ class IncidentSingle extends Component {
                     />
                   </div>
                 ) : null}
-                {incidentData.image_3 !== undefined ? (
+                {incidentData.image_3 !== "" &&
+                incidentData.image_3 !== undefined ? (
                   <div
                     className="incident-image-wrap"
                     onClick={() =>
@@ -215,7 +218,8 @@ class IncidentSingle extends Component {
                     />
                   </div>
                 ) : null}
-                {incidentData.image_4 !== undefined ? (
+                {incidentData.image_4 !== "" &&
+                incidentData.image_4 !== undefined ? (
                   <div
                     className="incident-image-wrap"
                     onClick={() =>

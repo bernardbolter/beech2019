@@ -23,7 +23,6 @@ class Incidents extends Component {
       let snap = snapshot.data();
       let incidentsArray = Object.keys(snap).map(key => snap[key]);
       this.props.filterFirstIncidents(incidentsArray);
-      console.log("incident array");
       if (this.props.searchIncidents.uniqueIncidents.length === 0) {
         this.props.getIncidentTypes(incidentsArray);
       }
@@ -32,7 +31,6 @@ class Incidents extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.searchIncidents !== prevProps.searchIncidents) {
-      console.log("all incidents");
       this.props.filterIncidents(
         this.props.incidents.allIncidents,
         this.props.searchIncidents
