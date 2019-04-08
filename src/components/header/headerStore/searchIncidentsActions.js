@@ -7,6 +7,13 @@ export const changeIncidentsSearchText = value => {
   };
 };
 
+export const changeIncidentsSort = value => {
+  return {
+    type: actionTypes.INCIDENT_SORT,
+    sortValue: value
+  };
+};
+
 export const changeIncidentsFilter = value => {
   return {
     type: actionTypes.INCIDENT_FILTER,

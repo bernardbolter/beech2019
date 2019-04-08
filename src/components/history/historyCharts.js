@@ -19,7 +19,6 @@ const HistoryCharts = props => {
               className="service-chart-wrap"
               onClick={() => openModal("ChartModal", chart)}
             >
-              <p>{chart.name}</p>
               <img
                 src={`${process.env.PUBLIC_URL}/${chart.thumb}`}
                 alt={`Service Chart for ${chart.name}`}

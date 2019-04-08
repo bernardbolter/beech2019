@@ -18,6 +18,10 @@ import "./app.scss";
 
 const browserHistory = createBrowserHistory();
 
+browserHistory.listen(_ => {
+  window.scrollTo(0, 0);
+});
+
 const Root = () => {
   return (
     <Provider store={store}>

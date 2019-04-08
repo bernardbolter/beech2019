@@ -52,7 +52,11 @@ export const filterHomeData = (planes, incidents) => {
       sortedData.status.push(a.status);
     }
     // country data
-    if (a.currentCountry !== "?" && a.currentCountry !== undefined) {
+    if (
+      a.currentCountry !== "?" &&
+      a.currentCountry !== undefined &&
+      a.status === "Operating"
+    ) {
       sortedData.currentCountry.push(a.currentCountry);
     }
     // operator data
@@ -60,7 +64,8 @@ export const filterHomeData = (planes, incidents) => {
       a.currentOperator !== "?" &&
       a.currentOperator !== undefined &&
       a.currentOperator !== "No Data" &&
-      a.currentOperator !== "not operating"
+      a.currentOperator !== "not operating" &&
+      a.status === "Operating"
     ) {
       sortedData.currentOperator.push(a.currentOperator);
     }
@@ -113,19 +118,20 @@ export const toggleReadMore = () => {
 };
 
 export const decideHomePageLinks = (data, name) => {
+  console.log(data);
+  console.log(name);
   return async dispatch => {
     await dispatch(handleAirplaneReset());
     await dispatch(incidentsSearchReset());
     if (name === "status") {
       if (data.name === "Parted Out") {
-        console.log("parted");
         await dispatch(changeAirplaneFilter("partedOut"));
       }
       if (data.name === "Operating") {
         await dispatch(changeAirplaneFilter("operating"));
       }
-      if (data.name === "Operating (Non-Current)") {
-        await dispatch(changeAirplaneFilter("operatingNonCurrent"));
+      if (data.name === "Unknown") {
+        await dispatch(changeAirplaneFilter("unknown"));
       }
       if (data.name === "Non-Flying") {
         await dispatch(changeAirplaneFilter("nonFlying"));
@@ -135,10 +141,12 @@ export const decideHomePageLinks = (data, name) => {
       }
     }
     if (name === "currentOperator") {
+      await dispatch(changeAirplaneFilter("operating"));
       await dispatch(changeAirplaneDropdown(data.name, "operator"));
     }
     if (name === "currentCountry") {
       await dispatch(changeAirplaneDropdown(data.name, "opercountryator"));
+      await dispatch(changeAirplaneFilter("operating"));
     }
     if (name === "serial") {
       const lowerSerial = data.name.toLowerCase();

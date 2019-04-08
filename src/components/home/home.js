@@ -48,37 +48,12 @@ class Home extends Component {
         <section className={openMobileNav ? "home home-open" : "home"}>
           <div className="home-text-wrap home-text-wrap-above">
             <div className="home-text">
-              <h2>Welcome to Beech1900.com</h2>
               <h1>
-                My goal is to bring you high fidelity, current, and interesting
-                information.
+                Welcome! Learn, research, and enjoy the most comprehensive
+                source of information about the Beech 1900 you can find. Whether
+                you're doing serious research or just browsing, there are search
+                tools designed to make it easier.
               </h1>
-              <h1>
-                The <b>"Airplane Database"</b> is the most comprehensive and
-                current database you'll find publically, with information about
-                and history of every Beech 1900 made, <i>696 total</i>.
-              </h1>
-              <h1>
-                The <b>"Incident Database"</b> contains incident and accident
-                data, including many moderate incidents where no one was hurt.
-                There 550 unique incidents and counting.
-              </h1>
-              <h1>
-                <b>"Service Charts"</b> are a convenient way to view historical
-                airline fleet information, aggregated for your convenience.
-              </h1>
-              <h3>Thanks for coming by!</h3>
-              <h2>Aaron</h2>
-              <h4>
-                I welcome your feedback and questions:
-                <a
-                  href="https://twitter.com/Beech1900dotcom"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  twitter @beech1900dotcom
-                </a>
-              </h4>
               <div
                 onClick={toggleReadMore}
                 className={
@@ -110,19 +85,36 @@ class Home extends Component {
               }
             >
               <h1>
-                This site is curated by a former Beech 1900 Captain at a
-                scheduled US passenger airline. Please have a look around! If
-                you have any feedback, check out twitter @beech1900dotcom and
-                leave a note.
+                I'm a former Beech 1900 Captain at a scheduled US passenger
+                airline, as well as the editor/curator here.
+              </h1>
+              <h1>
+                The airplane database is the most comprehensive and current
+                database you'll find outside of Beechcraft itself of the 696
+                Beech 1900s manufactured.
+              </h1>
+              <h1>
+                The incident database contains accident and incident data and
+                stills/video, including many moderate non-injury incidents.
+                There are over 500 unique incidents so far.
+              </h1>
+              <h1>
+                The history link has a narrative timeline, model information,
+                and graphical operator service charts
+              </h1>
+              <h1>
+                At the @beech1900dotcom Twitter page, you can post a question,
+                give feedback, send corrections, and find the latest updates to
+                the databases. I want to hear from you!
               </h1>
               <h2>Why I created Beech1900.com:</h2>
               <h1>
                 About 15 years ago, I began to regularly use Wikipedia and
                 happened upon their page dedicated to the Beech 1900. My first
                 instinct was to jump on Wikipedia and start editing that page
-                like mad. Slowly it became clear that what I really wanted to do
-                was more comprehensive. Goodness, I had been a Beech 1900
-                Captain... I've designed websites... I can do this!
+                like mad. It became clear that what I really wanted to do was
+                more comprehensive. Goodness, I had been a Beech 1900 Captain...
+                I've designed websites... I can do this!
               </h1>
               <h1>
                 For the last ten years, I've been researching, tweaking, and
@@ -168,7 +160,6 @@ class Home extends Component {
                   columnName="currentCountry"
                   columnHeader="Top Countries"
                 />
-                <HomeColumn columnName="serial" columnHeader="Serial Series" />
                 <HomeColumn
                   columnName="accidentCategory"
                   columnHeader="Top Incident Type"

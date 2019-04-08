@@ -16,6 +16,7 @@ import "./airplanes.sass";
 
 class Airplanes extends Component {
   async componentDidMount() {
+    window.scrollTo(0, 0);
     let fireplanesRef = await this.props.firestore
       .collection("base")
       .doc("airplaneExcerpts");

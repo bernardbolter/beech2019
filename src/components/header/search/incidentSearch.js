@@ -7,10 +7,9 @@ import {
   changeIncidentsSearchText,
   changeIncidentsFilter,
   changeIncidentsDropdown,
+  changeIncidentsSort,
   incidentsSearchReset
 } from "../headerStore/searchIncidentsActions";
-
-import { reverseIncidents } from "../../incidents/incidentsStore/incidentsActions";
 
 class IncidentSearch extends Component {
   handleTextChange = e => {
@@ -18,7 +17,7 @@ class IncidentSearch extends Component {
   };
 
   handleSortChange = e => {
-    this.props.reverseIncidents();
+    this.props.changeIncidentsSort(e.target.value);
   };
 
   handleFilterChange = e => {
@@ -173,8 +172,8 @@ const actions = {
   changeIncidentsSearchText,
   changeIncidentsFilter,
   changeIncidentsDropdown,
-  incidentsSearchReset,
-  reverseIncidents
+  changeIncidentsSort,
+  incidentsSearchReset
 };
 
 export default connect(

@@ -16,14 +16,17 @@
     position: relative
     top: 0
     left: 0
-    width: 130px
+    width: 150px
     margin: 5px 0  0 5px
     border-bottom: none
     background: none
     padding: 0
+    flex-grow: 0
+    flex-shrink: 0
+    flex-basis: 150px
 
   a
-    color: $dark-color
+    color: black
     display: block
     text-align: left
     text-decoration: none
@@ -32,7 +35,7 @@
 
     @media screen and (min-width: 650px)
       margin: 5px
-      font-size: 14px
+      font-size: 16px
 
     &:hover
       text-decoration: underline
