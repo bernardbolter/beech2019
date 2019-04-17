@@ -11,6 +11,7 @@
 # flags
 /public/flags
 /public/incident_photos
+/public/history
 
 # config
 /src/fbConfig.js

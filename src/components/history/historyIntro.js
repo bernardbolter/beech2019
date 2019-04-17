@@ -30,10 +30,10 @@ const HistoryIntro = () => {
         </div>
         <div className="history-image-wrap image-one">
           <img
-            src={`${process.env.PUBLIC_URL}/factory1.jpg`}
-            alt="Beech1900 factory"
+            src={`${process.env.PUBLIC_URL}/history/first_king_air_flight.jpg`}
+            alt="The first flight of the C90 24 January 1964"
           />
-          <p>Beech 1900 factory</p>
+          <p>The first flight of the C90 24 January 1964</p>
         </div>
       </div>
       <div className="history-intro intro-two">
@@ -65,10 +65,10 @@ const HistoryIntro = () => {
         </div>
         <div className="history-image-wrap image-two">
           <img
-            src={`${process.env.PUBLIC_URL}/factory2.jpg`}
-            alt="Beech1900 factory"
+            src={`${process.env.PUBLIC_URL}/history/beech_18_factory.jpg`}
+            alt="Beech Factory"
           />
-          <p>the original factory two</p>
+          <p>Beech Factory</p>
         </div>
       </div>
     </section>

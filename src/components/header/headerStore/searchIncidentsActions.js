@@ -44,6 +44,8 @@ export const getIncidentTypes = incidents => {
       inc.accidentCategory !== " " &&
       inc.accidentCategory !== "No Data" &&
       inc.accidentCategory !== "No Data " &&
+      inc.accidentCategory !== "no data " &&
+      inc.accidentCategory !== "no data" &&
       inc.accidentCategory !== "No data"
     ) {
       incidentTypes.push(inc.accidentCategory);

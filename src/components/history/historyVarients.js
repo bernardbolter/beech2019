@@ -43,6 +43,19 @@ const HistoryVarients = () => {
             US Air Force and US Army as VIP transports. One is used for GPS
             jamming tests at Holloman Air Force Base, New Mexico.
           </h3>
+          <div className="history-image-wrap-column">
+            <img
+              src={`${process.env.PUBLIC_URL}/history/factory1.jpg`}
+              alt="1900Ds on the factory floor at Raytheon in Wichita. Mid 1990s"
+            />
+          </div>
+          <div className="history-image-wrap-column">
+            <img
+              src={`${process.env.PUBLIC_URL}/history/factory2.jpg`}
+              alt="1900Ds on the factory floor at Raytheon in Wichita. Mid 1990s"
+            />
+            <p>1900Ds on the factory floor at Raytheon in Wichita. Mid 1990s</p>
+          </div>
         </div>
         <div className="history-varients-column">
           <h2>
@@ -60,6 +73,13 @@ const HistoryVarients = () => {
             featuring six-foot cabin height. While this promoted passenger
             comfort, it also increased overall aerodynamic drag by 13%.
           </h3>
+          <div className="history-image-wrap-column">
+            <img
+              src={`${process.env.PUBLIC_URL}/history/beech-1900D-cabin.jpg`}
+              alt="increased headroom in the 1900D"
+            />
+            <p>The first flight of the C90 24 January 1964</p>
+          </div>
           <h3>
             To compensate, more powerful engines were needed; the PT6A-67D
             turboprop engines featured 179 more horsepower each than the

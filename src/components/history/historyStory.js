@@ -5,16 +5,27 @@ const HistoryStory = () => {
     <section className="history-container history-container-main">
       <h1>BEECHCRAFT COMPANY HISTORY</h1>
       <p className="history-story-title-extra">(IN A BEECHNUT SHELL)</p>
-      <h2>
-        Travel Air <span className="history-story-year">- 1924</span>
-      </h2>
-      <h3>
-        Walter H. Beech founded Travel Air in 1924; this company was purchased
-        by the much larger aircraft manufacturer Curtiss-Wright in 1929. Walter
-        Beech was appointed soon thereafter as Curtiss-Wright President of
-        Airplanes Division, and Vice President of Sales. However, he reportedly
-        desired to return to airplane design.
-      </h3>
+      <div className="history-story-picture-wrap">
+        <div className="history-story-text-wrap">
+          <h2>
+            Travel Air <span className="history-story-year">- 1924</span>
+          </h2>
+          <h3>
+            Walter H. Beech founded Travel Air in 1924; this company was
+            purchased by the much larger aircraft manufacturer Curtiss-Wright in
+            1929. Walter Beech was appointed soon thereafter as Curtiss-Wright
+            President of Airplanes Division, and Vice President of Sales.
+            However, he reportedly desired to return to airplane design.
+          </h3>
+        </div>
+        <div className="history-image-story">
+          <img
+            src={`${process.env.PUBLIC_URL}/history/walter_beech.jpg`}
+            alt="Walter Beech"
+          />
+          <p>Walter Beech</p>
+        </div>
+      </div>
       <h2>
         Beech Aircraft Corporation{" "}
         <span className="history-story-year">- 1932</span>
@@ -25,12 +36,26 @@ const HistoryStory = () => {
         vacant Cessna facility, and many of the original Travel Air employees
         followed Beech to the fledgling company.
       </h3>
+      <div className="history-image-story-full">
+        <img
+          src={`${process.env.PUBLIC_URL}/history/beech_staggerwing.jpg`}
+          alt="Beechcraft Staggerwing"
+        />
+        <p>Beechcraft Staggerwing</p>
+      </div>
       <h3>
         The Beechcraft Model 17 Staggerwing was the first model off the new
         Beechcraft production line. It first flew in November 1932. Eventually
         about 750 Staggerwings were constructed. About one third of these were
         delivered to the US Army Air Force during World War II.
       </h3>
+      <div className="history-image-story-full">
+        <img
+          src={`${process.env.PUBLIC_URL}/history/walter_and_olive_beech.jpg`}
+          alt="Walter and Olive Beech next to a Staggerwing, circa 1935"
+        />
+        <p>Walter and Olive Beech next to a Staggerwing, circa 1935</p>
+      </div>
       <h3>
         Through World War II, the best-selling Beechcraft model was the
         twin-radial engine Beechcraft Model 18. Following the War, the
@@ -39,11 +64,25 @@ const HistoryStory = () => {
         longest-produced airplane in history, with new models continuing to roll
         off the factory floor today.
       </h3>
+      <div className="history-image-story-full">
+        <img
+          src={`${process.env.PUBLIC_URL}/history/beech_18_in_flight.jpg`}
+          alt="Beechcraft 18"
+        />
+        <p>Beechcraft 18</p>
+      </div>
       <h3>
         After Walter Beech died in 1950, Olive Beech took over the company, and
         remained CEO for the next thirty years, retiring following Raytheon’s
         acquisition of Beechcraft in 1980.
       </h3>
+      <div className="history-image-story-full">
+        <img
+          src={`${process.env.PUBLIC_URL}/history/bonanza_magazine_ad_1949.jpg`}
+          alt="Bonanza magazine ad, 1949"
+        />
+        <p>Bonanza magazine ad, 1949</p>
+      </div>
       <h2>
         Raytheon <span className="history-story-year">- 1980</span>
       </h2>

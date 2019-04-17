@@ -48,7 +48,7 @@ export const filterHomeData = (planes, incidents) => {
   });
   planesArray.map(a => {
     // status data
-    if (a.status !== "?" && a.status !== undefined) {
+    if (a.status !== "?" && a.status !== undefined && a.status !== "no data") {
       sortedData.status.push(a.status);
     }
     // country data
@@ -64,6 +64,7 @@ export const filterHomeData = (planes, incidents) => {
       a.latestOperator !== "?" &&
       a.latestOperator !== undefined &&
       a.latestOperator !== "No Data" &&
+      a.latestOperator !== "no data" &&
       a.latestOperator !== "not operating" &&
       a.status === "Operating"
     ) {
@@ -137,17 +138,13 @@ export const decideHomePageLinks = (data, name) => {
         await dispatch(changeAirplaneFilter("destroyed"));
       }
     }
-    if (name === "currentOperator") {
+    if (name === "latestOperator") {
       await dispatch(changeAirplaneFilter("operating"));
       await dispatch(changeAirplaneDropdown(data.name, "operator"));
     }
-    if (name === "currentCountry") {
+    if (name === "latestCountry") {
       await dispatch(changeAirplaneDropdown(data.name, "opercountryator"));
       await dispatch(changeAirplaneFilter("operating"));
-    }
-    if (name === "serial") {
-      const lowerSerial = data.name.toLowerCase();
-      await dispatch(changeAirplaneFilter(lowerSerial));
     }
     if (name === "accidentCategory") {
       await dispatch(changeIncidentsDropdown(data.name));

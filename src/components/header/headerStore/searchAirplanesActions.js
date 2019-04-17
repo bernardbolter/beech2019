@@ -21,7 +21,6 @@ export const changeAirplaneSort = value => {
 };
 
 export const changeAirplaneFilter = value => {
-  console.log("hit it");
   return {
     type: actionTypes.AIRPLANE_FILTER,
     filterValue: value
@@ -41,23 +40,23 @@ export const getCountriesAndOperators = airplanes => {
   const airplaneOperators = [];
   airplanes.map(plane => {
     if (
-      plane.currentCountry !== "?" &&
-      plane.currentCountry !== undefined &&
-      plane.currentCountry !== "" &&
-      plane.currentCountry !== "No Data"
+      plane.latestCountry !== "?" &&
+      plane.latestCountry !== undefined &&
+      plane.latestCountry !== "" &&
+      plane.latestCountry !== "No Data"
     ) {
-      airplaneCountries.push(plane.currentCountry);
+      airplaneCountries.push(plane.latestCountry);
     }
 
     if (
-      plane.currentOperator !== "?" &&
-      plane.currentOperator !== undefined &&
-      plane.currentOperator !== "" &&
-      plane.currentOperator !== " " &&
-      plane.currentOperator !== "No Data" &&
-      plane.currentOperator !== "not operating"
+      plane.latestOperator !== "?" &&
+      plane.latestOperator !== undefined &&
+      plane.latestOperator !== "" &&
+      plane.latestOperator !== " " &&
+      plane.latestOperator !== "No Data" &&
+      plane.latestOperator !== "not operating"
     ) {
-      airplaneOperators.push(plane.currentOperator);
+      airplaneOperators.push(plane.latestOperator);
     }
 
     return null;
