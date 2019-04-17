@@ -29,7 +29,7 @@ class AirplaneSingle extends Component {
     const serial = this.props.match.params.serial;
     await this.props.firestore
       .collection("airplanes")
-      .where("serial", "==", serial)
+      .where("Serial", "==", serial)
       .onSnapshot(querySnapshot => {
         querySnapshot.forEach(doc => {
           this.setState({
@@ -47,22 +47,23 @@ class AirplaneSingle extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { match, auth, openModal } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const {
-      serial,
+      Serial,
+      configuration,
       productionDate,
       status,
-      currentReg,
-      currentRegDate,
-      currentRegStatus,
-      currentOwner,
-      currentConfiguration,
-      currentOperator,
-      currentCountry,
-      currentDataSourceLink,
-      currentDataSourceDate,
-      currentDataSourceType,
+      latestReg,
+      regDate,
+      regStatus,
+      latestOwner,
+      latestOperator,
+      latestCountry,
+      dataLink,
+      dataDate,
+      dataType,
       initialOpReg,
       initialOperator,
       productionReg,
@@ -111,7 +112,7 @@ class AirplaneSingle extends Component {
                 <div className="airplane-single-colors">
                   <div className="airplane-single-serial">
                     <h3>Serial</h3>
-                    <p>{serial}</p>
+                    <p>{Serial}</p>
                   </div>
                   <div className="airplane-single-date-made">
                     <h3>Production Date</h3>
@@ -123,91 +124,88 @@ class AirplaneSingle extends Component {
                   </div>
                   <div className="airplane-single-registration">
                     <h3>Latest Registration</h3>
-                    <p>{currentReg}</p>
+                    <p>{latestReg}</p>
                   </div>
                   <div className="airplane-single-latest-operator">
                     <h3>Latest Operator</h3>
-                    <p>{currentOperator}</p>
+                    <p>{latestOperator}</p>
                   </div>
                   <div className="airplane-single-country">
                     <h3>Latest Country</h3>
-                    <p>{currentCountry}</p>
+                    <p>{latestCountry}</p>
                   </div>
                 </div>
               </div>
               <section className="airplane-single-bottom-container">
                 <div className="airplane-single-bottom-left">
                   <div className="bot-info-left">
-                    {currentDataSourceLink !== "" ? (
+                    {dataLink !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">
                           Latest Data Source Link
                         </p>
                         <p className="bot-info-data">
                           <a
-                            href={`http://${currentDataSourceLink}`}
+                            href={`http://${dataLink}`}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            {currentDataSourceLink}
+                            {dataLink}
                           </a>
                         </p>
                       </div>
                     ) : null}
 
-                    {currentDataSourceDate !== "" ? (
+                    {dataDate !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">
                           Latest Data Source Date
                         </p>
                         <p className="bot-info-data bot-info-line">
-                          {currentDataSourceDate}
+                          {dataDate}
                         </p>
                       </div>
                     ) : null}
 
-                    {currentDataSourceType !== "" ? (
+                    {dataType !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">Latest Data Type</p>
                         <p className="bot-info-data bot-info-line">
-                          {currentDataSourceType}
+                          {dataType}
                         </p>
                       </div>
                     ) : null}
 
-                    {currentOwner !== "" ? (
+                    {latestOwner !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">Latest Owner</p>
                         <p className="bot-info-data bot-info-line">
-                          {currentOwner}
+                          {latestOwner}
                         </p>
                       </div>
                     ) : null}
 
-                    {currentConfiguration !== "" ? (
+                    {configuration !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">Configuration</p>
                         <p className="bot-info-data bot-info-line">
-                          {currentConfiguration}
+                          {configuration}
                         </p>
                       </div>
                     ) : null}
 
-                    {currentRegDate !== "" ? (
+                    {regDate !== "" ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">Registration Date</p>
-                        <p className="bot-info-data bot-info-line">
-                          {currentRegDate}
-                        </p>
+                        <p className="bot-info-data bot-info-line">{regDate}</p>
                       </div>
                     ) : null}
 
-                    {currentRegStatus !== "" &&
-                    currentRegStatus !== undefined ? (
+                    {regStatus !== "" && regStatus !== undefined ? (
                       <div className="single-info-left">
                         <p className="bot-info-title">Registration Status</p>
                         <p className="bot-info-data bot-info-line">
-                          {currentRegStatus}
+                          {regStatus}
                         </p>
                       </div>
                     ) : null}

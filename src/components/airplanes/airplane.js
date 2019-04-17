@@ -10,17 +10,17 @@ const Airplane = props => {
           : "airplane-excerpt excerpt-even"
       }
     >
-      <Link to={`/airplanes/${props.serial}`}>
+      <Link to={`/airplanes/${props.Serial}`}>
         <div className="airplane-serial">
           <p>
             <span className="mobile-excerpt">Serial</span>
-            {props.serial}
+            {props.Serial}
           </p>
         </div>
         <div className="airplane-date-made">
           <p>
             <span className="mobile-excerpt">Prod. Date</span>
-            {props.prodDate}
+            {props.productionDate}
           </p>
         </div>
         <div className="airplane-current-status">
@@ -32,19 +32,19 @@ const Airplane = props => {
         <div className="airplane-registration">
           <p>
             <span className="mobile-excerpt">Latest Reg.</span>
-            {props.currentReg}
+            {props.latestReg}
           </p>
         </div>
         <div className="airplane-latest-operator">
           <p>
             <span className="mobile-excerpt">Latest Operator</span>
-            {props.currentOperator}
+            {props.latestOperator}
           </p>
         </div>
         <div className="airplane-country">
           <p>
             <span className="mobile-excerpt">Latest Country</span>
-            {props.currentCountry}
+            {props.latestCountry}
           </p>
           {imageExists(`${process.env.PUBLIC_URL}/flags/${props.flag}.png`) ? (
             <img

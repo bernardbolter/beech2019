@@ -38,7 +38,7 @@ export const filterAirplanes = (airplanes, search) => {
   const serialRegEx = new RegExp(`^U[${serialString}]`);
 
   filteredAirplanes = filteredAirplanes.filter(plane =>
-    serialRegEx.test(plane.serial)
+    serialRegEx.test(plane.Serial)
   );
 
   let statusArray = [];
@@ -80,7 +80,7 @@ export const filterAirplanes = (airplanes, search) => {
     search.airplanesOperatorValue !== "Select Operator"
   ) {
     filteredAirplanes = filteredAirplanes.filter(plane => {
-      return plane.currentOperator === search.airplanesOperatorValue;
+      return plane.latestOperator === search.airplanesOperatorValue;
     });
   }
 
@@ -89,7 +89,7 @@ export const filterAirplanes = (airplanes, search) => {
     search.airplanesCountryValue !== "Select Country"
   ) {
     filteredAirplanes = filteredAirplanes.filter(plane => {
-      return plane.currentCountry === search.airplanesCountryValue;
+      return plane.latestCountry === search.airplanesCountryValue;
     });
   }
 

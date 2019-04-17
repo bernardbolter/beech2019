@@ -102,7 +102,7 @@ class Airplanes extends Component {
                   </div>
                 ) : (
                   filteredAirplanes.map((plane, i) => {
-                    if (!plane.serial) {
+                    if (!plane.Serial) {
                       return null;
                     } else {
                       return <Airplane key={i} {...plane} evenOdd={i} />;
