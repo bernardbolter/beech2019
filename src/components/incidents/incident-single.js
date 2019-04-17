@@ -44,6 +44,7 @@ class IncidentSingle extends Component {
   render() {
     const { incidentLoaded, incidentData } = this.state;
     const { match, openModal } = this.props;
+    console.log(incidentData);
     return (
       <React.Fragment>
         <Header match={match} />
@@ -147,10 +148,10 @@ class IncidentSingle extends Component {
                     <h4>{incidentData.crewError}</h4>
                   </div>
                 ) : null}
-                {incidentData.endResults !== "" ? (
+                {incidentData.endResult !== "" ? (
                   <div className="incidetn-bot-left-data">
-                    <h5>End Results</h5>
-                    <h4>{incidentData.endResults}</h4>
+                    <h5>End Result</h5>
+                    <h4>{incidentData.endResult}</h4>
                   </div>
                 ) : null}
                 {incidentData.editorialOrSupplemental !== "" ? (
