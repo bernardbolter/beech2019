@@ -153,11 +153,11 @@ class Home extends Component {
               <div className="home-grid">
                 <HomeColumn columnName="status" columnHeader="Current Status" />
                 <HomeColumn
-                  columnName="currentOperator"
+                  columnName="latestOperator"
                   columnHeader="Top Operators"
                 />
                 <HomeColumn
-                  columnName="currentCountry"
+                  columnName="latestCountry"
                   columnHeader="Top Countries"
                 />
                 <HomeColumn

@@ -24,14 +24,14 @@ export const setIncidents = incidents => {
 };
 
 export const filterHomeData = (planes, incidents) => {
+  console.log(planes);
   const planesArray = Object.keys(planes).map(key => planes[key]);
   const incidentsArray = Object.keys(incidents).map(key => incidents[key]);
   let sortedData = {
     accidentCategory: [],
     status: [],
-    currentCountry: [],
-    currentOperator: [],
-    serial: []
+    latestCountry: [],
+    latestOperator: []
   };
 
   incidentsArray.map(i => {
@@ -53,27 +53,27 @@ export const filterHomeData = (planes, incidents) => {
     }
     // country data
     if (
-      a.currentCountry !== "?" &&
-      a.currentCountry !== undefined &&
+      a.latestCountry !== "?" &&
+      a.latestCountry !== undefined &&
       a.status === "Operating"
     ) {
-      sortedData.currentCountry.push(a.currentCountry);
+      sortedData.latestCountry.push(a.latestCountry);
     }
     // operator data
     if (
-      a.currentOperator !== "?" &&
-      a.currentOperator !== undefined &&
-      a.currentOperator !== "No Data" &&
-      a.currentOperator !== "not operating" &&
+      a.latestOperator !== "?" &&
+      a.latestOperator !== undefined &&
+      a.latestOperator !== "No Data" &&
+      a.latestOperator !== "not operating" &&
       a.status === "Operating"
     ) {
-      sortedData.currentOperator.push(a.currentOperator);
+      sortedData.latestOperator.push(a.latestOperator);
     }
-    // serial data
-    if (a.serial !== "?" && a.serial !== undefined) {
-      var shortSerial = a.serial.substring(0, 2);
-      sortedData.serial.push(shortSerial);
-    }
+    // // serial data
+    // if (a.Serial !== "?" && a.Serial !== undefined) {
+    //   var shortSerial = a.Serial.substring(0, 2);
+    //   sortedData.Serial.push(shortSerial);
+    // }
 
     return null;
   });
@@ -81,9 +81,8 @@ export const filterHomeData = (planes, incidents) => {
   // sort the individual data into objects of 10 or less
   sortedData.accidentCategory = sortData(sortedData.accidentCategory);
   sortedData.status = sortData(sortedData.status);
-  sortedData.currentCountry = sortData(sortedData.currentCountry);
-  sortedData.currentOperator = sortData(sortedData.currentOperator);
-  sortedData.serial = sortData(sortedData.serial);
+  sortedData.latestCountry = sortData(sortedData.latestCountry);
+  sortedData.latestOperator = sortData(sortedData.latestOperator);
 
   return {
     type: actionTypes.FILTER_HOME_DATA,
@@ -118,8 +117,6 @@ export const toggleReadMore = () => {
 };
 
 export const decideHomePageLinks = (data, name) => {
-  console.log(data);
-  console.log(name);
   return async dispatch => {
     await dispatch(handleAirplaneReset());
     await dispatch(incidentsSearchReset());
