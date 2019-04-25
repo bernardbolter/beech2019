@@ -4,7 +4,6 @@ const HistoryStory = () => {
   return (
     <section className="history-container history-container-main">
       <h1>BEECHCRAFT COMPANY HISTORY</h1>
-      <p className="history-story-title-extra">(IN A BEECHNUT SHELL)</p>
       <div className="history-story-picture-wrap">
         <div className="history-story-text-wrap">
           <h2>

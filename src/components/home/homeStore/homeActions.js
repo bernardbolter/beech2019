@@ -39,7 +39,8 @@ export const filterHomeData = (planes, incidents) => {
       i.accidentCategory !== "" &&
       i.accidentCategory !== undefined &&
       i.accidentCategory !== "Other" &&
-      i.accidentCategory !== "No Data"
+      i.accidentCategory !== "No Data" &&
+      i.accidentCategory !== "no data"
     ) {
       sortedData.accidentCategory.push(i.accidentCategory);
     }

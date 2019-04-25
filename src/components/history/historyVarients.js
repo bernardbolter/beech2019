@@ -76,9 +76,9 @@ const HistoryVarients = () => {
           <div className="history-image-wrap-column">
             <img
               src={`${process.env.PUBLIC_URL}/history/beech-1900D-cabin.jpg`}
-              alt="increased headroom in the 1900D"
+              alt="Increased headroom in the 1900D"
             />
-            <p>The first flight of the C90 24 January 1964</p>
+            <p>Increased headroom in the 1900D</p>
           </div>
           <h3>
             To compensate, more powerful engines were needed; the PT6A-67D

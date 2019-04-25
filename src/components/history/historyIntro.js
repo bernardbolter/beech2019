@@ -31,9 +31,9 @@ const HistoryIntro = () => {
         <div className="history-image-wrap image-one">
           <img
             src={`${process.env.PUBLIC_URL}/history/first_king_air_flight.jpg`}
-            alt="The first flight of the C90 24 January 1964"
+            alt="increased headroom in the 1900D"
           />
-          <p>The first flight of the C90 24 January 1964</p>
+          <p>The first flight of the C90 - 24 January 1964</p>
         </div>
       </div>
       <div className="history-intro intro-two">

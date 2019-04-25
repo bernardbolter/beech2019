@@ -8,6 +8,16 @@ export const filterFirstIncidents = incidents => {
     );
   });
 
+  firstIncidents.map(inc => {
+    var accident = inc.accidentCategory
+      .toLowerCase()
+      .split(" ")
+      .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(" ");
+
+    return (inc.accidentCategory = accident);
+  });
+
   const MONTHS = {
     jan: 1,
     feb: 2,
@@ -52,7 +62,13 @@ export const filterIncidents = (incidents, search) => {
 
   if (search.incidentsFatalitiesChecked) {
     filteredIncidents = filteredIncidents.filter(fate => {
-      return fate.fatalities !== "0" && fate.fatalities !== "No Data";
+      return (
+        fate.fatalities !== "0" &&
+        fate.fatalities !== "No Data" &&
+        fate.fatalities !== "no data" &&
+        fate.fatalities !== "" &&
+        fate.fatalities !== " "
+      );
     });
   }
 
